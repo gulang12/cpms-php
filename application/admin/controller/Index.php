@@ -7,7 +7,7 @@ use think\Request;
 
 class Index  extends AdminBase
 {
-    public function index()   //访问方式  http://域名/模块/控制器/方法/参数/参数值
+    public function test()   //访问方式  http://域名/模块/控制器/方法/参数/参数值
     {
     	
     /********************** 实例化引入库对象 ********************************/
@@ -37,7 +37,7 @@ class Index  extends AdminBase
         // return $this->fetch('index');  // 渲染页面
         // Session('name_liu','liuzaichun');
        
-       return view('index');
+       return $this->fetch();  // 渲染页面
 
        // return 'name:'.$name;   // 可以直接获取方法的参数 无需用get获取 
 
@@ -63,17 +63,18 @@ class Index  extends AdminBase
 
         // var_dump(request()->isGet());  //判断请求方式  isAjax、isPost
 
-
-
-        
-       
     }
     
-    public function route()   
+    public function index()   
     {
-    	echo "在应用目录里的route.php文件里设置路由规则";
+    	
 
+        return $this->fetch();
     }
 
+    public function welcome(){
+
+       return $this->fetch(); 
+    }
 
 }
