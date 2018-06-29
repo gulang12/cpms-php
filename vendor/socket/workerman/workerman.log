@@ -1,0 +1,36 @@
+2018-06-27 21:16:01 pid:1 Worker process terminated with ERROR: E_ERROR "Call to a member function emit() on a non-object in D:\PHPstudy\WWW\yxadmin\application\socket\controller\Server.php on line 24"
+2018-06-27 21:17:24 pid:1 Worker process terminated with ERROR: E_ERROR "Call to a member function emit() on a non-object in D:\PHPstudy\WWW\yxadmin\application\socket\controller\Server.php on line 30"
+2018-06-27 21:27:23 pid:1 Worker process terminated with ERROR: E_ERROR "Call to a member function emit() on a non-object in D:\PHPstudy\WWW\yxadmin\application\socket\controller\Server.php on line 28"
+2018-06-28 16:17:46 pid:1 Worker process terminated with ERROR: E_ERROR "Call to undefined function app\socket\controller\push() in D:\PHPstudy\WWW\yxadmin\application\socket\controller\Server.php on line 28"
+2018-06-28 16:50:34 pid:1 Worker process terminated with ERROR: E_ERROR "Call to a member function join() on a non-object in D:\PHPstudy\WWW\yxadmin\application\socket\controller\Server.php on line 28"
+2018-06-28 16:52:24 pid:1 Worker process terminated with ERROR: E_ERROR "Allowed memory size of 134217728 bytes exhausted (tried to allocate 86769669 bytes) in D:\PHPstudy\WWW\yxadmin\vendor\socket\workerman\phpsocket.io\src\Parser\Encoder.php on line 70"
+2018-06-29 14:36:49 pid:1 Worker process terminated with ERROR: E_ERROR "Call to a member function to() on a non-object in D:\PHPstudy\WWW\yxadmin\application\socket\controller\Server.php on line 68"
+2018-06-29 14:42:23 pid:1 Worker process terminated with ERROR: E_ERROR "Call to a member function to() on a non-object in D:\PHPstudy\WWW\yxadmin\application\socket\controller\Server.php on line 68"
+2018-06-29 14:43:26 pid:1 Worker process terminated with ERROR: E_ERROR "Call to a member function emit() on a non-object in D:\PHPstudy\WWW\yxadmin\application\socket\controller\Server.php on line 68"
+2018-06-29 14:44:39 pid:1 Worker process terminated with ERROR: E_ERROR "Call to a member function emit() on a non-object in D:\PHPstudy\WWW\yxadmin\application\socket\controller\Server.php on line 68"
+2018-06-29 14:48:54 pid:1 Worker process terminated with ERROR: E_ERROR "Call to a member function emit() on a non-object in D:\PHPstudy\WWW\yxadmin\application\socket\controller\Server.php on line 77"
+2018-06-29 15:05:10 pid:1 Worker process terminated with ERROR: E_ERROR "Call to a member function to() on a non-object in D:\PHPstudy\WWW\yxadmin\application\socket\controller\Server.php on line 70"
+2018-06-29 15:12:20 pid:1 exception 'think\exception\ErrorException' with message 'strlen() expects parameter 1 to be string, object given' in D:\PHPstudy\WWW\yxadmin\vendor\socket\workerman\workerman\Protocols\Http.php:252
+Stack trace:
+#0 [internal function]: think\Error::appError(2, 'strlen() expect...', 'D:\\PHPstudy\\WWW...', 252, Array)
+#1 D:\PHPstudy\WWW\yxadmin\vendor\socket\workerman\workerman\Protocols\Http.php(252): strlen(Object(PHPSocketIO\SocketIO))
+#2 D:\PHPstudy\WWW\yxadmin\vendor\socket\workerman\workerman\Connection\TcpConnection.php(336): Workerman\Protocols\Http::encode(Object(PHPSocketIO\SocketIO), Object(Workerman\Connection\TcpConnection))
+#3 D:\PHPstudy\WWW\yxadmin\application\socket\controller\Server.php(79): Workerman\Connection\TcpConnection->send(Object(PHPSocketIO\SocketIO))
+#4 [internal function]: app\socket\controller\Server->app\socket\controller\{closure}(Object(Workerman\Connection\TcpConnection), Array)
+#5 D:\PHPstudy\WWW\yxadmin\vendor\socket\workerman\workerman\Connection\TcpConnection.php(645): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #101)
+#7 D:\PHPstudy\WWW\yxadmin\vendor\socket\workerman\workerman\Events\Select.php(289): call_user_func_array(Array, Array)
+#8 D:\PHPstudy\WWW\yxadmin\vendor\socket\workerman\workerman\Worker.php(2231): Workerman\Events\Select->loop()
+#9 D:\PHPstudy\WWW\yxadmin\vendor\socket\workerman\workerman\Worker.php(1221): Workerman\Worker->run()
+#10 D:\PHPstudy\WWW\yxadmin\vendor\socket\workerman\workerman\Worker.php(1164): Workerman\Worker::forkWorkersForWindows()
+#11 D:\PHPstudy\WWW\yxadmin\vendor\socket\workerman\workerman\Worker.php(478): Workerman\Worker::forkWorkers()
+#12 D:\PHPstudy\WWW\yxadmin\application\socket\controller\Server.php(87): Workerman\Worker::runAll()
+#13 [internal function]: app\socket\controller\Server->index()
+#14 D:\PHPstudy\WWW\yxadmin\thinkphp\library\think\App.php(343): ReflectionMethod->invokeArgs(Object(app\socket\controller\Server), Array)
+#15 D:\PHPstudy\WWW\yxadmin\thinkphp\library\think\App.php(606): think\App::invokeMethod(Array, Array)
+#16 D:\PHPstudy\WWW\yxadmin\thinkphp\library\think\App.php(457): think\App::module(Array, Array, NULL)
+#17 D:\PHPstudy\WWW\yxadmin\thinkphp\library\think\App.php(139): think\App::exec(Array, Array)
+#18 D:\PHPstudy\WWW\yxadmin\thinkphp\start.php(19): think\App::run()
+#19 D:\PHPstudy\WWW\yxadmin\public\server.php(12): require('D:\\PHPstudy\\WWW...')
+#20 {main}
+2018-06-29 15:12:20 pid:1 Worker process terminated
