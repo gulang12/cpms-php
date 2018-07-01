@@ -3,6 +3,7 @@ namespace app\admin\controller;
 
 use think\Config;
 use think\Request;
+// use app\index\controller\Test;  
 
 class Index  extends AdminBase
 {
@@ -36,7 +37,7 @@ class Index  extends AdminBase
         // return $this->fetch('index');  // 渲染页面
         // Session('name_liu','liuzaichun');
        
-       // return $this->fetch();  // 渲染页面
+       return $this->fetch();  // 渲染页面
 
        // return 'name:'.$name;   // 可以直接获取方法的参数 无需用get获取 
 
@@ -67,38 +68,14 @@ class Index  extends AdminBase
     public function index()   
     {
     	
-      
 
         return $this->fetch();
     }
 
     public function welcome(){
-
-       return $this->fetch(); 
+       
+        return '<style type="text/css">*{ padding: 0; margin: 0; } .think_default_text{ padding: 4px 48px;} a{color:#2E5CD5;cursor: pointer;text-decoration: none} a:hover{text-decoration:underline; } body{ background: #fff; font-family: "Century Gothic","Microsoft yahei"; color: #333;font-size:18px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.6em; font-size: 42px }</style><div style="padding: 24px 48px;"><p><span style="font-size:30px">欢迎使用yx-admin v1.0后台管理系统！！！</span>';
+       // return $this->fetch(); 
     }
-
-    public function sendToSocket() {
-
-        //利用API推送信息给socket服务器  推送的url地址，使用自己的服务器地址
-        $push_api_url = "http://127.0.0.1:2121";  // 这个要与服务端的 new Worker('http://0.0.0.0:2121')做区分
-        $post_data = array(
-           "type" => "publish",
-           "content" => "这个是推送给服务器的测试数据",
-           "to" => '222',   // 给指定用户推送信息  to为组名
-        );
-        $ch = curl_init ();
-        curl_setopt ( $ch, CURLOPT_URL, $push_api_url );
-        curl_setopt ( $ch, CURLOPT_POST, 1 );
-        curl_setopt ( $ch, CURLOPT_HEADER, 0 );
-        curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
-        curl_setopt ( $ch, CURLOPT_POSTFIELDS, $post_data );
-        curl_setopt ($ch, CURLOPT_HTTPHEADER, array("Expect:"));
-        $return = curl_exec ( $ch );
-        curl_close ( $ch );
-        var_dump($return);  
-    }
-
-
-    
 
 }

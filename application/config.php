@@ -137,9 +137,6 @@ return [
         // 标签库标签结束标记
         'taglib_end'   => '>',
         
-        // 布局模板功能
-        'layout_on'     =>  false,
-        'layout_name'   =>  'layout',
     ],
 
     // 视图输出字符串内容替换
