@@ -36,7 +36,7 @@ class Index  extends AdminBase
         // return $this->fetch('index');  // 渲染页面
         // Session('name_liu','liuzaichun');
        
-       // return $this->fetch();  // 渲染页面
+       return $this->fetch();  // 渲染页面
 
        // return 'name:'.$name;   // 可以直接获取方法的参数 无需用get获取 
 
@@ -67,13 +67,13 @@ class Index  extends AdminBase
     public function index()   
     {
     	
-      
 
         return $this->fetch();
     }
 
     public function welcome(){
 
+      
        return $this->fetch(); 
     }
 
@@ -96,10 +96,7 @@ class Index  extends AdminBase
         curl_setopt ($ch, CURLOPT_HTTPHEADER, array("Expect:"));
         $return = curl_exec ( $ch );
         curl_close ( $ch );
-        var_dump($return);  
+        var_dump($return);
     }
-
-
-    
 
 }

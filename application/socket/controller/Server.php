@@ -53,7 +53,7 @@ class Server extends Controller
 		    // 监听一个http端口
 		    $inner_http_worker = new Worker('http://0.0.0.0:2121');  // 要与客户端通过API发送过来的http端口127.0.0.1区分开来
 
-		    // 当http客户端发来数据时触发
+		    // 当http客户端发来数据时触发(调用接口请求时触发)
 		    $inner_http_worker->onMessage = function($http_connection, $data)use($io){
 		    	
 		    	switch(@$_POST['type']){

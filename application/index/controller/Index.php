@@ -13,6 +13,7 @@ class Index extends IndexBase
         // $data = ['name'=>'thinkphp','url'=>'thinkphp.cn'];
     	 
         // return ['data'=>$data,'code'=>1,'message'=>'操作完成'];
+        return 'this is a test contrll';
     }
     
 
