@@ -49,29 +49,29 @@ class Server extends Controller
 
         
         // 当$io启动后监听一个http端口，监听的是通过API推送的信息
-		$io->on('workerStart', function()use($io){  
+        $io->on('workerStart', function()use($io){  
 		    // 监听一个http端口
 		    $inner_http_worker = new Worker('http://0.0.0.0:2121');  // 要与客户端通过API发送过来的http端口127.0.0.1区分开来
 
 		    // 当http客户端发来数据时触发
 		    $inner_http_worker->onMessage = function($http_connection, $data)use($io){
-		        
-		        switch(@$_POST['type']){
-		            case 'publish':
-		                $to = @$_POST['to'];
-		                $_POST['content'] = htmlspecialchars(@$_POST['content']);
+		    	
+		    	switch(@$_POST['type']){
+		    		case 'publish':
+		    		$to = @$_POST['to'];
+		    		$_POST['content'] = htmlspecialchars(@$_POST['content']);
 		                   // 有指定uid则向uid所在socket组发送数据
-		                if($to){
-		                    $io->to($to)->emit('new_msg','这条信息是给222的');
+		    		if($to){
+		    			$io->to($to)->emit('new_msg','这条信息是给222的');
 
 		                    // 否则向所有uid推送数据
-		                }else{
+		    		}else{
 
-		                    $io->emit('new_msg', @$_POST['content']);
-		                }
+		    			$io->emit('new_msg', @$_POST['content']);
+		    		}
 
-		                break;
-		        }
+		    		break;
+		    	}
 
 		        return $http_connection->send('返回给客户端的信息');  // 返回给客户端的信息
 		    };
