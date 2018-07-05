@@ -42,7 +42,7 @@ $menu = array(
 
        
 	    array(
-			'name'=>'管理员管理',
+			'name'=>'用户管理',
 	        'controller'=>'admin/User',
 	        'icon'=>'fa-user',
 			'child'=>array(

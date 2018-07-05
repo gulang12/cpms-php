@@ -31,10 +31,9 @@
                         <h5>权限管理</h5>
                     </div>
                     <div class="ibox-content">
-                        <form method="get" class="form-horizontal">
+                        <form id="auth_form"  method="post" class="form-horizontal">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">所属角色</label>
-
                                 <div class="col-sm-2">
                                     <select class="form-control m-b" name="account">
                                         <option>选项 1</option>
@@ -74,7 +73,7 @@
 
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-primary" type="submit" onclick="">保存内容</button>
                                     <button class="btn btn-white" type="submit">取消</button>
                                 </div>
                             </div>
@@ -89,6 +88,7 @@
 	<js href="/static/js/admin/bootstrap.min.js"/>
 	<js href="/static/js/admin/content.min.js"/>
     <js href="/static/js/admin/plugins/iCheck/icheck.min.js"/>
+    <js href="/static/js/admin/admincommon.js"/>
     <script>
         $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
     </script>
