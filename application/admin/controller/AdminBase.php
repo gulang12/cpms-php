@@ -27,7 +27,8 @@ class AdminBase extends Controller
     */
     public function _initialize()
     {
-    	// do something...
+    	
+      // do something...
 
     	// echo "this is a admin  _initialize function";
     }

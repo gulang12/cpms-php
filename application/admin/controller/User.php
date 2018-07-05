@@ -20,8 +20,13 @@ class User  extends AdminBase
 
     public function roleAuth()   
     {
-    	
+    
+    
+        include APP_PATH."admin/conf/menu.php";
+
+        $this->assign("menu",$menu['admin']);	
 
         return $this->fetch();
     }
+
 }

@@ -67,7 +67,11 @@ class Index  extends AdminBase
     public function index()   
     {
     	
+        include APP_PATH."admin/conf/menu.php";
 
+        
+
+        $this->assign("menu",$menu['admin']);
         return $this->fetch();
     }
 
