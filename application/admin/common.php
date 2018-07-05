@@ -14,11 +14,13 @@ function check_auth($action){
     
     $roleAuth = array('admin/User','admin/User/userList'); //角色保存的权限数据
     
-    if(in_array($action,$roleAuth)) 
+    // if(in_array($action,$roleAuth)) 
+
+    // 	return true;
+    // else 
+    // 	return false;
 
     	return true;
-    else 
-    	return false;
 }
 
 
