@@ -31,15 +31,16 @@
                         <h5>权限管理</h5>
                     </div>
                     <div class="ibox-content">
-                        <form id="auth_form"  method="post" class="form-horizontal">
+                        <form id="auth_form"  method="post"  class="form-horizontal" onsubmit="return false;">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">所属角色</label>
                                 <div class="col-sm-2">
-                                    <select class="form-control m-b" name="account">
-                                        <option>选项 1</option>
-                                        <option>选项 2</option>
-                                        <option>选项 3</option>
-                                        <option>选项 4</option>
+                                    <select class="form-control m-b" name="role_id">
+                                        <option value="0">选择角色</option>
+                                        <option value="1">管理员</option>
+                                        <option value="2">销售员</option>
+                                        <option value="3">审核员</option>
+                                        <option value="4">客服</option>
                                     </select>
                                 </div>
                             </div>
@@ -73,7 +74,7 @@
 
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <button class="btn btn-primary" type="submit" onclick="">保存内容</button>
+                                    <button class="btn btn-primary" type="submit" onclick="roleAuthSubmit();">保存内容</button>
                                     <button class="btn btn-white" type="submit">取消</button>
                                 </div>
                             </div>
@@ -91,6 +92,31 @@
     <js href="/static/js/admin/admincommon.js"/>
     <script>
         $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
+        
+        $(document).ready(function(){
+            
+            // refreshRandomStr('reset_submit');
+        })
+        
+        function roleAuthSubmit(){
+            var data = $("#auth_form").serializeArray();
+
+            $.post("{:url('admin/user/addRoleAuth')}",data,function(data){
+            
+                if(data.code == 1) {
+
+                    console.log(data.msg);
+                }else {
+                    alert(data.msg);
+                    console.log(data.msg);
+
+                }
+
+            },'json');
+
+           
+        }
+        
     </script>
 </body>
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
