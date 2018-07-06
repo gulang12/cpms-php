@@ -55,13 +55,13 @@
                                         <div class="col-sm-2">
                                             <div class="checkbox i-checks">
                                                 <label class="checkbox-inline-block i-checks text-navy">
-                                                    <input type="checkbox" value="{$child['action']}" checked> <i></i>{$child['name']}
+                                                    <input type="checkbox" value="{$child['action']}" name="action[]" checked><i></i>{$child['name']}
                                                 </label>
                                             </div>
                                             <volist name="child.auth" id="auth">
                                                 <div class="checkbox i-checks">
                                                     <label>
-                                                        <input type="checkbox" value="{$auth['action']}"> <i></i>{$auth['name']}
+                                                        <input type="checkbox" value="{$auth['action']}" name="action[]"><i></i>{$auth['name']}
                                                     </label>
                                                 </div>
                                             </volist>
