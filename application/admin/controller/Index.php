@@ -103,4 +103,10 @@ class Index  extends AdminBase
         var_dump($return);
     }
 
+    public function login() {
+
+
+       return $this->fetch(); 
+    }
+
 }
