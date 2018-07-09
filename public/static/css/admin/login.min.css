@@ -1,6 +1,6 @@
 html{height:100%}
 body.signin{height:auto;background:url(../../images/admin-login-bg.jpg) no-repeat center fixed;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;color:rgba(255,255,255,.95)}
-.signinpanel{width:750px;margin:10% auto 0}
+.signinpanel{width:750px;margin:20% auto 0}
 .signinpanel .logopanel{float:none;width:auto;padding:0;background:0 0}
 .signinpanel .signin-info ul{list-style:none;padding:0;margin:20px 0}
 .signinpanel .form-control{display:block;margin-top:15px}
