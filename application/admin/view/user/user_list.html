@@ -30,7 +30,7 @@
                     <div class="ibox-title">
                         <h5>管理员列表</h5>
                         <div class="ibox-tools">
-                            <button class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-right:10px;position:relative;top:-5px;" title="添加管理员">
+                            <button data-toggle="modal"  href="#modal-form" class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-right:10px;position:relative;top:-5px;" title="添加管理员">
                                 <i class="fa fa-user-md"></i>+
                             </button>
                         </div>
@@ -108,7 +108,44 @@
             </div>
         </div>
     </div>
-    
+    <div id="modal-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form role="form" onsubmit="return false;">
+                                <div class="form-group">
+                                    <label>用户名：</label>
+                                    <input type="text" placeholder="输入用户名" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>密码：</label>
+                                    <input type="password" placeholder="请输入密码" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>确认密码：</label>
+                                    <input type="password" placeholder="确认密码" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>邮箱：</label>
+                                    <input type="email" placeholder="输入邮箱" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>电话：</label>
+                                    <input type="text" placeholder="输入电话" class="form-control">
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-sm btn-primary pull-right m-t-n-xs"><strong>登录</strong>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <js href="/static/js/admin/jquery.min.js"/>
 	<js href="/static/js/admin/bootstrap.min.js"/>
 	<js href="/static/js/admin/plugins/jeditable/jquery.jeditable.js"/>
