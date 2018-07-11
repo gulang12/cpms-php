@@ -34,9 +34,9 @@
                         <input type="text" name="vertify" id="vertify" class="form-control vertify m-b">
                     </div>
                     <div class="col-xs-5 form_vertify_img">
-                        <img src="" alt="验证码" class="form-control m-b">
+                        <img src="{:url('admin/index/vertify')}" alt="验证码" class="form-control m-b" onclick="this.src=this.src+'?v='+Math.random();" >
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block submit-btn">登录</button>
+                    <button type="submit" class="btn btn-primary btn-block submit-btn" onclick="login_submit_btn();">登录</button>
                 </form>
             </div>
         </div>
@@ -46,5 +46,13 @@
             </div>
         </div>
     </div>
+    <js href="/static/js/admin/jquery.min.js"/>
 </body>
 </html>
+<script type="text/javascript">
+    
+function login_submit_btn() {
+      
+
+}
+</script>

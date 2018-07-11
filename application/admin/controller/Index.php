@@ -3,6 +3,7 @@ namespace app\admin\controller;
 
 use think\Config;
 use think\Request;
+use think\captcha\Captcha;
 
 class Index  extends AdminBase
 {
@@ -69,8 +70,6 @@ class Index  extends AdminBase
     	
         include APP_PATH."admin/conf/menu.php";
 
-        
-
         $this->assign("menu",$menu['admin']);
         return $this->fetch();
     }
@@ -78,7 +77,7 @@ class Index  extends AdminBase
     public function welcome(){
 
       
-       return $this->fetch(); 
+        return $this->fetch(); 
     }
 
 
@@ -86,10 +85,10 @@ class Index  extends AdminBase
 
         //利用API推送信息给socket服务器  推送的url地址，使用自己的服务器地址
         $push_api_url = "http://127.0.0.1:2121";  // 这个要与服务端的 new Worker('http://0.0.0.0:2121')做区分
-        $post_data = array(
-           "type" => "publish",
-           "content" => "这个是推送给服务器的测试数据",
-           "to" => '222',   // 给指定用户推送信息  to为组名
+        $post_data    = array(
+           "type"     => "publish",
+           "content"  => "这个是推送给服务器的测试数据",
+           "to"       => '222',   // 给指定用户推送信息  to为组名
         );
         $ch = curl_init ();
         curl_setopt ( $ch, CURLOPT_URL, $push_api_url );
@@ -107,6 +106,24 @@ class Index  extends AdminBase
 
 
        return $this->fetch(); 
+    }
+
+
+    public function vertify() {
+       
+        $config =    [
+            // 验证码字体大小
+            'fontSize'    =>    30,    
+            // 验证码位数
+            'length'      =>    4,   
+            // 关闭验证码杂点
+            'useNoise'    =>    false, 
+        ];
+
+        $captcha = new Captcha($config);
+
+        return $captcha->entry();
+
     }
 
 }

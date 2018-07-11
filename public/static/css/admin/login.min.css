@@ -9,6 +9,8 @@ body.signin{height:auto;background:url(../../images/admin-login-bg.jpg) no-repea
 .signinpanel .vertify{color:#333;}
 .signinpanel .form_vertify{padding-left:0px !important;padding-right:10px !important;margin-top:-12px;}
 .signinpanel .form_vertify_img{padding-left:0px !important;padding-right:0px !important;margin-top:-12px;}
+.signinpanel .form_vertify_img > img{padding:0px !important;}
+
 .signinpanel .btn{margin-top:15px;margin-bottom:10px;}
 .signinpanel form{
 	background:rgba(255,255,255,.2);
