@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-<!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:16:41 GMT -->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +7,8 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <title>忆寻-admin</title>
 
-    <meta name="keywords" content="忆寻-admin,后台管理框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
 
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
@@ -20,6 +19,8 @@
 	<css href="/static/css/admin/plugins/dataTables/dataTables.bootstrap.css">
 	<css href="/static/css/admin/animate.min.css" />
 	<css href="/static/css/admin/style.min862f.css"/>
+    <!-- <css href="/static/css/admin/common.css"/> -->
+    <link href="/static/css/admin/admincommon.css?v=20180712" rel='stylesheet' type='text/css' /> 
 </head>
 
 <body class="gray-bg">
@@ -30,7 +31,7 @@
                     <div class="ibox-title">
                         <h5>管理员列表</h5>
                         <div class="ibox-tools">
-                            <button data-toggle="modal"  href="#modal-form" class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-right:10px;position:relative;top:-5px;" title="添加管理员">
+                            <button data-toggle="modal"  href="#user-modal-form" class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-right:10px;position:relative;top:-5px;" title="添加管理员">
                                 <i class="fa fa-user-md"></i>+
                             </button>
                         </div>
@@ -62,7 +63,7 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a href="javascript:;" class="font-bold">修改</a>
+                                                    <a href="javascript:;" class="font-bold edit-user">修改</a>
                                                 </li>
                                                 <li><a href="javascript:;">删除</a></li>
                                             </ul>
@@ -82,9 +83,9 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a href="javascript:;" class="font-bold">修改</a>
+                                                    <a href="javascript:;" class="font-bold edit-user">修改</a>
                                                 </li>
-                                                <li><a href="{:url('socket/index/index')}">删除</a></li>
+                                                <li><a href="javascript:;">删除</a></li>
                                             </ul>
                                         </div>
                                     </td>
@@ -108,69 +109,80 @@
             </div>
         </div>
     </div>
-    <div id="modal-form" class="modal fade" aria-hidden="true">
+    <div id="user-modal-form" class="modal fade" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <form role="form" onsubmit="return false;">
+                <form id="user_form" action="" method="post" onsubmit="return false;">
+                    <div class="modal-header">
+                        <span class="refresh-btn" onclick="refresh_form('user_form');"><i class="fa fa-refresh"></i></span>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">添加管理员</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>用户名：</label>
-                                    <input type="text" placeholder="输入用户名" class="form-control">
+                                    <label>登入名：</label>
+                                    <input type="text" placeholder="输入登入名" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>密码：</label>
-                                    <input type="password" placeholder="请输入密码" class="form-control">
+                                    <input type="password" placeholder="输入密码" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>电话：</label>
+                                    <input type="text" placeholder="输入电话" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>邮箱：</label>
+                                    <input type="text" placeholder="输入邮箱" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>确认密码：</label>
                                     <input type="password" placeholder="确认密码" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label>邮箱：</label>
-                                    <input type="email" placeholder="输入邮箱" class="form-control">
+                                    <label>所属角色</label>
+                                    <select class="form-control m-b" name="role_id">
+                                        <option value="0">选择角色</option>
+                                        <option value="1">管理员</option>
+                                        <option value="2">销售员</option>
+                                        <option value="3">审核员</option>
+                                        <option value="4">客服</option>
+                                    </select>
                                 </div>
-                                <div class="form-group">
-                                    <label>电话：</label>
-                                    <input type="text" placeholder="输入电话" class="form-control">
-                                </div>
-                                <div>
-                                    <button type="submit" class="btn btn-sm btn-primary pull-right m-t-n-xs"><strong>登录</strong>
-                                    </button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">添加</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <js href="/static/js/admin/jquery.min.js"/>
 	<js href="/static/js/admin/bootstrap.min.js"/>
-	<js href="/static/js/admin/plugins/jeditable/jquery.jeditable.js"/>
 	<js href="/static/js/admin/plugins/dataTables/jquery.dataTables.js"/>
 	<js href="/static/js/admin/plugins/dataTables/dataTables.bootstrap.js"/>
 	<js href="/static/js/admin/content.min.js"/>
+    <!-- <js href="/static/js/admin/admincommon.js"/> -->
+    <script type="text/javascript" src="/static/js/admin/admincommon.js?v=20180712"></script>
+
     <script>
         $(document).ready(function(){
             $(".dataTables-example").dataTable();
-            // var oTable=$("#editable").dataTable();
-            // oTable.$("td").editable("http://www.yxadmin.com/admin/index/index",{"callback":function(sValue,y){
-            //     var aPos=oTable.fnGetPosition(this);
-            //     oTable.fnUpdate(sValue,aPos[0],aPos[1])
-            // },"submitdata":function(value,settings){
-            
-            // return{"row_id":this.parentNode.getAttribute("id"),"column":oTable.fnGetPosition(this)[2]}
-            
-            // },"width":"90%","height":"100%"})
-        });
 
-        function fnClickAddRow(){
-            $("#editable").dataTable().fnAddData(["Custom row","New row","New row","New row","New row"])
-        };
+            $(".ibox-content").on('click','.edit-user',function(){
+                
+                $("#user-modal-form").modal('show');
+            })
+        });
+        
     </script>
 
 </body>
-<!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
 </html>

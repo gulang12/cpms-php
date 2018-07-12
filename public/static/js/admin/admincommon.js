@@ -14,8 +14,11 @@ function createRandomStr(len){
     return random;
 } 
 
-function refreshRandomStr(el){
-	var random = createRandomStr();
+/**
+* des:刷新表单数据
+* @param form_name  表单ID
+**/
+function refresh_form(form_name){
 
-	$("#"+el).val(random);
+    $('#'+form_name)[0].reset();
 }
