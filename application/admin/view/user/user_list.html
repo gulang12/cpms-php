@@ -169,6 +169,7 @@
 	<js href="/static/js/admin/plugins/dataTables/jquery.dataTables.js"/>
 	<js href="/static/js/admin/plugins/dataTables/dataTables.bootstrap.js"/>
 	<js href="/static/js/admin/content.min.js"/>
+    <js href="/static/js/admin/plugins/layui/layer/layer.js"/>
     <!-- <js href="/static/js/admin/admincommon.js"/> -->
     <script type="text/javascript" src="/static/js/admin/admincommon.js?v=20180712"></script>
 
@@ -179,6 +180,8 @@
             $(".ibox-content").on('click','.edit-user',function(){
                 
                 $("#user-modal-form").modal('show');
+                
+                layer.msg('添加成功！', {time: 1000, icon:6});
             })
         });
         
