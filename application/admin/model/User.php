@@ -5,21 +5,46 @@ use think\Model;
 class User extends Model
 {
     
+    protected $pk = 'user_id';
     
-    
-    public function userList(){
+    public  function getUsers(){
+        // $users = $this->where('user_status=0 and user_login="admin123"')->select(); // 多条件查询
+
+        $users     = $this->where('user_status=0')->select();
+        if($users) {
+
+        	$users = collection($users)->toArray();
+        }
+        
+        return $users;
+
+    } 
+
+    public function addUser($input){
+        
+        $this->data($input);
+
+		$save = $this->allowField(true)->save($input);
+
+		return $save;
+
           // to do
     } 
 
-    public function addUser(){
+
+    public function delUser($userId){
+        
+        $del = $this->where('user_id='.$userId)->delete();
+
+        return $del;
           // to do
     } 
 
+    public function updateUser($input,$userId) {
 
-    public function delUser(){
-          // to do
-    } 
+    	$update = $this->allowField(true)->save($input,['user_id' =>$userId]);
 
-
+    	return $update;
+    }
        
 }

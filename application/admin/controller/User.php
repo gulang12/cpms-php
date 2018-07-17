@@ -7,8 +7,57 @@ class User  extends AdminBase
     public function userList()   
     {
     	
+        echo "<pre>";
+        $users =  model('User')->getUsers();
 
+        print_r($users);
+
+        exit;
+        $this->assign("users",$users);
         return $this->fetch();
+    }
+
+    public function addUser(){
+        // $input = input();
+
+        $input = array(
+            'user_login'  =>  'thinkphp',
+            'email' =>  'thinkphp@qq.com',
+            'user_phone' =>  '1226740471'
+        );
+
+        $info =  model('User')->addUser($input);
+        
+        print_r($info);
+        exit;
+        return json(['code'=>1,'msg'=>'添加成功']);
+
+    }
+    
+    public function delUser(){
+        
+        $userId = 3;
+        $info   =  model('User')->delUser($userId);
+        
+        print_r($info);
+        exit;
+        return json(['code'=>1,'msg'=>'添加成功']);
+        
+    }
+    
+    public function updateUser(){
+        $input = array(
+            'user_login'  =>  'admin5555',
+            'email' =>  'thinkphp@qq.com',
+            'user_phone' =>  '15889745718'
+        );
+        $userId = 4;
+        $info   =  model('User')->updateUser($input,$userId);
+        
+        print_r($info);
+        exit;
+        return json(['code'=>1,'msg'=>'添加成功']);
+        
     }
 
     public function userRole()   
@@ -47,7 +96,7 @@ class User  extends AdminBase
             // 防止表单在极短时间重复提交  （有些强迫症患者提交按钮时喜欢快速点击两次）
             if(!Session('submit_time')) {
                 Session('submit_time',$submit_time);
-
+                
                return json(['code'=>1,'msg'=>'添加成功1']);
   
             }else{
