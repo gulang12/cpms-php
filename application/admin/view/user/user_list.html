@@ -138,8 +138,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <input type="hidden" id="user_id" name="user_id" value="" />
+                        <input type="hidden" id="handle_type"  name="handle_type"  value="add" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="submit" class="btn btn-primary">添加</button>
+                        <button type="submit" class="btn btn-primary" onclick="userSubmit();">确定</button>
                     </div>
                 </form>
             </div>
@@ -162,10 +164,17 @@
                 
                 $("#user-modal-form").modal('show');
                 
-                layer.msg('添加成功！', {time: 1000, icon:6});
+                // layer.msg('添加成功！', {time: 1000, icon:6});
             })
         });
         
+        function userSubmit(){
+            var handle_type = $("#handle_type").val();
+
+            var url =  handle_type == 'add' ? 'admin/User/addUser' : 'admin/User/delUser';
+            
+
+        }
     </script>
 
 </body>

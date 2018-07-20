@@ -104,14 +104,14 @@
 
                                 <div class="form-group">
                                     <label>描述：</label>
-                                    <textarea id="ccomment" name="comment" class="form-control"  style="margin: 0px 0px 0px 0px; height: 93px; max-width:100%;"></textarea>
+                                    <textarea id="ccomment" name="comment" class="form-control"  style="margin:0px; height: 93px; max-width:100%;"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="submit" class="btn btn-primary">添加</button>
+                        <button type="submit" class="btn btn-primary" onclick="roleSubmit();">确定</button>
                     </div>
                 </form>
             </div>
@@ -133,6 +133,8 @@
                 
                 $("#role-modal-form").modal('show');
             });
+
+
 
         });
     </script>

@@ -16,7 +16,7 @@ class User  extends AdminBase
     }
 
     public function addUser(){
-        // $input = input();
+        $input = input();
 
         $input = array(
             'user_login'  =>  'thinkphp',
