@@ -100,7 +100,7 @@
         function roleAuthSubmit(){
             var data = $("#auth_form").serializeArray();
 
-            $.post("{:url('admin/user/addRoleAuth')}",data,function(data){
+            $.post("{:url('admin/Role/addRoleAuth')}",data,function(data){
             
                 if(data.code == 1) {
 

@@ -48,42 +48,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="gradeX">
-                                    <td>1</td>
-                                    <td>管理员</td>
-                                    <td>拥有部分模块的查看修改权</td>
-                                    <td class="center">2018-07-01</td>
-                                    <td class="center" align="center">
-                                        <div class="btn-group">
-                                            <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a href="javascript:;" class="font-bold edit-role">修改</a>
-                                                </li>
-                                                <li><a href="javascript:;">删除</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="gradeX">
-                                    <td>2</td>
-                                    <td>销售员</td>
-                                    <td>拥有部分模块的查看权</td>
-                                    <td class="center">2018-07-01</td>
-                                    <td class="center" align="center">
-                                        <div class="btn-group">
-                                            <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a href="javascript:;" class="font-bold edit-role">修改</a>
-                                                </li>
-                                                <li><a href="javascript:;">删除</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <volist name="roles" id="vo">
+                                    <tr class="gradeX">
+                                        <td>{$vo['role_id']}</td>
+                                        <td>{$vo['role_name']}</td>
+                                        <td>整站权限</td>
+                                        <td class="center">{$vo['role_add_time']}</td>
+                                        <td class="center" align="center">
+                                            <div class="btn-group">
+                                                <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a href="javascript:;" class="font-bold edit-role" data-id="{$vo['role_id']}">修改</a>
+                                                    </li>
+                                                    <li><a href="javascript:;" data-id="{$vo['role_id']}">删除</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </volist>
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -115,12 +99,12 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>角色名：</label>
-                                    <input type="text" placeholder="输入角色名" class="form-control">
+                                    <input type="text" placeholder="输入角色名" class="form-control" aria-required="true" aria-invalid="true">
                                 </div>
 
                                 <div class="form-group">
                                     <label>描述：</label>
-                                    <textarea id="ccomment" name="comment" class="form-control" required="" aria-required="true" style="margin: 0px 0px 0px 0px; height: 93px; width: 521px;"></textarea>
+                                    <textarea id="ccomment" name="comment" class="form-control"  style="margin: 0px 0px 0px 0px; height: 93px; max-width:100%;"></textarea>
                                 </div>
                             </div>
                         </div>

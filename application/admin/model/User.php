@@ -10,7 +10,12 @@ class User extends Model
     public  function getUsers(){
         // $users = $this->where('user_status=0 and user_login="admin123"')->select(); // 多条件查询
 
-        $users     = $this->where('user_status=0')->select();
+       
+        $users  =   $this->alias('u')->field('u.*,r.role_name')
+                    ->join('role r','r.role_id = u.user_role','LEFT')
+                    ->where('u.user_status=0')
+                    ->select();
+                    
         if($users) {
 
         	$users = collection($users)->toArray();
@@ -22,7 +27,6 @@ class User extends Model
 
     public function addUser($input){
         
-        $this->data($input);
 
 		$save = $this->allowField(true)->save($input);
 

@@ -62,7 +62,7 @@ $menu = array(
 	            array(
 					'name'=>'角色管理',
 
-					'action'=>'admin/User/userRole',
+					'action'=>'admin/Role/roleList',
 
 	                "auth"=>array(
 	                    array("name"=>'添加','action'=>"admin/User/add"),
@@ -74,7 +74,7 @@ $menu = array(
 			    array(
 					'name'=>'权限管理',
 
-					'action'=>'admin/User/roleAuth',
+					'action'=>'admin/Role/roleAuth',
 
 	                "auth"=>array(
 	                    array("name"=>'添加','action'=>"admin/User/add"),

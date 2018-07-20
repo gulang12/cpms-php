@@ -50,46 +50,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="gradeX">
-                                    <td>1</td>
-                                    <td>admin</td>
-                                    <td>15889745178</td>
-                                    <td class="center">admin@yx.com</td>
-                                    <td class="center">超级管理员</td>
-                                    <td class="center">2018-07-01</td>
-                                    <td class="center" align="center">
-                                        <div class="btn-group">
-                                            <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a href="javascript:;" class="font-bold edit-user">修改</a>
-                                                </li>
-                                                <li><a href="javascript:;">删除</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="gradeX">
-                                    <td>2</td>
-                                    <td>龙行天下4</td>
-                                    <td>15889745118</td>
-                                    <td class="center">longxing@yx.com</td>
-                                    <td class="center">管理员</td>
-                                    <td class="center">2018-07-01</td>
-                                    <td class="center" align="center">
-                                        <div class="btn-group">
-                                            <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a href="javascript:;" class="font-bold edit-user">修改</a>
-                                                </li>
-                                                <li><a href="javascript:;">删除</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <volist name="users" id="vo">
+                                    <tr class="gradeX">
+                                        <td>{$vo['user_id']}</td>
+                                        <td>{$vo['user_login']}</td>
+                                        <td>{$vo['user_phone']}</td>
+                                        <td class="center">{$vo['user_email']}</td>
+                                        <td class="center">{$vo['role_name']}</td>
+                                        <td class="center">{$vo['user_registered']}</td>
+                                        <td class="center" align="center">
+                                            <div class="btn-group">
+                                                <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a href="javascript:;" class="font-bold edit-user" data-id="{$vo['user_id']}">修改</a>
+                                                    </li>
+                                                    <li><a href="javascript:;" data-id="{$vo['user_id']}">删除</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </volist>
                             </tbody>
                             <tfoot>
                                 <tr>
