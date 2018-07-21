@@ -33,6 +33,8 @@
  * @link http://www.openwall.com/phpass/
  * @since 2.5.0
  */
+namespace app\common\util;
+
 class PasswordHash {
 	var $itoa64;
 	var $iteration_count_log2;
