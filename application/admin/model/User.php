@@ -11,9 +11,7 @@ class User extends Model
     // 指定自动写入的时间戳字段名
     protected $createTime = 'user_registered';
 
-
-    public  function getUsers(){
-        // $users = $this->where('user_status=0 and user_login="admin123"')->select(); // 多条件查询
+    public  function getUserList(){
        
         $users  =   $this->alias('u')->field('u.*,r.role_name')
                     ->join('role r','r.role_id = u.user_role','LEFT')
@@ -28,6 +26,23 @@ class User extends Model
         return $users;
 
     } 
+    
+    public function getUser($userId) {
+
+        $user = model("User")->where("user_id=".$userId)->find();
+
+        if($user) {
+
+            $user = $user->toArray();
+
+            return json(['code'=>1,'msg'=>'数据获取成功','data'=>$user]);
+            
+        }else{
+
+            return json(['code'=>0,'msg'=>'数据丢失','data'=>'']); 
+        }
+
+    }
 
     public function addUser($input){
 

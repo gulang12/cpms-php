@@ -163,13 +163,26 @@
             $(".ibox-content").on('click','.edit-user',function(){
                 var userId = $(this).data("id");
 
-                $.post("{:url('admin/User/updateUser')}",{user_id:userId},function(data){
-
+                $.post("{:url('admin/User/getUser')}",{user_id:userId},function(data){
                     
+                    if(data.code==1) {
 
+                        $("input[name='user_login']").val(data.data.user_login);
+                        $("input[name='user_pass']").val(data.data.user_pass);
+                        $("input[name='confirm_pass']").val(data.data.user_pass);
+                        $("input[name='user_phone']").val(data.data.user_phone);
+                        $("input[name='user_email']").val(data.data.user_email);
+                        $("#user_id").val(data.data.user_id);
+
+                    }else{
+
+                        layer.msg(data.msg, {time:500, icon:5});  
+                    }
+                    
+                    $("#user-modal-form").modal('show');
                 },'json');
 
-                $("#user-modal-form").modal('show');
+                
 
             })
         });

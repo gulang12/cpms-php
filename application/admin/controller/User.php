@@ -9,11 +9,19 @@ class User  extends AdminBase
     {
     	
         
-        $users =  model('User')->getUsers();
+        $users =  model('User')->getUserList();
 
         $this->assign("users",$users);
 
         return $this->fetch();
+    }
+    
+    public function getUser() {
+        $userId = input()['user_id'];
+
+        $user   = model("User")->getUser($userId);
+        
+        return $user;
     }
 
     public function addUser(){

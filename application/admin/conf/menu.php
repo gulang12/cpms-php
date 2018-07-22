@@ -85,6 +85,29 @@ $menu = array(
 		    )
 		    
 		),
+
+
+		array(
+			'name'=>'订单管理',
+	        'controller'=>'admin/Order',
+	        'icon'=>'fa-balance-scale',
+			'child'=>array(
+
+				array(
+					'name'=>'订单列表',
+
+					'action'=>'admin/Order/orderList',
+
+	                "auth"=>array(
+	                	array("name"=>'添加','action'=>"admin/Order/add"),
+	                	array("name"=>'删除','action'=>"admin/Order/delete"),
+	                	array("name"=>'编辑','action'=>"admin/Order/edit"),
+	                )
+			    ),
+	            
+		    )
+		    
+		),
         
 	),
 	
