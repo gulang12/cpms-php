@@ -29,13 +29,15 @@ class User extends Model
     
     public function getUser($userId) {
 
-        $user = model("User")->where("user_id=".$userId)->find();
+        $user  = $this->where("user_id=".$userId)->find();
+
+        $roles = model('Role')->getSelectRoles();
 
         if($user) {
 
             $user = $user->toArray();
 
-            return json(['code'=>1,'msg'=>'数据获取成功','data'=>$user]);
+            return json(['code'=>1,'msg'=>'数据获取成功','data'=>$user,'roles'=>$roles]);
             
         }else{
 
@@ -49,26 +51,35 @@ class User extends Model
         if(request()->isPost()) {
 
 	        if($input['handle_type'] == 'add') {
-
-	            $save = $this->allowField(true)->save($input);
                 
-                if($save) {
-                	return json(['code'=>1,'msg'=>'添加成功']);
+                $isHaveUser = $this->where("user_login ='".$input['user_login']."'")->find();
+
+                if(!$isHaveUser) {
+
+                    $save = $this->allowField(true)->save($input);
+                
+	                if($save) {
+	                	return json(['code'=>1,'msg'=>'添加成功']);
+
+	                }else{
+
+	                    return json(['code'=>2,'msg'=>'添加失败']);
+	                }
 
                 }else{
-
-                    return json(['code'=>2,'msg'=>'添加失败']);
+                    
+                    return json(['code'=>3,'msg'=>'登入名已存在']);
                 }
 
 	        }else{
 
-	            return json(['code'=>3,'msg'=>'非法数据']);
+	            return json(['code'=>4,'msg'=>'非法数据']);
 
 	        }
 
         }else {
            
-            return json(['code'=>4,'msg'=>'非法请求']);
+            return json(['code'=>5,'msg'=>'非法请求']);
         }
 		
     } 
@@ -77,16 +88,52 @@ class User extends Model
     public function delUser($userId){
         
         $del = $this->where('user_id='.$userId)->delete();
+        
+        if($del) {
 
-        return $del;
-          // to do
+        	return json(['code'=>1,'msg'=>'删除成功']);
+
+        }else{
+            return json(['code'=>0,'msg'=>'删除失败']);
+        }
+
     } 
 
-    public function updateUser($input,$userId) {
+    public function updateUser($input) {
 
-    	$update = $this->allowField(true)->save($input,['user_id' =>$userId]);
+    	if(request()->isPost()) {
+            if($input['handle_type'] == 'update') {
+                
+                $isHaveUser = $this->where("user_login='".$input['user_login']."'"." AND user_id <>".$input['user_id'])->find();
+                
+                if(!$isHaveUser) {
+    
+                    $update = $this->allowField(true)->save($input,$input['user_id']);
 
-    	return $update;
+	            	if($update !==false) {
+
+	            		return json(['code'=>1,'msg'=>'更新成功']);
+
+	            	}else{
+
+	            		return json(['code'=>2,'msg'=>'更新失败']);
+	            	}
+
+                }else{
+                        return json(['code'=>3,'msg'=>'登入名已存在']);
+                }
+            	
+
+            }else{
+
+            	return json(['code'=>4,'msg'=>'非法数据']);
+            }
+
+    	}else{
+
+    		return json(['code'=>5,'msg'=>'非法请求']);
+    	}
+
     }
        
 }

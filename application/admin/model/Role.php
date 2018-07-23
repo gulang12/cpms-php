@@ -6,10 +6,14 @@ class Role extends Model
 {
     
     protected $pk = 'role_id';
+
+    protected $autoWriteTimestamp = 'datetime'; //时间字段类型
+
+    // 指定自动写入的时间戳字段名
+    protected $createTime = 'role_add_time';
     
     public  function getRoles(){
-        // $users = $this->where('user_status=0 and user_login="admin123"')->select(); // 多条件查询
-
+        
         $roles     = $this->select();
 
         if($roles) {
@@ -20,6 +24,17 @@ class Role extends Model
         return $roles;
 
     } 
+
+    public function getSelectRoles() {
+
+        $roles = $this->where("role_id > 1")->select();
+
+        
+        $roles = collection($roles)->toArray();
+
+        return $roles;
+  
+    }
 
     public function addRole($input){
         

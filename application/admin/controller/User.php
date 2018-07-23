@@ -23,7 +23,13 @@ class User  extends AdminBase
         
         return $user;
     }
+    
+    public function getRoles(){
 
+        $roles  = model('Role')->getSelectRoles();
+
+        return $roles ? json(['code'=>1,'roles'=>$roles,'msg'=>'获取数据成功']) : json(['code'=>0,'roles'=>'','msg'=>'获取数据成功']);
+    }
     public function addUser(){
 
         
@@ -36,30 +42,22 @@ class User  extends AdminBase
     
     public function delUser(){
         
-        $userId = 3;
-        $info   =  model('User')->delUser($userId);
+        $userId = input()['user_id'];
         
-        print_r($info);
-        exit;
-        return json(['code'=>1,'msg'=>'添加成功']);
+        $info   =  model('User')->delUser($userId);
+    
+        return $info;
         
     }
     
     public function updateUser(){
-        
-        if(request()->isPost()) {
            
-            $input  = input();
-           
-             
-            $info   = model('User')->updateUser($input,$userId);
-            
-           
-            exit;
-            return json(['code'=>1,'msg'=>'添加成功']);
+        $input  = input();
+         
+        $info   = model('User')->updateUser($input);
         
-        }
-        
+        return $info;
+      
     }
 
     

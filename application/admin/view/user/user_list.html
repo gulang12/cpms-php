@@ -31,7 +31,7 @@
                     <div class="ibox-title">
                         <h5>管理员列表</h5>
                         <div class="ibox-tools">
-                            <button data-toggle="modal"  href="#user-modal-form" class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-right:10px;position:relative;top:-5px;" title="添加管理员">
+                            <button id="toggle_modal"  class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-right:10px;position:relative;top:-5px;" title="添加管理员">
                                 <i class="fa fa-user-md"></i>+
                             </button>
                         </div>
@@ -51,7 +51,7 @@
                             </thead>
                             <tbody>
                                 <volist name="users" id="vo">
-                                    <tr class="gradeX">
+                                    <tr class="gradeX" id="user-{$vo['user_id']}">
                                         <td>{$vo['user_id']}</td>
                                         <td>{$vo['user_login']}</td>
                                         <td>{$vo['user_phone']}</td>
@@ -62,12 +62,15 @@
                                             <div class="btn-group">
                                                 <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
                                                 </button>
-                                                <ul class="dropdown-menu">
-                                                    <li>
-                                                        <a href="javascript:;" class="font-bold edit-user" data-id="{$vo['user_id']}">修改</a>
-                                                    </li>
-                                                    <li><a href="javascript:;" data-id="{$vo['user_id']}">删除</a></li>
-                                                </ul>
+                                                <if condition="$vo['user_id'] gt 1">
+                                                   <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a href="javascript:;" class="font-bold edit-user" data-id="{$vo['user_id']}">修改</a>
+                                                        </li>
+                                                        <li><a href="javascript:;" class="font-bold del-user" data-id="{$vo['user_id']}">删除</a></li>
+                                                    </ul> 
+                                                </if>
+                                                
                                             </div>
                                         </td>
                                     </tr>
@@ -126,12 +129,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>所属角色</label>
-                                    <select class="form-control m-b" name="user_role">
-                                        <option value="0">选择角色</option>
-                                        <option value="1">管理员</option>
-                                        <option value="2">销售员</option>
-                                        <option value="3">审核员</option>
-                                        <option value="4">客服</option>
+                                    <select class="form-control m-b" name="user_role" id="user_role">
                                     </select>
                                 </div>
                             </div>
@@ -161,8 +159,8 @@
             $(".dataTables-example").dataTable();
 
             $(".ibox-content").on('click','.edit-user',function(){
-                var userId = $(this).data("id");
-
+                var userId = $(this).data("id"),option = '';
+                
                 $.post("{:url('admin/User/getUser')}",{user_id:userId},function(data){
                     
                     if(data.code==1) {
@@ -173,6 +171,24 @@
                         $("input[name='user_phone']").val(data.data.user_phone);
                         $("input[name='user_email']").val(data.data.user_email);
                         $("#user_id").val(data.data.user_id);
+                        $("#handle_type").val('update');
+                        
+                        option = '<option value="0">选择角色</option>';
+
+                        for(var i in data.roles) {
+
+                            if(data.roles[i].role_id == data.data.user_role) {
+
+                                option+='<option value="'+data.roles[i].role_id+'" selected >'+data.roles[i].role_name+'</option>'; 
+
+                            }else{
+                              
+                                option+='<option value="'+data.roles[i].role_id+'">'+data.roles[i].role_name+'</option>';
+                            }
+                           
+                        }
+
+                        $("#user_role").empty().append(option);
 
                     }else{
 
@@ -180,11 +196,57 @@
                     }
                     
                     $("#user-modal-form").modal('show');
+
                 },'json');
 
-                
+            });
 
-            })
+            $(".ibox-content").on('click','.del-user',function(){
+                
+                var userId = $(this).data("id");
+
+                $.post("{:url('admin/User/delUser')}",{user_id:userId},function(data){
+                    
+                    if(data.code==1) {
+
+                        layer.msg(data.msg, {time:500, icon:6});
+                         
+                        $("#user-"+userId).remove();
+
+                    }else{
+                    
+                        layer.msg(data.msg, {time:500, icon:5});
+
+                    }
+
+                },'json');
+
+            });
+
+
+            $("#toggle_modal").on('click',function(){
+                var option = '';
+
+                refresh_form('user_form');
+
+                $.post("{:url('admin/User/getRoles')}",function(data){
+                    option = '<option value="0">选择角色</option>';
+                    if(data.code==1) {
+
+                        for(var i in data.roles) {
+                            option+='<option value="'+data.roles[i].role_id+'">'+data.roles[i].role_name+'</option>';
+                        }
+                    }
+                    
+                    $("#user_role").empty().append(option);
+
+                },'json');
+
+                $("#user_id").val('');
+                $("#handle_type").val('add');
+                $("#user-modal-form").modal('show');
+            });
+
         });
         
         function userSubmit(){
@@ -202,19 +264,19 @@
             if($.trim($("input[name='user_pass']").val()) == '') {
 
                 layer.msg('请填写密码', {time:500, icon:5});  
-                 return false;
+                return false;
             }
             
             if($.trim($("input[name='confirm_pass']").val()) != $.trim($("input[name='user_pass']").val())) {
 
                 layer.msg('确认密码不一致', {time:500, icon:5});  
-                 return false;
+                return false;
             }
 
             if($("select[name='user_role']").val() == 0) {
 
                 layer.msg('请选择用户角色', {time:500, icon:5});  
-                 return false;
+                return false;
             }
 
 
