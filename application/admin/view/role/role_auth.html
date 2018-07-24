@@ -34,12 +34,11 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">所属角色</label>
                                 <div class="col-sm-2">
-                                    <select class="form-control m-b" name="role_id">
+                                    <select class="form-control m-b" name="role_id" id="role_id">
                                         <option value="0">选择角色</option>
-                                        <option value="1">管理员</option>
-                                        <option value="2">销售员</option>
-                                        <option value="3">审核员</option>
-                                        <option value="4">客服</option>
+                                        <volist name="roles" id="vo">
+                                            <option value="{$vo.role_id}">{$vo.role_name}</option>
+                                        </volist>
                                     </select>
                                 </div>
                             </div>
@@ -49,13 +48,13 @@
                             <volist name="menu" id="parent">
                                 <div class="form-group">
                                     <label class="col-sm-1 control-label checkbox-inline-block i-checks text-navy">
-                                        <input type="checkbox" value="{$parent['controller']}">{$parent['name']}
+                                        <input type="checkbox" name="action[]" value="{$parent['controller']}">{$parent['name']}
                                     </label>
                                     <volist name="parent.child" id="child">
                                         <div class="col-sm-2">
                                             <div class="checkbox i-checks">
                                                 <label class="checkbox-inline-block i-checks text-navy">
-                                                    <input type="checkbox" value="{$child['action']}" name="action[]" checked><i></i>{$child['name']}
+                                                    <input type="checkbox" value="{$child['action']}" name="action[]"><i></i>{$child['name']}
                                                 </label>
                                             </div>
                                             <volist name="child.auth" id="auth">
@@ -88,26 +87,37 @@
 	<js href="/static/js/admin/bootstrap.min.js"/>
 	<js href="/static/js/admin/content.min.js"/>
     <js href="/static/js/admin/plugins/iCheck/icheck.min.js"/>
-    <js href="/static/js/admin/admincommon.js"/>
+    <js href="/static/js/admin/plugins/layui/layer/layer.js"/>
+     <!-- <js href="/static/js/admin/admincommon.js"/> -->
+    <script type="text/javascript" src="/static/js/admin/admincommon.js?v=20180712"></script>
+
     <script>
-        $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
+        $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green"})});
         
-        $(document).ready(function(){
-            
-            // refreshRandomStr('reset_submit');
-        })
         
         function roleAuthSubmit(){
             var data = $("#auth_form").serializeArray();
-
+            
+            if($("#role_id").val()==0) {
+                
+                layer.msg('请选择角色', {time:500, icon:5});
+                 
+                return false;
+            }
+           
+           
             $.post("{:url('admin/Role/addRoleAuth')}",data,function(data){
             
                 if(data.code == 1) {
 
-                    console.log(data.msg);
+                    layer.msg(data.msg, {time:500, icon:6});
+                 
+                    return false;
                 }else {
-                    alert(data.msg);
-                    console.log(data.msg);
+
+                    layer.msg(data.msg, {time:500, icon:5});
+                 
+                     return false;
                 }
 
             },'json');

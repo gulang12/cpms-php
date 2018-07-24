@@ -28,21 +28,27 @@ class User extends Model
     } 
     
     public function getUser($userId) {
+        if(request()->isPost()){
+        	$user  = $this->where("user_id=".$userId)->find();
 
-        $user  = $this->where("user_id=".$userId)->find();
+	        $roles = model('Role')->getSelectRoles();
 
-        $roles = model('Role')->getSelectRoles();
+	        if($user) {
 
-        if($user) {
+	            $user = $user->toArray();
 
-            $user = $user->toArray();
+	            return json(['code'=>1,'msg'=>'数据获取成功','data'=>$user,'roles'=>$roles]);
+	            
+	        }else{
 
-            return json(['code'=>1,'msg'=>'数据获取成功','data'=>$user,'roles'=>$roles]);
-            
+	            return json(['code'=>2,'msg'=>'数据丢失','data'=>'']); 
+	        }
+
         }else{
-
-            return json(['code'=>0,'msg'=>'数据丢失','data'=>'']); 
+            
+            return json(['code'=>3,'msg'=>'非法请求','data'=>'']);
         }
+        
 
     }
 
@@ -87,7 +93,7 @@ class User extends Model
 
     public function delUser($userId){
         
-        $del = $this->where('user_id='.$userId)->delete();
+        $del = $this->where('user_id='.$userId.' AND user_id <> 1')->delete();
         
         if($del) {
 
@@ -131,7 +137,7 @@ class User extends Model
 
     	}else{
 
-    		return json(['code'=>5,'msg'=>'非法请求']);
+    		    return json(['code'=>5,'msg'=>'非法请求']);
     	}
 
     }
