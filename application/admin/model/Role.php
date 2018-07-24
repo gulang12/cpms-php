@@ -155,8 +155,7 @@ class Role extends Model
             $submit_time = ($submit_time[0]/1000)+$submit_time[1];
 
             $role_id  = $input["role_id"];
-            $action   = implode(",",$input['action']);
-
+            $action   = isset($input['action']) ? implode(",",$input['action']) :'';
             
             // 防止表单在极短时间重复提交  （有些强迫症患者提交按钮时喜欢快速点击两次）
             if(!Session('submit_time')) {

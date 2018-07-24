@@ -1,7 +1,7 @@
 <?php
 namespace app\admin\model;
 use think\Model;
-
+use app\common\util\PasswordHash;
 class User extends Model
 {
     
@@ -28,6 +28,7 @@ class User extends Model
     } 
     
     public function getUser($userId) {
+
         if(request()->isPost()){
         	$user  = $this->where("user_id=".$userId)->find();
 
@@ -58,6 +59,9 @@ class User extends Model
 
 	        if($input['handle_type'] == 'add') {
                 
+                // $pass = new PasswordHash(8,true);
+                // var_dump($pass);
+
                 $isHaveUser = $this->where("user_login ='".$input['user_login']."'")->find();
 
                 if(!$isHaveUser) {

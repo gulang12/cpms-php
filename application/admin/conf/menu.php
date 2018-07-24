@@ -77,9 +77,7 @@ $menu = array(
 					'action'=>'admin/Role/roleAuth',
 
 	                "auth"=>array(
-	                    array("name"=>'添加','action'=>"admin/User/add"),
-	                	array("name"=>'删除','action'=>"admin/User/delete"),
-	                	array("name"=>'编辑','action'=>"admin/User/edit"),
+	                    array("name"=>'添加','action'=>"admin/User/add")
 	                )
 			    ),
 		    )
