@@ -44,7 +44,7 @@ class AdminBase extends Controller
 
         if(!in_array($request_url,$noLogin) && !session('is_login')) {
 
-            echo '请先登入！！！';
+            // echo '请先登入！！！';
            
         }
 
