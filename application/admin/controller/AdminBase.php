@@ -28,8 +28,26 @@ class AdminBase extends Controller
     public function _initialize()
     {
     	
-      // do something...
+        // 不需要登入的请求
+        
+        $noLogin =array( 
+            'admin/Index/login',
+            'admin/Index/loginOut',
+            'admin/Index/vertify',
+        ); 
+        
+        $module      = request()->module();
+        $controller  = request()->controller();
+        $action      = request()->action();
 
-    	// echo "this is a admin  _initialize function";
+        $request_url = $module."/".$controller."/".$action;
+
+        if(!in_array($request_url,$noLogin) && !session('is_login')) {
+
+            echo '请先登入！！！';
+           
+        }
+
     }
+
 }

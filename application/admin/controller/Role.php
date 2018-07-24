@@ -19,7 +19,7 @@ class Role  extends AdminBase
 
         $roleId = input()['role_id'];
 
-        $role = model("Role")->getRole($roleId);
+        $role   = model("Role")->getRole($roleId);
 
         return $role;
     }

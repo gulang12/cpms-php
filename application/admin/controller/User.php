@@ -31,7 +31,6 @@ class User  extends AdminBase
         return $roles ? json(['code'=>1,'roles'=>$roles,'msg'=>'获取数据成功']) : json(['code'=>0,'roles'=>'','msg'=>'获取数据成功']);
     }
     public function addUser(){
-
         
         $input = input();
 
