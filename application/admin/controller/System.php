@@ -17,4 +17,16 @@ class System extends AdminBase
 
         return $this->fetch();
     }
+
+    public function fontIcon() {
+
+
+    	return $this->fetch();
+    }
+
+    public function glyphIcon() {
+
+
+    	return $this->fetch();
+    }
 }

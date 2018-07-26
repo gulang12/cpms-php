@@ -42,7 +42,7 @@ class Index  extends AdminBase
 
     public function welcome(){
 
-      
+        
         return $this->fetch(); 
     }
 
@@ -96,11 +96,13 @@ class Index  extends AdminBase
                     return json(['code'=>3,'msg'=>'密码不正确']);  
                 }
                 
+                $roleInfo = Db::name('role')->where('role_id',$checkLogin['user_role'])->find();
                 session('is_login',true);
                 session('user_id',$checkLogin['user_id']);
                 session('user_login',$checkLogin['user_login']);
                 session('user_status',$checkLogin['user_status']);
                 session('user_role',$checkLogin['user_role']);
+                session('role_name',$roleInfo['role_name']);
 
                 return json(['code'=>1,'msg'=>'登入成功','jumpUrl'=>"index"]);  
                 

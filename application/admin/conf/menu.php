@@ -36,6 +36,24 @@ $menu = array(
 	                	array("name"=>'编辑','action'=>"admin/System/edit"),
 	                )
 			    ),
+
+			    array(
+					'name'=>'字体图标1',
+
+					'action'=>'admin/System/fontIcon',
+
+	                "auth"=>array(
+	                )
+			    ),
+
+			    array(
+					'name'=>'字体图标2',
+
+					'action'=>'admin/System/glyphIcon',
+
+	                "auth"=>array(
+	                )
+			    ),
 		    )
 		   
 		),
