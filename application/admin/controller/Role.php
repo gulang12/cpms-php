@@ -17,7 +17,7 @@ class Role  extends AdminBase
 
     public function getRole() {
 
-        $roleId = input()['role_id'];
+        $roleId = input('param.role_id');
 
         $role   = model("Role")->getRole($roleId);
 
@@ -36,7 +36,7 @@ class Role  extends AdminBase
     
     public function delRole(){
         
-        $roleId = input()['role_id'];
+        $roleId = input('param.role_id');
 
         $info   =  model('Role')->delRole($roleId);
         

@@ -2,25 +2,13 @@
 namespace app\admin\controller;
 
 use think\Config;
-use think\Request;
+use think\Db;
 use think\captcha\Captcha;
-
+use app\common\util\PasswordHash;
 class Index  extends AdminBase
 {
     public function test()   //访问方式  http://域名/模块/控制器/方法/参数/参数值
     {
-    	
-    /********************** 实例化引入库对象 ********************************/
-        // $class = new Test();  // 其它应用模块引入控制器方式
-
-    	// $data = $class->test();
-
-    	
-    /********************** 指定返回数据格式 ********************************/
-        // $data = ['name'=>'thinkphp','url'=>'thinkphp.cn'];
-
-        // return json(['data'=>$data,'code'=>1,'message'=>'操作完成']);  //  指定返回数据格式
-
         
     /********************** 读取配置文件数据 ********************************/  
        
@@ -40,28 +28,6 @@ class Index  extends AdminBase
        return $this->fetch();  // 渲染页面
 
        // return 'name:'.$name;   // 可以直接获取方法的参数 无需用get获取 
-
-       
-        
-    /**********************获取参数 GET POST ...*********************/
-            // 方式一：
-        // $request = Request::instance();
-       
-        // print_r($request->param('name')); // 适用pathinfo的URL  
-
-        // print_r($request->get('name')); // 只能获取这种形式的 http://域名/模块/控制器/方法?参数=参数值
-
-        // 使用助手函数获取参数    
-        //print_r(input('get.name'));  // 只能获取这种形式的 http://域名/模块/控制器/方法?参数=参数值
-        // input('get.');
-        
-        /************* 这种方式适用所有URL规则 **************/
-
-        // print_r(input('param.name'));  
-        // print_r(input('name'));
-        // print_r(input(''));  // 获取所有参数
-
-        // var_dump(request()->isGet());  //判断请求方式  isAjax、isPost
 
     }
     
@@ -104,9 +70,58 @@ class Index  extends AdminBase
 
     public function login() {
 
+        if(request()->isPost()) {
 
-       return $this->fetch(); 
+            $captcha    = new Captcha();
+
+            $user_login = input('param.user_login');
+            $user_pass  = input('param.user_pass');
+            $vertify    = input('param.vertify');
+            
+            if(!$captcha->check($vertify)) {
+                
+                return json(['code'=>4,'msg'=>'验证码错误']);  
+            }
+
+            $checkLogin = Db::name('user')->where('user_login',$user_login)->find();
+            
+            if(is_array($checkLogin) && count($checkLogin) > 0) {
+
+                $hasher = new PasswordHash(8,true);
+                
+                $chekcPass = $hasher->CheckPassword($user_pass, $checkLogin['user_pass']);
+               
+                if(!$chekcPass){
+                    
+                    return json(['code'=>3,'msg'=>'密码不正确']);  
+                }
+                
+                session('is_login',true);
+                session('user_id',$checkLogin['user_id']);
+                session('user_login',$checkLogin['user_login']);
+                session('user_status',$checkLogin['user_status']);
+                session('user_role',$checkLogin['user_role']);
+
+                return json(['code'=>1,'msg'=>'登入成功','jumpUrl'=>"index"]);  
+                
+            }else{
+
+                return json(['code'=>2,'msg'=>'用户名不正确']);  
+            }
+
+            exit();
+        }
+
+        return $this->fetch(); 
     }
+
+    public function loginOut() {
+        
+        session(null); // 清除session 安全退出帐号
+
+        $this->redirect('admin/Index/login',302);
+    }
+
 
 
     public function vertify() {

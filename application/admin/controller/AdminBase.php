@@ -44,7 +44,7 @@ class AdminBase extends Controller
 
         if(!in_array($request_url,$noLogin) && !session('is_login')) {
 
-            // echo '请先登入！！！';
+            $this->redirect('admin/Index/login',302); // 跳转到登入页面
            
         }
 

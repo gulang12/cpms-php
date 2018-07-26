@@ -8,11 +8,19 @@
 /**
   【des:检测用户权限】
 * @param $action  模块/控制器/操作
-* @param return   true or false 
+* return boolean   true or false 
 **/
 function check_auth($action){
     
-    $roleAuth = array('admin/User','admin/User/userList'); //角色保存的权限数据
+    include APP_PATH."admin/conf/menu.php";  // 后台菜单
+
+    $role_id  = session("role_id");
+
+    $roleAuth = db('role')->where("role_id",$role_id)->column('role_auth');
+
+    
+    
+    // $roleAuth = array('admin/User','admin/User/userList'); //角色保存的权限数据
     
     // if(in_array($action,$roleAuth)) 
 
@@ -22,6 +30,7 @@ function check_auth($action){
 
     	return true;
 }
+
 
 
 

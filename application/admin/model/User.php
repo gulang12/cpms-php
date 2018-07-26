@@ -32,11 +32,17 @@ class User extends Model
         if(request()->isPost()){
         	$user  = $this->where("user_id=".$userId)->find();
 
-	        $roles = model('Role')->getSelectRoles();
+            if($userId==1)
 
+                $roles = array(array("role_id"=>1,"role_name"=>'超级管理员'));
+            else
+
+            	$roles = model('Role')->getSelectRoles();
+           
 	        if($user) {
 
 	            $user = $user->toArray();
+	            
 
 	            return json(['code'=>1,'msg'=>'数据获取成功','data'=>$user,'roles'=>$roles]);
 	            
@@ -59,8 +65,9 @@ class User extends Model
 
 	        if($input['handle_type'] == 'add') {
                 
-                // $pass = new PasswordHash(8,true);
-                // var_dump($pass);
+                $hasher = new PasswordHash(8,true);
+
+                $input['user_pass'] = $hasher->HashPassword($input['user_pass']);
 
                 $isHaveUser = $this->where("user_login ='".$input['user_login']."'")->find();
 
@@ -114,6 +121,10 @@ class User extends Model
     	if(request()->isPost()) {
             if($input['handle_type'] == 'update') {
                 
+                $hasher = new PasswordHash(8,true);
+                
+                $input['user_pass'] = $hasher->HashPassword($input['user_pass']);
+
                 $isHaveUser = $this->where("user_login='".$input['user_login']."'"." AND user_id <>".$input['user_id'])->find();
                 
                 if(!$isHaveUser) {
