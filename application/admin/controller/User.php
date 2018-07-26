@@ -17,7 +17,7 @@ class User  extends AdminBase
     }
     
     public function getUser() {
-        $userId = input()['user_id'];
+        $userId = input('param.user_id');
 
         $user   = model("User")->getUser($userId);
         
@@ -41,7 +41,7 @@ class User  extends AdminBase
     
     public function delUser(){
         
-        $userId = input()['user_id'];
+        $userId = input('param.user_id');
         
         $info   =  model('User')->delUser($userId);
     

@@ -116,6 +116,7 @@ class Role extends Model
                 $isHaveRole = $this->where("role_name ='".$input['role_name']."'"." AND role_id <>".$input['role_id'])->find();
 
                 if(!$isHaveRole) {
+                    
                     $update = $this->allowField(true)->save($input,['role_id' =>$input['role_id']]);
 
                     if($update !==false) {
