@@ -56,15 +56,24 @@
                                         <td class="center">{$vo['role_add_time']}</td>
                                         <td class="center" align="center">
                                             <div class="btn-group">
-                                                <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
-                                                </button>
+                                                
                                                 <if condition="$vo['role_id'] eq 1">
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a href="javascript:;" class="font-bold edit-role" data-id="{$vo['role_id']}">修改</a>
-                                                        </li>
-                                                    </ul>
+                                                    <if condition="$Request.session.user_id eq 1">
+                                                        <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                <a href="javascript:;" class="font-bold edit-role" data-id="{$vo['role_id']}">修改</a>
+                                                            </li>
+                                                        </ul>
+                                                    <else/>
+                                                        <button data-toggle="dropdown" class="btn btn-primary btn-xs disabled" aria-expanded="false">操作 <span class="caret"></span>
+                                                        </button>
+                                                    </if>
+                                                    
                                                 <else/>
+                                                    <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
+                                                    </button>
                                                     <ul class="dropdown-menu">
                                                         <li>
                                                             <a href="javascript:;" class="font-bold edit-role" data-id="{$vo['role_id']}">修改</a>

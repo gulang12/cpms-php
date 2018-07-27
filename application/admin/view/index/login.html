@@ -54,8 +54,31 @@
     
 function login_submit_btn() {
     
-   var data = $("#form_login").serializeArray();
+    if($.trim($("input[name=user_login]").val())=='') {
+        
+        $("#notice-msg").text('请输入用户名');
 
+        return false;
+    }
+    
+    if($.trim($("input[name=user_pass]").val())=='') {
+        
+        $("#notice-msg").text('请输入密码');
+
+        return false;
+    }
+   
+    if($.trim($("input[name=vertify]").val())=='') {
+        
+        $("#notice-msg").text('请输入验证码');
+
+        return false;
+    }
+
+
+
+   var data = $("#form_login").serializeArray();
+   
    $.post("{:url('admin/Index/login')}",data,function(data){
         
         if(data.code==1) {

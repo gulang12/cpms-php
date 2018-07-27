@@ -14,11 +14,11 @@ function check_auth($action){
     
     include APP_PATH."admin/conf/menu.php";  // 后台菜单
 
-    $role_id  = session("role_id");
+    $role_id  = session("user_role");
 
     $roleAuth = db('role')->where("role_id",$role_id)->column('role_auth');
 
-    
+
     
     // $roleAuth = array('admin/User','admin/User/userList'); //角色保存的权限数据
     

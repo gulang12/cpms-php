@@ -42,7 +42,7 @@ class User extends Model
 	        if($user) {
 
 	            $user = $user->toArray();
-	            
+
 
 	            return json(['code'=>1,'msg'=>'数据获取成功','data'=>$user,'roles'=>$roles]);
 	            
@@ -128,8 +128,23 @@ class User extends Model
                 $isHaveUser = $this->where("user_login='".$input['user_login']."'"." AND user_id <>".$input['user_id'])->find();
                 
                 if(!$isHaveUser) {
-    
-                    $update = $this->allowField(true)->save($input,$input['user_id']);
+                    
+                    if($input['user_id']==1) { // 只有admin才能编辑admin用户 
+
+                        if(session("user_id")==1) {
+                            $update = $this->allowField(true)->save($input,$input['user_id']);
+
+                        }else{
+                             
+                            return json(['code'=>6,'msg'=>'	NO！你不是超级管理员']);
+                        }
+                       
+                    }else{
+                           
+                           $update = $this->allowField(true)->save($input,$input['user_id']);
+                    }
+
+                    
 
 	            	if($update !==false) {
 
