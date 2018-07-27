@@ -128,7 +128,7 @@
                                     <input type="text" placeholder="输入登入名" name="user_login" value="" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label>密码：</label>
+                                    <label id="user_pass_tip">密码：</label>
                                     <input type="password" placeholder="输入密码" name="user_pass" value="" class="form-control">
                                 </div>
                                 <div class="form-group">
@@ -142,7 +142,7 @@
                                     <input type="text" placeholder="输入邮箱" name="user_email" value="" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label>确认密码：</label>
+                                    <label id="confirm_pass_tip">确认密码：</label>
                                     <input type="password" placeholder="确认密码" name="confirm_pass" value="" class="form-control">
                                 </div>
                                 <div class="form-group">
@@ -179,13 +179,18 @@
             $(".ibox-content").on('click','.edit-user',function(){
                 var userId = $(this).data("id"),option = '';
                 
+                $("#myModalLabel").text('编辑管理员');
+                $("#user_pass_tip").text("新密码：");
+                $("#confirm_pass_tip").text("确认新密码：");
                 $.post("{:url('admin/User/getUser')}",{user_id:userId},function(data){
                     
                     if(data.code==1) {
 
                         $("input[name='user_login']").val(data.data.user_login);
-                        $("input[name='user_pass']").val(data.data.user_pass);
-                        $("input[name='confirm_pass']").val(data.data.user_pass);
+                        // $("input[name='user_pass']").val(data.data.user_pass);
+                        // $("input[name='confirm_pass']").val(data.data.user_pass);
+                        // $("input[name='user_pass']").attr()
+
                         $("input[name='user_phone']").val(data.data.user_phone);
                         $("input[name='user_email']").val(data.data.user_email);
                         $("#user_id").val(data.data.user_id);
@@ -244,6 +249,10 @@
 
             $("#toggle_modal").on('click',function(){
                 var option = '';
+
+                $("#myModalLabel").text('添加管理员');
+                $("#user_pass_tip").text("密码：");
+                $("#confirm_pass_tip").text("确认密码：");
 
                 refresh_form('user_form');
 

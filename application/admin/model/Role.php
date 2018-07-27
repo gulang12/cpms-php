@@ -117,7 +117,21 @@ class Role extends Model
 
                 if(!$isHaveRole) {
                     
-                    $update = $this->allowField(true)->save($input,['role_id' =>$input['role_id']]);
+                    if($input['role_id']==1) { // 只有admin才能编辑
+
+                        if(session("user_id")==1) {
+
+                            $update = $this->allowField(true)->save($input,['role_id' =>$input['role_id']]);
+
+                        }else{
+                             
+                            return json(['code'=>6,'msg'=>' NO！你不是超级管理员']);
+                        }
+                       
+                    }else{
+                           
+                           $update = $this->allowField(true)->save($input,['role_id' =>$input['role_id']]);
+                    }
 
                     if($update !==false) {
 

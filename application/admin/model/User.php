@@ -144,8 +144,6 @@ class User extends Model
                            $update = $this->allowField(true)->save($input,$input['user_id']);
                     }
 
-                    
-
 	            	if($update !==false) {
 
 	            		return json(['code'=>1,'msg'=>'更新成功']);
