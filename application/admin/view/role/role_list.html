@@ -199,11 +199,17 @@
 
             $("#toggle_modal").on('click',function(){
 
-                refresh_form('role_form');
+                var index = layer.open({
+                  title:'添加角色',
+                  offset: ['220px', '220px'],
+                  isOutAnim: true ,
+                  type: 2,
+                  content:"{:url('admin/Role/roleAuth')}",
+                  area: '800px',
+                  maxmin: true
+                });
 
-                $("#role_id").val('');
-                $("#handle_type").val('add');
-                $("#role-modal-form").modal('show');
+                layer.full(index);
 
             });
         });
