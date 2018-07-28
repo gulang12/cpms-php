@@ -83,6 +83,8 @@
 
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
+                                    <input type="hidden" id="role_id" name="role_id" value="" />
+                                    <input type="hidden" id="handle_type"  name="handle_type"  value="add" />
                                     <button class="btn btn-primary" type="submit" onclick="roleAuthSubmit();">保存内容</button>
                                 </div>
                             </div>
@@ -108,9 +110,9 @@
         function roleAuthSubmit(){
             var data = $("#auth_form").serializeArray();
             
-            if($("#role_id").val()==0) {
+            if($("#role_name").val()=='') {
                 
-                layer.msg('请选择角色', {time:500, icon:5});
+                layer.msg('请填写角色名', {time:500, icon:5});
                  
                 return false;
             }
