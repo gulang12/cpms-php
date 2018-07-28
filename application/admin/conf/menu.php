@@ -13,17 +13,17 @@ $menu = array(
 	        'icon'=>'fa-gear',
 			'child'=>array(
 
-				array(
-					'name'=>'系统设置',
+				// array(
+				// 	'name'=>'系统设置',
 
-					'action'=>'admin/System/systemSetup',
+				// 	'action'=>'admin/System/systemSetup',
 
-	                "auth"=>array(
-	                	array("name"=>'添加','action'=>"admin/System/add"),
-	                	array("name"=>'删除','action'=>"admin/System/delete"),
-	                	array("name"=>'编辑','action'=>"admin/System/edit"),
-	                )
-			    ),
+			   //    "auth"=>array(
+			   //          array("name"=>'添加','action'=>"admin/System/add"),
+			   //          array("name"=>'删除','action'=>"admin/System/delete"),
+			   //          array("name"=>'编辑','action'=>"admin/System/edit"),
+			   //     )
+			   //  ),
 	            
 	            array(
 					'name'=>'系统日志',
@@ -31,9 +31,8 @@ $menu = array(
 					'action'=>'admin/System/systemLog',
 
 	                "auth"=>array(
-	                	array("name"=>'添加','action'=>"admin/System/add"),
-	                	array("name"=>'删除','action'=>"admin/System/delete"),
-	                	array("name"=>'编辑','action'=>"admin/System/edit"),
+	                	array("name"=>'添加','action'=>"admin/System/addLog"),
+	                	array("name"=>'删除','action'=>"admin/System/delLog")
 	                )
 			    ),
 
@@ -71,9 +70,9 @@ $menu = array(
 					'action'=>'admin/User/userList',
 
 	                "auth"=>array(
-	                	array("name"=>'添加','action'=>"admin/User/add"),
-	                	array("name"=>'删除','action'=>"admin/User/delete"),
-	                	array("name"=>'编辑','action'=>"admin/User/edit"),
+	                	array("name"=>'添加','action'=>"admin/User/addUser"),
+	                	array("name"=>'删除','action'=>"admin/User/delUser"),
+	                	array("name"=>'编辑','action'=>"admin/User/updateUser"),
 	                )
 			    ),
 	            
@@ -83,9 +82,9 @@ $menu = array(
 					'action'=>'admin/Role/roleList',
 
 	                "auth"=>array(
-	                    array("name"=>'添加','action'=>"admin/User/add"),
-	                	array("name"=>'删除','action'=>"admin/User/delete"),
-	                	array("name"=>'编辑','action'=>"admin/User/edit"),
+	                    array("name"=>'添加','action'=>"admin/Role/addRole"),
+	                	array("name"=>'删除','action'=>"admin/Role/delRole"),
+	                	array("name"=>'编辑','action'=>"admin/Role/updateRole"),
 	                )
 			    ),
 
@@ -95,7 +94,7 @@ $menu = array(
 					'action'=>'admin/Role/roleAuth',
 
 	                "auth"=>array(
-	                    array("name"=>'添加','action'=>"admin/User/add")
+	                    array("name"=>'添加','action'=>"admin/Role/addRoleAuth")
 	                )
 			    ),
 		    )

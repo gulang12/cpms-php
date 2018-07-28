@@ -187,9 +187,8 @@
                     if(data.code==1) {
 
                         $("input[name='user_login']").val(data.data.user_login);
-                        // $("input[name='user_pass']").val(data.data.user_pass);
-                        // $("input[name='confirm_pass']").val(data.data.user_pass);
-                        // $("input[name='user_pass']").attr()
+                        $("input[name='user_pass']").val('');
+                        $("input[name='confirm_pass']").val('');
 
                         $("input[name='user_phone']").val(data.data.user_phone);
                         $("input[name='user_email']").val(data.data.user_email);
@@ -288,17 +287,37 @@
                 return false;
             }
             
-            if($.trim($("input[name='user_pass']").val()) == '') {
 
-                layer.msg('请填写密码', {time:500, icon:5});  
-                return false;
-            }
-            
-            if($.trim($("input[name='confirm_pass']").val()) != $.trim($("input[name='user_pass']").val())) {
+            if(handle_type == 'add') {
 
-                layer.msg('确认密码不一致', {time:500, icon:5});  
-                return false;
+                if($.trim($("input[name='user_pass']").val()) == '') {
+
+                    layer.msg('请填写密码', {time:500, icon:5});  
+                    return false;
+                }
+
+                if($.trim($("input[name='confirm_pass']").val()) != $.trim($("input[name='user_pass']").val())) {
+
+                    layer.msg('确认密码不一致', {time:500, icon:5});  
+                    return false;
+                }
+
+                url = "{:url('admin/User/addUser')}";
+
+            }else if(handle_type == 'update'){
+
+                if($.trim($("input[name='user_pass']").val())) {
+                      
+                    if($.trim($("input[name='confirm_pass']").val()) != $.trim($("input[name='user_pass']").val())) {
+                  
+                        layer.msg('确认密码不一致', {time:500, icon:5});  
+                        return false;
+                    }  
+                }
+                
+                url = "{:url('admin/User/updateUser')}";
             }
+
 
             if($("select[name='user_role']").val() == 0) {
 
@@ -306,23 +325,13 @@
                 return false;
             }
 
-
-            if(handle_type == 'add') {
-
-                url = "{:url('admin/User/addUser')}";
-
-            }else if(handle_type == 'update'){
-                
-                url = "{:url('admin/User/updateUser')}";
-            }
-
-           
             $.post(url,data,function(data){
                 if(data.code==1) {
 
                    layer.msg(data.msg, {time:500, icon:6}); 
 
                 }else{
+                    
                    layer.msg(data.msg, {time:500, icon:5});  
                 }
             },'json');

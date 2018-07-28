@@ -72,10 +72,15 @@ class User extends Model
                 $isHaveUser = $this->where("user_login ='".$input['user_login']."'")->find();
 
                 if(!$isHaveUser) {
+                    if($input['user_role']==1) {
+
+                    	return json(['code'=>6,'msg'=>'不能添加为超管']);
+                    }
 
                     $save = $this->allowField(true)->save($input);
                 
 	                if($save) {
+
 	                	return json(['code'=>1,'msg'=>'添加成功']);
 
 	                }else{
@@ -123,8 +128,15 @@ class User extends Model
                 
                 $hasher = new PasswordHash(8,true);
                 
-                $input['user_pass'] = $hasher->HashPassword($input['user_pass']);
+                if($input['user_pass']) {
 
+                	$input['user_pass'] = $hasher->HashPassword($input['user_pass']);
+
+                }else{
+
+                    unset($input['user_pass']);
+                }
+               
                 $isHaveUser = $this->where("user_login='".$input['user_login']."'"." AND user_id <>".$input['user_id'])->find();
                 
                 if(!$isHaveUser) {
@@ -140,9 +152,15 @@ class User extends Model
                         }
                        
                     }else{
-                           
-                           $update = $this->allowField(true)->save($input,$input['user_id']);
+                    	
+                            if($input['user_role']==1) {
+
+		                    	return json(['code'=>7,'msg'=>'不能添加为超管']);
+		                    }
+
+                            $update = $this->allowField(true)->save($input,$input['user_id']);
                     }
+
 
 	            	if($update !==false) {
 

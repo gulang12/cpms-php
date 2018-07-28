@@ -61,7 +61,7 @@ class Role  extends AdminBase
         include APP_PATH."admin/conf/menu.php";
           
         $roles = model("Role")->getSelectRoles();
-
+        
         $this->assign("roles",$roles); 
 
         $this->assign("menu",$menu['admin']);	

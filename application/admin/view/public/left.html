@@ -28,7 +28,7 @@
                 </div>
             </li>
             <volist name="menu" id="parent">
-                <if condition="check_auth($parent['controller']) eq 'true'">
+                <if condition="check_auth($parent['controller'])">
                     <li>
                         <a href="#">
                             <i class="fa {$parent['icon']}"></i>
@@ -37,7 +37,7 @@
                         </a>
                         <ul class="nav nav-second-level">
                             <volist name="parent.child" id="child">
-                                <if condition="check_auth($child['action']) eq 'true'">
+                                <if condition="check_auth($child['action'])">
                                     <li>
                                         <a class="J_menuItem" href="{:url($child['action'])}">{$child['name']}</a>
                                     </li>

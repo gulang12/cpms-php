@@ -10,29 +10,27 @@
 * @param $action  模块/控制器/操作
 * return boolean   true or false 
 **/
-function check_auth($action){
+function check_auth($action=''){
     
     include APP_PATH."admin/conf/menu.php";  // 后台菜单
-
+    
     $role_id  = session("user_role");
+
+    if($role_id == 1) { // 超级管理员
+        
+        return true;
+    }
 
     $roleAuth = db('role')->where("role_id",$role_id)->column('role_auth');
 
+    $roleAuth = explode(",",$roleAuth[0]);
 
-    
-    // $roleAuth = array('admin/User','admin/User/userList'); //角色保存的权限数据
-    
-    // if(in_array($action,$roleAuth)) 
-
-    // 	return true;
-    // else 
-    // 	return false;
+    if(in_array($action,$roleAuth)) 
 
     	return true;
+    else 
+    	return false;
 }
-
-
-
 
 
 ?>
