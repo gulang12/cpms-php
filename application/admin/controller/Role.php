@@ -24,12 +24,12 @@ class Role  extends AdminBase
         return $role;
     }
 
-    public function addRole()   
+    public function addRoleAuth()   
     {
         
         $input = input();
 
-        $info  =  model('Role')->addRole($input);
+        $info  =  model('Role')->addRoleAuth($input);
 
         return $info;
     }
@@ -43,16 +43,6 @@ class Role  extends AdminBase
         return $info;
         
     }
-    
-    public function updateRole(){
-
-        $input  = input();
-
-        $info   =  model('Role')->updateRole($input);
-
-        return $info;
-        
-    }
 
 
     public function roleAuth()   
@@ -61,7 +51,7 @@ class Role  extends AdminBase
         include APP_PATH."admin/conf/menu.php";
           
         $roles = model("Role")->getSelectRoles();
-        
+
         $this->assign("roles",$roles); 
 
         $this->assign("menu",$menu['admin']);	
@@ -70,11 +60,11 @@ class Role  extends AdminBase
     }
 
 
-    public function addRoleAuth(){
+    public function updateRoleAuth(){
 
         $input  = input();
         
-        $info   = model("Role")->addRoleAuth($input);
+        $info   = model("Role")->updateRoleAuth($input);
 
         return $info;
     }

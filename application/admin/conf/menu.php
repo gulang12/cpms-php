@@ -82,21 +82,12 @@ $menu = array(
 					'action'=>'admin/Role/roleList',
 
 	                "auth"=>array(
-	                    array("name"=>'添加','action'=>"admin/Role/addRole"),
+	                    array("name"=>'添加','action'=>"admin/Role/addRoleAuth"),
 	                	array("name"=>'删除','action'=>"admin/Role/delRole"),
-	                	array("name"=>'编辑','action'=>"admin/Role/updateRole"),
+	                	array("name"=>'编辑','action'=>"admin/Role/updateRoleAuth"),
 	                )
 			    ),
-
-			    array(
-					'name'=>'权限管理',
-
-					'action'=>'admin/Role/roleAuth',
-
-	                "auth"=>array(
-	                    array("name"=>'添加','action'=>"admin/Role/addRoleAuth")
-	                )
-			    ),
+			    
 		    )
 		    
 		),

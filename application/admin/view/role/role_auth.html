@@ -42,18 +42,6 @@
                                 </div>
                             </div>
 
-                            <!-- <div class="form-group">
-                                <label class="col-sm-2 control-label">所属角色</label>
-                                <div class="col-sm-2">
-                                    <select class="form-control m-b" name="role_id" id="role_id">
-                                        <option value="0">选择角色</option>
-                                        <volist name="roles" id="vo">
-                                            <option value="{$vo.role_id}">{$vo.role_name}</option>
-                                        </volist>
-                                    </select>
-                                </div>
-                            </div> -->
-                            
                             <div class="hr-line-dashed"></div>
 
                             <volist name="menu" id="parent">
@@ -116,9 +104,17 @@
                  
                 return false;
             }
-           
-           
-            $.post("{:url('admin/Role/addRoleAuth')}",data,function(data){
+            
+            var handle_type = $("#handle_type").val();
+
+            if(handle_type == 'add') 
+                url = "{:url('admin/Role/addRoleAuth')}";
+
+            else if(handle_type == 'update')
+                
+                url = "{:url('admin/Role/updateRoleAuth')}";
+
+            $.post(url,data,function(data){
             
                 if(data.code == 1) {
 
