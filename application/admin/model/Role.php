@@ -27,24 +27,18 @@ class Role extends Model
     
     public function getRole($roleId){
 
-        if(request()->isPost()){
+        $role = $this->where("role_id=".$roleId)->find();
 
-            $role = $this->where("role_id=".$roleId)->find();
+        if($role) {
+            $role = $role->toArray();
 
-            if($role) {
-                $role = $role->toArray();
-
-                return json(['code'=>1,"data"=>$role,'msg'=>'数据获取成功']);
-
-            }else{
-               
-                return json(['code'=>2,"data"=>'','msg'=>'数据获取失败']);
-            }
-
+            return $role;
         }else{
             
-            return json(['code'=>3,'data'=>'','msg'=>'非法请求']);
+            return '';
+            
         }
+       
     }
 
     public function getSelectRoles() {
@@ -62,6 +56,8 @@ class Role extends Model
         if(request()->isPost()){
 
             if($input['handle_type'] == 'add') {
+
+                $input['role_auth']   = isset($input['role_auth']) ? implode(",",$input['role_auth']) :'';
 
                 $isHaveRole = $this->where("role_name ='".$input['role_name']."'")->find();
 
@@ -113,7 +109,7 @@ class Role extends Model
 
             if($input['handle_type'] == 'update') {
 
-                $action   = isset($input['action']) ? implode(",",$input['action']) :'';
+                $input['role_auth']   = isset($input['role_auth']) ? implode(",",$input['role_auth']) :'';
                 $isHaveRole = $this->where("role_name ='".$input['role_name']."'"." AND role_id <>".$input['role_id'])->find();
 
                 if(!$isHaveRole) {

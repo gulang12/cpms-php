@@ -32,13 +32,13 @@
                             <div class="form-group">
                                 <label class="col-sm-1 control-label text-navy">角色名：</label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="role_name" value="" id="role_name" placeholder="输入角色名" class="form-control">
+                                    <input type="text" name="role_name" value="{$roleInfo.role_name|default=''}" id="role_name" placeholder="输入角色名" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-1 control-label text-navy">描述：</label>
                                 <div class="col-sm-5">
-                                    <textarea name="role_describe" value="" id="role_describe" class="form-control" placeholder="输入角色描述"  style="margin:0px; height: 93px; max-width:100%;"></textarea>
+                                    <textarea name="role_describe" value="" id="role_describe" class="form-control" placeholder="输入角色描述"  style="margin:0px; height: 93px; max-width:100%;">{$roleInfo.role_describe|default=''}</textarea>
                                 </div>
                             </div>
 
@@ -47,19 +47,19 @@
                             <volist name="menu" id="parent">
                                 <div class="form-group">
                                     <label class="col-sm-1 control-label checkbox-inline-block i-checks text-navy">
-                                        <input type="checkbox" name="action[]" value="{$parent['controller']}">{$parent['name']}
+                                        <input type="checkbox" name="role_auth[]" value="{$parent['controller']}" <if condition="in_array($parent['controller'],$action)">checked</if>>{$parent['name']}
                                     </label>
                                     <volist name="parent.child" id="child">
                                         <div class="col-sm-2">
                                             <div class="checkbox i-checks">
                                                 <label class="checkbox-inline-block i-checks text-navy">
-                                                    <input type="checkbox" value="{$child['action']}" name="action[]"><i></i>{$child['name']}
+                                                    <input type="checkbox" value="{$child['action']}" name="role_auth[]" <if condition="in_array($parent['controller'],$action)">checked</if>><i></i>{$child['name']}
                                                 </label>
                                             </div>
                                             <volist name="child.auth" id="auth">
                                                 <div class="checkbox i-checks">
                                                     <label>
-                                                        <input type="checkbox" value="{$auth['action']}" name="action[]"><i></i>{$auth['name']}
+                                                        <input type="checkbox" value="{$auth['action']}" name="role_auth[]" <if condition="in_array($parent['controller'],$action)">checked</if>><i></i>{$auth['name']}
                                                     </label>
                                                 </div>
                                             </volist>
@@ -71,8 +71,8 @@
 
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <input type="hidden" id="role_id" name="role_id" value="" />
-                                    <input type="hidden" id="handle_type"  name="handle_type"  value="add" />
+                                    <input type="hidden" id="role_id" name="role_id" value="{$roleInfo.role_id|default=''}" />
+                                    <input type="hidden" id="handle_type"  name="handle_type"  value="{$type}" />
                                     <button class="btn btn-primary" type="submit" onclick="roleAuthSubmit();">保存内容</button>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                 url = "{:url('admin/Role/addRoleAuth')}";
 
             else if(handle_type == 'update')
-                
+
                 url = "{:url('admin/Role/updateRoleAuth')}";
 
             $.post(url,data,function(data){
@@ -125,7 +125,7 @@
 
                     layer.msg(data.msg, {time:500, icon:5});
                  
-                     return false;
+                    return false;
                 }
 
             },'json');

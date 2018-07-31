@@ -30,11 +30,13 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>角色管理</h5>
-                        <div class="ibox-tools">
-                            <button id="toggle_modal" class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-right:10px;position:relative;top:-5px;" title="添加角色">
-                                <i class="fa fa-group"></i>+
-                            </button>
-                        </div>
+                        <if condition="check_auth('admin/Role/addRoleAuth')">
+                            <div class="ibox-tools">
+                                <button id="toggle_modal" class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-right:10px;position:relative;top:-5px;" title="添加角色">
+                                    <i class="fa fa-group"></i>+
+                                </button>
+                            </div>
+                        </if>
                     </div>
                     <div class="ibox-content">
                         <table class="table table-striped table-bordered table-hover dataTables-example">
@@ -70,20 +72,20 @@
                                                         <button data-toggle="dropdown" class="btn btn-primary btn-xs disabled" aria-expanded="false">操作 <span class="caret"></span>
                                                         </button>
                                                     </if>
-                                                    
                                                 <else/>
                                                     <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a href="javascript:;" class="font-bold edit-role" data-id="{$vo['role_id']}">修改</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:;" class="font-bold del-role" data-id="{$vo['role_id']}">删除</a>
-                                                        </li>
+                                                        <if condition="check_auth('admin/Role/updateRoleAuth')">
+                                                            <li><a href="javascript:;" class="font-bold edit-role" data-id="{$vo['role_id']}">修改</a></li>
+                                                        </if>
+                                                       
+                                                        <if condition="check_auth('admin/Role/delRole')">
+                                                            <li><a href="javascript:;" class="font-bold del-role" data-id="{$vo['role_id']}">删除</a></li>
+                                                        </if>
+                                                        
                                                     </ul>
                                                 </if>
-                                               
                                             </div>
                                         </td>
                                     </tr>
@@ -99,43 +101,8 @@
                                 </tr>
                             </tfoot>
                         </table>
-
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-     <div id="role-modal-form" class="modal fade" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form id="role_form" action="" method="post" onsubmit="return false;">
-                    <div class="modal-header">
-                        <span class="refresh-btn" onclick="refresh_form('role_form');"><i class="fa fa-refresh"></i></span>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">添加角色</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label>角色名：</label>
-                                    <input type="text" name="role_name" value="" id="role_name" placeholder="输入角色名" class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>描述：</label>
-                                    <textarea name="role_describe" value="" id="role_describe" class="form-control" placeholder="输入角色描述"  style="margin:0px; height: 93px; max-width:100%;"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="hidden" id="role_id" name="role_id" value="" />
-                        <input type="hidden" id="handle_type"  name="handle_type"  value="add" />
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="submit" class="btn btn-primary" onclick="roleSubmit();">确定</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -152,26 +119,18 @@
             $(".dataTables-example").dataTable();
 
             $(".ibox-content").on('click','.edit-role',function(){
-
                 var roleId = $(this).data("id");
+                var index = layer.open({
+                    title:'编辑角色',
+                    offset: ['120px', '220px'],
+                    isOutAnim: true ,
+                    type: 2,
+                    content:"{:url('admin/Role/roleAuth')}?type=update&role_id="+roleId,
+                    area: ['800px','400px'],
+                    maxmin: true
+                });
 
-                $.post("{:url('admin/Role/getRole')}",{role_id:roleId},function(data){
-                    
-                    if(data.code==1) {
-                       
-                        $("#role_id").val(data.data.role_id);
-                        $("#role_name").val(data.data.role_name);
-                        $("#role_describe").val(data.data.role_describe);
-
-                    }else{
-                        
-                        layer.msg(data.msg, {time:500, icon:5});  
-                    }
-
-                },'json');
-
-                $("#handle_type").val('update');
-                $("#role-modal-form").modal('show');
+                layer.full(index);
             });
             
             $(".ibox-content").on('click','.del-role',function(){
@@ -204,7 +163,7 @@
                   offset: ['120px', '220px'],
                   isOutAnim: true ,
                   type: 2,
-                  content:"{:url('admin/Role/roleAuth')}",
+                  content:"{:url('admin/Role/roleAuth')}?type=add",
                   area: ['800px','400px'],
                   maxmin: true
                 });
@@ -212,36 +171,7 @@
                 layer.full(index);
 
             });
-        });
-
-        function roleSubmit() {
-            
-            var handle_type = $("#handle_type").val();
-            var data        = $("#role_form").serializeArray();
-            var url         = '';
- 
-            if($.trim($("input[name='role_name']").val()) == '') {
-
-                layer.msg('请填角色名', {time:500, icon:5});  
-                return false; 
-            }
-            
-            if(handle_type == 'add') 
-                url = "{:url('admin/Role/addRole')}";
-            else if(handle_type == 'update')
-                url = "{:url('admin/Role/updateRole')}";
-
-            $.post(url,data,function(data){
-                if(data.code==1) {
-
-                   layer.msg(data.msg, {time:500, icon:6}); 
-
-                }else{
-                   layer.msg(data.msg, {time:500, icon:5});  
-                }
-
-            },'json');
-        }
+        }); 
 
     </script>
 

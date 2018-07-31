@@ -13,16 +13,6 @@ class Role  extends AdminBase
 
         return $this->fetch();
     }
-    
-
-    public function getRole() {
-
-        $roleId = input('param.role_id');
-
-        $role   = model("Role")->getRole($roleId);
-
-        return $role;
-    }
 
     public function addRoleAuth()   
     {
@@ -50,10 +40,25 @@ class Role  extends AdminBase
     
         include APP_PATH."admin/conf/menu.php";
           
-        $roles = model("Role")->getSelectRoles();
+        $input   = input("param.type",'');
+        $role_id = input("param.role_id",'');
+        $action  = array(); 
+        if($input=='add') {
 
-        $this->assign("roles",$roles); 
+            $type = 'add';
 
+        }elseif($input=='update'){
+
+            $type = 'update'; 
+
+            $roleInfo = model('Role')->getRole($role_id);
+            $action   = explode(',', $roleInfo['role_auth']);
+            $this->assign("roleInfo",$roleInfo);
+            
+        }
+        
+        $this->assign("action",$action);
+        $this->assign("type",$type);
         $this->assign("menu",$menu['admin']);	
 
         return $this->fetch();
@@ -63,7 +68,7 @@ class Role  extends AdminBase
     public function updateRoleAuth(){
 
         $input  = input();
-        
+
         $info   = model("Role")->updateRoleAuth($input);
 
         return $info;
