@@ -137,22 +137,28 @@
                 
                 var roleId = $(this).data("id");
 
-                $.post("{:url('admin/Role/delRole')}",{role_id:roleId},function(data){
+                layer.confirm("你确定要删除【"+$("#role-"+roleId).children("td").eq(1).text()+"】吗？", {
+
+                    btn: ['确定','取消'] //按钮
+
+                }, function(){
+
+                    $.post("{:url('admin/Role/delRole')}",{role_id:roleId},function(data){
                     
-                    if(data.code==1) {
+                        if(data.code==1) {
 
-                        layer.msg(data.msg, {time:500, icon:6});
-                         
-                        $("#role-"+roleId).remove();
+                            layer.msg(data.msg, {time:500, icon:1});
+                             
+                            $("#role-"+roleId).remove();
 
-                    }else{
-                    
-                        layer.msg(data.msg, {time:500, icon:5});
+                        }else{
+                        
+                            layer.msg(data.msg, {time:500, icon:2});
 
-                    }
+                        }
 
-                },'json');
-
+                    },'json');
+                });
             });
 
 

@@ -53,13 +53,13 @@
                                         <div class="col-sm-2">
                                             <div class="checkbox i-checks">
                                                 <label class="checkbox-inline-block i-checks text-navy">
-                                                    <input type="checkbox" value="{$child['action']}" name="role_auth[]" <if condition="in_array($parent['controller'],$action)">checked</if>><i></i>{$child['name']}
+                                                    <input type="checkbox" value="{$child['action']}" name="role_auth[]" <if condition="in_array($child['action'],$action)">checked</if>><i></i>{$child['name']}
                                                 </label>
                                             </div>
                                             <volist name="child.auth" id="auth">
                                                 <div class="checkbox i-checks">
                                                     <label>
-                                                        <input type="checkbox" value="{$auth['action']}" name="role_auth[]" <if condition="in_array($parent['controller'],$action)">checked</if>><i></i>{$auth['name']}
+                                                        <input type="checkbox" value="{$auth['action']}" name="role_auth[]" <if condition="in_array($auth['action'],$action)">checked</if>><i></i>{$auth['name']}
                                                     </label>
                                                 </div>
                                             </volist>
@@ -117,7 +117,7 @@
             $.post(url,data,function(data){
             
                 if(data.code == 1) {
-
+                    window.location.reload();//刷新当前iframe页面
                     layer.msg(data.msg, {time:500, icon:6});
                  
                     return false;

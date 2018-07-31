@@ -65,22 +65,17 @@
                                                 
                                                 <if condition="$vo['user_id'] eq 1">
                                                     <if condition="$Request.session.user_id eq 1">
-                                                    
                                                         <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle " aria-expanded="false">操作 <span class="caret"></span>
                                                         </button>
-
                                                         <ul class="dropdown-menu">
                                                             <li>
                                                                 <a href="javascript:;" class="font-bold edit-user" data-id="{$vo['user_id']}">修改</a>
                                                             </li>
                                                         </ul> 
                                                     <else/>
-
                                                         <button data-toggle="dropdown" class="btn btn-primary btn-xs disabled" aria-expanded="false">操作 <span class="caret"></span>
                                                         </button>
-
                                                     </if>
-                                                    
                                                 <else/>
                                                     <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
                                                     </button>
@@ -88,7 +83,6 @@
                                                         <if condition="check_auth('admin/User/updateUser')">
                                                             <li><a href="javascript:;" class="font-bold edit-user" data-id="{$vo['user_id']}">修改</a></li>
                                                         </if>
-
                                                         <if condition="check_auth('admin/User/delUser')">
                                                             <li><a href="javascript:;" class="font-bold del-user" data-id="{$vo['user_id']}">删除</a></li>
                                                         </if>
@@ -232,22 +226,29 @@
                 
                 var userId = $(this).data("id");
 
-                $.post("{:url('admin/User/delUser')}",{user_id:userId},function(data){
+                layer.confirm("你确定要删除【"+$("#user-"+userId).children("td").eq(1).text()+"】吗？", {
+
+                    btn: ['确定','取消'] //按钮
+
+                }, function(){
+
+                    $.post("{:url('admin/User/delUser')}",{user_id:userId},function(data){
                     
-                    if(data.code==1) {
+                        if(data.code==1) {
 
-                        layer.msg(data.msg, {time:500, icon:6});
-                         
-                        $("#user-"+userId).remove();
+                            layer.msg(data.msg, {time:500, icon:1});
+                             
+                            $("#user-"+userId).remove();
 
-                    }else{
-                    
-                        layer.msg(data.msg, {time:500, icon:5});
+                        }else{
+                        
+                            layer.msg(data.msg, {time:500, icon:2});
 
-                    }
+                        }
 
-                },'json');
+                    },'json');
 
+                });
             });
 
 
@@ -333,6 +334,7 @@
             $.post(url,data,function(data){
                 if(data.code==1) {
 
+                   window.location.reload();//刷新当前iframe页面
                    layer.msg(data.msg, {time:500, icon:6}); 
 
                 }else{
