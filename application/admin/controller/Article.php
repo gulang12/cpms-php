@@ -10,10 +10,15 @@ class Article extends AdminBase
         $roles =  model('Role')->getRoles();
 
         $this->assign("roles",$roles);
-        
+
         return $this->fetch();
     }
-  
+    
+    public function publishArticle() {
+       
+       return $this->fetch();
+    }
+
     
     public function addArticle() {
 
