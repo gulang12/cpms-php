@@ -97,7 +97,6 @@
         
         function roleAuthSubmit(){
             var data = $("#auth_form").serializeArray();
-            
             if($("#role_name").val()=='') {
                 
                 layer.msg('请填写角色名', {time:500, icon:5});
@@ -117,10 +116,11 @@
             $.post(url,data,function(data){
             
                 if(data.code == 1) {
-                    window.location.reload();//刷新当前iframe页面
+                    
                     layer.msg(data.msg, {time:500, icon:6});
                  
                     return false;
+                    
                 }else {
 
                     layer.msg(data.msg, {time:500, icon:5});

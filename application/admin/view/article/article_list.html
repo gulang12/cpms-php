@@ -29,11 +29,16 @@
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>订单列表</h5>
-                        <div class="ibox-tools">
-                            <button class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-right:10px;position:relative;top:-5px;" title="添加管理员">
-                                <i class="fa fa-balance-scale"></i>+
+                        <h5>文章列表</h5>
+                        <if condition="check_auth('admin/Article/addArticle')">
+                            <button class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-left:10px;position:relative;top:-5px;" title="添加文章">
+                                <i class="fa fa-edit"></i>+
                             </button>
+                        </if>
+                        <div class="ibox-tools">
+                            <a href="javascript:location.replace(location.href);" class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-right:10px;position:relative;top:-5px;" title="刷新">
+                                <i class="fa fa-refresh"></i>
+                            </a>
                         </div>
                     </div>
                     <div class="ibox-content">

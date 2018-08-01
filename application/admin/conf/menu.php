@@ -94,20 +94,20 @@ $menu = array(
 
 
 		array(
-			'name'=>'订单管理',
+			'name'=>'文章管理',
 	        'controller'=>'admin/Order',
-	        'icon'=>'fa-balance-scale',
+	        'icon'=>'fa-edit',
 			'child'=>array(
 
 				array(
-					'name'=>'订单列表',
+					'name'=>'文章列表',
 
-					'action'=>'admin/Order/orderList',
+					'action'=>'admin/Article/articleList',
 
 	                "auth"=>array(
-	                	array("name"=>'添加','action'=>"admin/Order/add"),
-	                	array("name"=>'删除','action'=>"admin/Order/delete"),
-	                	array("name"=>'编辑','action'=>"admin/Order/edit"),
+	                	array("name"=>'添加','action'=>"admin/Article/addArticle"),
+	                	array("name"=>'删除','action'=>"admin/Article/delArticle"),
+	                	array("name"=>'编辑','action'=>"admin/Article/updateArticle"),
 	                )
 			    ),
 	            
