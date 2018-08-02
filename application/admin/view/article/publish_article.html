@@ -13,10 +13,9 @@
     <css href="/static/css/admin/bootstrap.min14ed.css" />
     <css href="/static/css/admin/font-awesome.min93e3.css" />
     <css href="/static/css/admin/animate.min.css" />
-    <css href="/staticcss/plugins/summernote/summernote.css"/>
-    <css href="/staticcss/plugins/summernote/summernote-bs3.css"/>
+    <css href="/static/css/admin/plugins/summernote/summernote.css"/>
+    <css href="/static/css/admin/plugins/summernote/summernote-bs3.css"/>
     <css href="/static/css/admin/style.min862f.css"/>
-
 </head>
 
 <body class="gray-bg">
@@ -28,21 +27,7 @@
                     <div class="ibox-title">
                         <h5>Wyswig Summernote 富文本编辑器</h5>
                         <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="form_editors.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="form_editors.html#">选项1</a>
-                                </li>
-                                <li><a href="form_editors.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
+                            
                         </div>
                     </div>
                     <div class="ibox-content no-padding">
@@ -67,9 +52,26 @@
     <js href="/static/js/admin/jquery.min.js"/>
     <js href="/static/js/admin/bootstrap.min.js"/>
     <js href="/static/js/admin/content.min.js"/>
-    <js href="/static/js/plugins/summernote/summernote.min.js"></script>
-    <js href="/static/js/plugins/summernote/summernote-zh-CN.js"></script>
+    <js href="/static/js/admin/plugins/summernote/summernote.min.js"/>
+    <js href="/static/js/admin/plugins/summernote/summernote-zh-CN.js"/>
+    <js href="/static/js/admin/plugins/layui/layer/layer.js"/>
     <script>
-        $(document).ready(function(){$(".summernote").summernote({lang:"zh-CN"})});var edit=function(){$("#eg").addClass("no-padding");$(".click2edit").summernote({lang:"zh-CN",focus:true})};var save=function(){$("#eg").removeClass("no-padding");var aHTML=$(".click2edit").code();$(".click2edit").destroy()};
+        $(document).ready(
+            function(){
+                $(".summernote").summernote({lang:"zh-CN"});
+            }
+        );
+        var edit=function(){
+
+            $("#eg").addClass("no-padding");
+            $(".click2edit").summernote(
+                {lang:"zh-CN",focus:true})};
+            var save=function(){
+                $("#eg").removeClass("no-padding");
+                var aHTML=$(".click2edit").code();
+                $(".click2edit").destroy();
+            };
+            
+            
     </script>
 </html>

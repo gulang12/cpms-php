@@ -31,7 +31,7 @@
                     <div class="ibox-title">
                         <h5>文章列表</h5>
                         <if condition="check_auth('admin/Article/addArticle')">
-                            <button class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-left:10px;position:relative;top:-5px;" title="添加文章">
+                            <button id="toggle_modal" class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-left:10px;position:relative;top:-5px;" title="添加文章">
                                 <i class="fa fa-edit"></i>+
                             </button>
                         </if>
@@ -132,6 +132,22 @@
                 
                 // layer.msg('添加成功！', {time: 1000, icon:6});
             })
+
+            $("#toggle_modal").on('click',function(){
+
+                var addIndex = layer.open({
+                  title:'发布文章',
+                  offset: ['120px', '220px'],
+                  isOutAnim: true ,
+                  type: 2,
+                  content:"{:url('admin/Article/publishArticle')}?type=add",
+                  area: ['800px','400px'],
+                  maxmin: true
+                });
+
+                layer.full(addIndex);
+
+            });
         });
         
     </script>
