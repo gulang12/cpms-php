@@ -16,6 +16,7 @@
     <css href="/static/css/admin/plugins/summernote/summernote.css"/>
     <css href="/static/css/admin/plugins/summernote/summernote-bs3.css"/>
     <css href="/static/css/admin/style.min862f.css"/>
+    <link href="/static/css/admin/admincommon.css?v=20180802" rel='stylesheet' type='text/css' />
 </head>
 
 <body class="gray-bg">
@@ -34,8 +35,9 @@
 
                     <div class="form-group">
                         <label class="col-sm-1 control-label">文章封面</label>
-                        <div class="col-sm-8">
-                            <input type="file" name="article_tile" value="" class="form-control">
+                        <div class="col-sm-2">
+                            <input type="file" name="article_tile" value="" class="form-control input-file">
+                            <span class="cover_file_text"></span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -60,6 +62,13 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-1 col-sm-offset-5">
+                    <input type="hidden" id="article_id" name="article_id" value="" />
+                    <input type="hidden" id="handle_type"  name="handle_type"  value="{$type}" />
+                    <button class="btn btn-primary" type="submit" onclick="publishArticleSubmit();">保存内容</button>
+                </div>
+            </div>
         </form>
     </div>
     <js href="/static/js/admin/jquery.min.js"/>
@@ -74,16 +83,17 @@
                 $(".summernote").summernote({lang:"zh-CN"});
             }
         );
-        var edit=function(){
+        // var edit=function(){
 
-            $("#eg").addClass("no-padding");
-            $(".click2edit").summernote(
-                {lang:"zh-CN",focus:true})};
-            var save=function(){
-                $("#eg").removeClass("no-padding");
-                var aHTML=$(".click2edit").code();
-                $(".click2edit").destroy();
-            };
+        //     $("#eg").addClass("no-padding");
+        //     $(".click2edit").summernote(
+        //         {lang:"zh-CN",focus:true})};
+        
+        // var save=function(){
+        //         $("#eg").removeClass("no-padding");
+        //         var aHTML=$(".click2edit").code();
+        //         $(".click2edit").destroy();
+        //     };
             
 
     </script>

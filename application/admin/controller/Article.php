@@ -16,6 +16,9 @@ class Article extends AdminBase
     
     public function publishArticle() {
        
+       $type  = input("param.type",'');
+
+       $this->assign("type",$type);
        return $this->fetch();
     }
 

@@ -1,2 +1,4 @@
 .refresh-btn{position:absolute;top:15px;right:40px;opacity:0.2;color: #000;text-shadow: 0 1px 0 #fff;cursor:pointer;font-weight:700;}
 .refresh-btn:hover{color:#0a0000;opacity:1;}
+.cover_file_text{display:inline-block;width:78px;height:30px;position:absolute;top:2px;left:93px;background-color:#fff;}
+.input-file{background-color:#fff;padding:4px;margin:0px;}

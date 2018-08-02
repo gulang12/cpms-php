@@ -17,7 +17,7 @@ return [
     // 应用调试模式
     'app_debug'              => true,   // 部署正式环境 关闭调试模式 false;
     // 应用Trace
-    'app_trace'              => true,   // 看出页面响应时间  部署正式环境 关闭模式 false;
+    'app_trace'              => false,   // 看出页面响应时间  部署正式环境 关闭模式 false;
     // 应用模式状态
     'app_status'             => '',
     // 是否支持多模块
