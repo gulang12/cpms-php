@@ -31,16 +31,19 @@
                         </div>
                     </div>
 
-                    <div class="hr-line-dashed"></div>
+                    <div class="hr-line-dashed" style="border:0.5px dashed #bfbaba;"></div>
 
                     <div class="form-group">
                         <label class="col-sm-1 control-label">文章封面</label>
                         <div class="col-sm-2">
                             <input type="file" id="article_poster" name="article_poster"  value="" class="form-control input-file" onchange="getImgData(this);">
-                            <span class="cover_file_text"></span>
                         </div>
                     </div>
-                    <div class="hr-line-dashed"></div>
+                     <div class="form-group">
+                            <label class="col-sm-1 control-label">预览图片</label>
+                            <div class="col-sm-2" id="temp_picture_wrap"></div>
+                        </div>
+                    <div class="hr-line-dashed" style="border:0.5px dashed #bfbaba;"></div>
                 </div>
             </div>
 
@@ -75,30 +78,63 @@
     <js href="/static/js/admin/plugins/summernote/summernote-zh-CN.js"/>
     <js href="/static/js/admin/plugins/layui/layer/layer.js"/>
     <script>
-        $(document).ready(
-            function(){
-                $(".summernote").summernote({lang:"zh-CN"});
-            }
-        );
+        $(document).ready(function(){
+
+            $(".summernote").summernote({lang:"zh-CN",height:'300px'});
+
+            $("#temp_picture_wrap").on("click",'.del_temp_picture',function(){
+                $("#article_poster").val('');
+                $("#temp_picture_wrap").empty();
+            })
+
+        });
+
 
         function getImgData(obj){
-               //URL.createObjectURL 方式
-    //           document.getElementById('imgFile').onchange = function(e){
-    //     var ele =  document.getElementById('imgFile').files[0];
-  
-    //     var createObjectURL = function(blob){
-    //     return window[window.webkitURL ? 'webkitURL' : 'URL']['createObjectURL'](blob);
-    //     };
-    //     var newimgdata = createObjectURL(ele);
-  
-    //     var pvImg = new Image();
-    //     pvImg.src = newimgdata;
-    //     pvImg.setAttribute('id','previewImg');
- 
-    //     $('.preview_wrap').html('').append(pvImg);
-    // }
+
+            var file =  obj.files[0];
+      
+            var createObjectURL = function(blob){
+
+                return window[window.webkitURL ? 'webkitURL' : 'URL']['createObjectURL'](blob);
+            };
+
+            var filedata = createObjectURL(file);
+      
+            var imgObject = new Image();
+            imgObject.src = filedata;
+            imgObject.id  = 'temp_picture';
+            imgObject.width   = '240';
+            imgObject.height  = '250';
+            imgObject.style.marginTop  = '15px';
+
+            $('#temp_picture_wrap').html('').append(imgObject);
+            $('#temp_picture_wrap').append("<p style='text-align:right' class='del_temp_picture'><a>删除</a></p>"); 
+    
         }
         
+
+        function publishArticleSubmit(){
+
+            if($.trim($("input[name='article_tile']").val()) ==''){
+
+                layer.msg('请填写标题', {time:500, icon:2});
+
+                return false;
+            }
+
+            if($.trim($(".summernote").code()) ==''){
+
+                layer.msg('请填写内容', {time:500, icon:2});
+
+                return false;
+            }
+
+            
+            
+
+        }
+
         // var edit=function(){
 
         //     $("#eg").addClass("no-padding");

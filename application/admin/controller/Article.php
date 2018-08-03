@@ -19,12 +19,15 @@ class Article extends AdminBase
        $type  = input("param.type",'');
 
        $this->assign("type",$type);
+
        return $this->fetch();
     }
 
     
     public function addArticle() {
+        $input = input();
 
+        
     }
 
     public function delArticle() {
