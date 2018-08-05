@@ -41,7 +41,7 @@
                     </div>
                      <div class="form-group">
                             <label class="col-sm-1 control-label">预览图片</label>
-                            <div class="col-sm-2" id="temp_picture_wrap"></div>
+                            <div class="" id="temp_picture_wrap" style="position:relative;"></div>
                         </div>
                     <div class="hr-line-dashed" style="border:0.5px dashed #bfbaba;"></div>
                 </div>
@@ -109,7 +109,7 @@
             imgObject.style.marginTop  = '15px';
 
             $('#temp_picture_wrap').html('').append(imgObject);
-            $('#temp_picture_wrap').append("<p style='text-align:right' class='del_temp_picture'><a>删除</a></p>"); 
+            $('#temp_picture_wrap').append("<a class='del_temp_picture' style='position:absolute;bottom:0px;margin-left:10px;'>删除</a>"); 
     
         }
         
