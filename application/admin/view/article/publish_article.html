@@ -93,23 +93,47 @@
         function getImgData(obj){
 
             var file =  obj.files[0];
-      
+            var formData = new FormData();
+
             var createObjectURL = function(blob){
 
                 return window[window.webkitURL ? 'webkitURL' : 'URL']['createObjectURL'](blob);
             };
 
-            var filedata = createObjectURL(file);
-      
-            var imgObject = new Image();
-            imgObject.src = filedata;
-            imgObject.id  = 'temp_picture';
-            imgObject.width   = '240';
-            imgObject.height  = '250';
-            imgObject.style.marginTop  = '15px';
+            formData.append('file',file);
+           
+            $.ajax({
+                url: "{:url('admin/Upload/checkFileInfo')}",
+                type: 'post',
+                processData: false,  // 异步传输 formData 时要加上  processData: false  contentType: false 
+                contentType: false,  // 否则会报 Illegal invocation 非法调用错误
+                data: formData,
+                success: function (data) {
+                    
+                    if(data.code==1) {
+                        var filedata  = createObjectURL(file);
+                        var imgObject = new Image();
+                        imgObject.src = filedata;
+                        imgObject.id  = 'temp_picture';
+                        imgObject.width   = '240';
+                        imgObject.height  = '250';
+                        imgObject.style.marginTop  = '15px';
 
-            $('#temp_picture_wrap').html('').append(imgObject);
-            $('#temp_picture_wrap').append("<a class='del_temp_picture' style='position:absolute;bottom:0px;margin-left:10px;'>删除</a>"); 
+                        $('#temp_picture_wrap').html('').append(imgObject);
+                        $('#temp_picture_wrap').append("<a class='del_temp_picture' style='position:absolute;bottom:0px;margin-left:10px;'>删除</a>"); 
+
+                    }else{
+                        
+                        layer.msg(data.msg, {time:500, icon:2}); 
+                    }
+                   
+                },
+                dataType:'json'
+            });
+
+            return;
+
+            
     
         }
         
