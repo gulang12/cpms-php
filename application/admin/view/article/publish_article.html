@@ -13,7 +13,7 @@
     <css href="/static/css/admin/bootstrap.min14ed.css" />
     <css href="/static/css/admin/font-awesome.min93e3.css" />
     <css href="/static/css/admin/animate.min.css" />
-    <css href="/static/css/admin/plugins/summernote/summernote.css"/>
+    <css href="/static/css/admin/plugins/summernote/new_sumnote.css"/>
     <css href="/static/css/admin/plugins/summernote/summernote-bs3.css"/>
     <css href="/static/css/admin/style.min862f.css"/>
     <link href="/static/css/admin/admincommon.css?v=20180802" rel='stylesheet' type='text/css' />
@@ -50,8 +50,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-content no-padding">
-                            <div class="summernote">
+                        <div id="summernote_box" class="ibox-content no-padding">
+                            <div class ="summernote">
                                 <h2>H+ 后台主题</h2>
                                 <p>H+是一个完全响应式，基于Bootstrap3.3.6最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术，她提供了诸多的强大的可以重新组合的UI组件，并集成了最新的jQuery版本(v2.1.1)，当然，也集成了很多功能强大，用途广泛的就jQuery插件，她可以用于所有的Web应用程序，如<b>网站管理后台</b>，<b>网站会员中心</b>，<b>CMS</b>，<b>CRM</b>，<b>OA</b>等等，当然，您也可以对她进行深度定制，以做出更强系统。</p>
                                 <p>
@@ -74,19 +74,47 @@
     <js href="/static/js/admin/jquery.min.js"/>
     <js href="/static/js/admin/bootstrap.min.js"/>
     <js href="/static/js/admin/content.min.js"/>
-    <js href="/static/js/admin/plugins/summernote/summernote.min.js"/>
+    <js href="/static/js/admin/plugins/summernote/new_sumnote.js"/>
     <js href="/static/js/admin/plugins/summernote/summernote-zh-CN.js"/>
     <js href="/static/js/admin/plugins/layui/layer/layer.js"/>
     <script>
         $(document).ready(function(){
 
-            $(".summernote").summernote({lang:"zh-CN",height:'300px'});
-
             $("#temp_picture_wrap").on("click",'.del_temp_picture',function(){
                 $("#article_poster").val('');
                 $("#temp_picture_wrap").empty();
-            })
+            });
 
+            $('.summernote').summernote({
+                lang:"zh-CN",
+                height:'300px',
+                callbacks: {
+                    onImageUpload: function(files) {
+                        var formData = new FormData();
+                        formData.append('file',files[0]);
+                        $.ajax({
+                            url : "{:url('admin/Upload/getUploadFileInfo')}?isupload=2&folder=article",//后台文件上传接口
+                            type : 'post',
+                            data : formData,
+                            processData : false,
+                            contentType : false,
+                            success : function(data) {
+                                if(data.code==1){
+
+                                    $('.summernote').summernote('insertImage',data.data,'img');
+
+                                }else{
+
+                                    layer.msg(data.msg, {time:800, icon:2}); 
+                                }
+                            },
+                            dataType:'json'
+                        });
+                    }
+                }
+            });
+            
+            
         });
 
 
@@ -101,9 +129,9 @@
             };
 
             formData.append('file',file);
-           
+
             $.ajax({
-                url: "{:url('admin/Upload/checkFileInfo')}",
+                url: "{:url('admin/Upload/getUploadFileInfo')}?isupload=1",
                 type: 'post',
                 processData: false,  // 异步传输 formData 时要加上  processData: false  contentType: false 
                 contentType: false,  // 否则会报 Illegal invocation 非法调用错误
@@ -124,17 +152,15 @@
 
                     }else{
                         
-                        layer.msg(data.msg, {time:500, icon:2}); 
+                        $("#article_poster").val('');
+                        $("#temp_picture_wrap").empty();
+                        layer.msg(data.msg, {time:800, icon:2}); 
                     }
                    
                 },
                 dataType:'json'
             });
-
-            return;
-
-            
-    
+           
         }
         
 
@@ -147,16 +173,12 @@
                 return false;
             }
 
-            if($.trim($(".summernote").code()) ==''){
+            if($.trim($("#summernote").code()) ==''){
 
                 layer.msg('请填写内容', {time:500, icon:2});
 
                 return false;
             }
-
-            
-            
-
         }
 
         // var edit=function(){
