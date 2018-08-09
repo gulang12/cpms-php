@@ -113,7 +113,7 @@
                     }
                 }
             });
-            
+
             
         });
 
@@ -165,7 +165,7 @@
         
 
         function publishArticleSubmit(){
-
+            
             if($.trim($("input[name='article_tile']").val()) ==''){
 
                 layer.msg('请填写标题', {time:500, icon:2});
@@ -173,7 +173,7 @@
                 return false;
             }
 
-            if($.trim($("#summernote").code()) ==''){
+            if($.trim($(".summernote").summernote('code')) ==''){
 
                 layer.msg('请填写内容', {time:500, icon:2});
 
@@ -181,18 +181,7 @@
             }
         }
 
-        // var edit=function(){
-
-        //     $("#eg").addClass("no-padding");
-        //     $(".click2edit").summernote(
-        //         {lang:"zh-CN",focus:true})};
         
-        // var save=function(){
-        //         $("#eg").removeClass("no-padding");
-        //         var aHTML=$(".click2edit").code();
-        //         $(".click2edit").destroy();
-        //     };
-            
 
     </script>
 </html>
