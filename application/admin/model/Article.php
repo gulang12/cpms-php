@@ -56,7 +56,7 @@ class Article extends Model
                 }
                 
                 $input['article_author']  = getLoginUserInfo('user_id');
-                $input['article_content'] = htmlspecialchars(htmlspecialchars($input['article_content']));
+                $input['article_content'] = htmlspecialchars($input['article_content']);
 
                 $save = $this->allowField(true)->save($input);
                 
