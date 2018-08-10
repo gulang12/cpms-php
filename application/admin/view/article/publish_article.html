@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label">文章封面</label>
                         <div class="col-sm-2">
-                            <input type="file" id="article_poster" name="article_poster"  value="" class="form-control input-file" onchange="getImgData(this);">
+                            <input type="file" id="article_poster" name="file"  value="" class="form-control input-file" onchange="getImgData(this);">
                         </div>
                     </div>
                      <div class="form-group">
@@ -76,7 +76,7 @@
     <js href="/static/js/admin/content.min.js"/>
     <js href="/static/js/admin/plugins/summernote/new_sumnote.js"/>
     <js href="/static/js/admin/plugins/summernote/summernote-zh-CN.js"/>
-    <js href="/static/js/admin/plugins/layui/layer/layer.js"/>
+    <js href="/static/js/admin/plugins/layui/layer/layer.js"/> 
     <script>
         $(document).ready(function(){
 
@@ -93,7 +93,7 @@
                         var formData = new FormData();
                         formData.append('file',files[0]);
                         $.ajax({
-                            url : "{:url('admin/Upload/getUploadFileInfo')}?isupload=2&folder=article",//后台文件上传接口
+                            url : "{:url('admin/Upload/checkUploadFileInfo')}?isupload=2&folder=article",//后台文件上传接口
                             type : 'post',
                             data : formData,
                             processData : false,
@@ -131,7 +131,7 @@
             formData.append('file',file);
 
             $.ajax({
-                url: "{:url('admin/Upload/getUploadFileInfo')}?isupload=1",
+                url: "{:url('admin/Upload/checkUploadFileInfo')}?isupload=1",
                 type: 'post',
                 processData: false,  // 异步传输 formData 时要加上  processData: false  contentType: false 
                 contentType: false,  // 否则会报 Illegal invocation 非法调用错误
@@ -165,7 +165,7 @@
         
 
         function publishArticleSubmit(){
-            
+
             if($.trim($("input[name='article_tile']").val()) ==''){
 
                 layer.msg('请填写标题', {time:500, icon:2});
@@ -179,9 +179,27 @@
 
                 return false;
             }
-        }
+            
+            var formData = new FormData(document.getElementById('article_form'));
+           
+            formData.append('article_content',$(".summernote").summernote('code'));
+            
+            $.ajax({
+                url: "{:url('admin/Article/addArticle')}",
+                type: 'post',
+                processData: false,  // 异步传输 formData 时要加上  processData: false  contentType: false 
+                contentType: false,  // 否则会报 Illegal invocation 非法调用错误
+                data: formData,
+                success: function (data) {
+                    
+                   
+                   
+                },
+                dataType:'json'
+            });
+            
 
-        
+        }
 
     </script>
 </html>

@@ -1,7 +1,7 @@
 <?php
 namespace app\admin\model;
 use think\Model;
-
+use app\admin\controller\Upload;
 class Article extends Model
 {
     
@@ -47,7 +47,26 @@ class Article extends Model
 
             if($input['handle_type'] == 'add') {
 
+                $upload = new Upload();
+
+                $article_poster_url = $upload->uploadFile('article');
+
+                $input['article_poster'] = $article_poster_url;
                 
+                $input['article_author']  = getLoginUserInfo('user_id');
+                // $input['article_content'] = htmlspecialchars($input['article_content'],ENT_QUOTES);
+
+                 echo "<pre>";
+                print_r(htmlspecialchars_decode($input['article_content']));exit;
+                $save = $this->allowField(true)->save($input);
+                
+                if($save) {
+                    return json(['code'=>1,'msg'=>'保存成功']);
+
+                }else{
+
+                    return json(['code'=>2,'msg'=>'保存失败']);
+                }
                 
             }else{
 

@@ -26,8 +26,10 @@ class Article extends AdminBase
     
     public function addArticle() {
         $input = input();
-
         
+        $info  = model('article')->addArticle($input);
+
+        return $info;
     }
 
     public function delArticle() {

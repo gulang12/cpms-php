@@ -66,4 +66,32 @@ function repeatSubmitLimit() {
     }
 }
 
+/**
+  【des:获取登入用户信息】
+*  @param  $field  用户字段  默认为空则获取用户所有字段信息
+*  return  string
+**/
+function getLoginUserInfo($field='') {
+    
+    $user_id  = session('user_id');
+    
+    if($field=='user_id') {
+        return $user_id;
+    }
+    
+    if($field) {
+        $fieldInfo = db('user')->where("user_id",$user_id)->column($field);
+
+        return $fieldInfo[0];
+
+    }else{
+        
+        $allFieldInfo = db('user')->where("user_id",$user_id)->select();
+
+        $allFieldInfo = collection($allFieldInfo)->toArray();
+
+        return $allFieldInfo;
+    }
+}
+
 ?>

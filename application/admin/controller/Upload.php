@@ -6,7 +6,8 @@ class Upload  extends AdminBase
     protected $fileSize = 125678;
     protected $fileExt  = 'jpg,png,gif';
     protected $saveFolder = ''; // 图片保存目录
-    public function getUploadFileInfo() {
+
+    public function checkUploadFileInfo() {
         $isupload = input('param.isupload'); // 1：不上传， 2：上传
         
         if(input('param.folder','')) {
@@ -28,7 +29,7 @@ class Upload  extends AdminBase
                     return json(['code'=>1,'msg'=>'图片符合规定','data'=> DS .'upload'. DS . $this->saveFolder. DS .$uploadInfo->getSaveName()]);
                 }else{
                      
-                    return json(['code'=>2,'msg'=>$uploadInfo->getError(),'data'=>'']);
+                    return json(['code'=>2,'msg'=>$uploadInfo->getError(),'data'=>'']);  
                 }
             }
         }else{
@@ -36,5 +37,26 @@ class Upload  extends AdminBase
            return json(['code'=>2,'msg'=>$file->getError(),'data'=>'']);
         }
     }
+
+
+    public function uploadFile($folder='') {
+       
+        $this->saveFolder = $folder;
+        
+        // 获取表单上传文件
+        $file = request()->file('file');
+
+        $uploadInfo = $file->move(ROOT_PATH . 'public' . DS . 'upload'. DS . $this->saveFolder);
+
+        if($uploadInfo) {
+
+            return  DS .'upload'. DS . $this->saveFolder. DS .$uploadInfo->getSaveName();
+            
+        }else{
+           
+            return false;
+        }
+    }
+
     
 }
