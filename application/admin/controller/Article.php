@@ -7,9 +7,11 @@ class Article extends AdminBase
     public function articleList()   
     {
     	
-        $roles =  model('Role')->getRoles();
-
-        $this->assign("roles",$roles);
+        $articles =  model('article')->getArticles();
+         
+         // "<pre>";
+         print_r($articles);
+        $this->assign("articles",$articles);
 
         return $this->fetch();
     }
@@ -26,7 +28,7 @@ class Article extends AdminBase
     
     public function addArticle() {
         $input = input();
-        
+  
         $info  = model('article')->addArticle($input);
 
         return $info;

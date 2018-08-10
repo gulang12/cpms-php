@@ -49,15 +49,15 @@ class Article extends Model
 
                 $upload = new Upload();
 
-                $article_poster_url = $upload->uploadFile('article');
+                if(isset($input['file'])) {
+                    $article_poster_url = $upload->uploadFile('article');
 
-                $input['article_poster'] = $article_poster_url;
+                    $input['article_poster'] = $article_poster_url;
+                }
                 
                 $input['article_author']  = getLoginUserInfo('user_id');
-                // $input['article_content'] = htmlspecialchars($input['article_content'],ENT_QUOTES);
+                $input['article_content'] = htmlspecialchars(htmlspecialchars($input['article_content']));
 
-                 echo "<pre>";
-                print_r(htmlspecialchars_decode($input['article_content']));exit;
                 $save = $this->allowField(true)->save($input);
                 
                 if($save) {
