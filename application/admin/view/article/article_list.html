@@ -46,64 +46,50 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>登入名</th>
-                                    <th>手机</th>
-                                    <th>邮箱</th>
-                                    <th>角色</th>
-                                    <th>加入时间</th>
+                                    <th>标题</th>
+                                    <th>作者</th>
+                                    <th>封面</th>
+                                    <th>发布时间</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="gradeX">
-                                    <td>1</td>
-                                    <td>admin</td>
-                                    <td>15889745178</td>
-                                    <td class="center">admin@yx.com</td>
-                                    <td class="center">超级管理员</td>
-                                    <td class="center">2018-07-01</td>
-                                    <td class="center" align="center">
-                                        <div class="btn-group">
-                                            <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a href="javascript:;" class="font-bold edit-user">修改</a>
-                                                </li>
-                                                <li><a href="javascript:;">删除</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="gradeX">
-                                    <td>2</td>
-                                    <td>龙行天下4</td>
-                                    <td>15889745118</td>
-                                    <td class="center">longxing@yx.com</td>
-                                    <td class="center">管理员</td>
-                                    <td class="center">2018-07-01</td>
-                                    <td class="center" align="center">
-                                        <div class="btn-group">
-                                            <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a href="javascript:;" class="font-bold edit-user">修改</a>
-                                                </li>
-                                                <li><a href="javascript:;">删除</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <volist name="articles" id="vo">
+                                    <tr class="gradeX">
+                                        <td>{$vo['article_id']}</td>
+                                        <td>{$vo['article_title']}</td>
+                                        <td>{$vo['article_author']}</td>
+                                        <td class="center" align="center">
+                                        <if condition="$vo['article_poster']">
+                                            <img height="80" width="80" src="{$vo['article_poster']}"/>
+                                        </if>
+                                        </td>
+                                        <td class="center">{$vo['article_add_time']}</td>
+                                        <td class="center" align="center">
+                                            <div class="btn-group">
+                                                <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <if condition="check_auth('admin/Article/updateArticle')">
+                                                        <li><a href="javascript:;" data-id="{$vo['article_id']}" class="font-bold edit-article">修改</a>
+                                                        </li>
+                                                    </if>
+                                                    <if condition="check_auth('admin/Article/delArticle')">
+                                                        <li data-id="{$vo['article_id']}" class="font-bold del-article"><a href="javascript:;">删除</a></li>
+                                                    </if>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </volist>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>ID</th>
-                                    <th>登入名</th>
-                                    <th>手机</th>
-                                    <th>邮箱</th>
-                                    <th>角色</th>
-                                    <th>加入时间</th>
+                                    <th>标题</th>
+                                    <th>作者</th>
+                                    <th>内容</th>
+                                    <th>发布时间</th>
                                     <th>操作</th>
                                 </tr>
                             </tfoot>
@@ -126,11 +112,19 @@
         $(document).ready(function(){
             $(".dataTables-example").dataTable();
 
-            $(".ibox-content").on('click','.edit-user',function(){
+            $(".ibox-content").on('click','.edit-article',function(){
                 
-                // $("#user-modal-form").modal('show');
-                
-                // layer.msg('添加成功！', {time: 1000, icon:6});
+                var addIndex = layer.open({
+                  title:'发布文章',
+                  offset: ['120px', '220px'],
+                  isOutAnim: true ,
+                  type: 2,
+                  content:"{:url('admin/Article/publishArticle')}?type=update&article_id="+$(this).data('id'),
+                  area: ['800px','400px'],
+                  maxmin: true
+                });
+
+                layer.full(addIndex);
             })
 
             $("#toggle_modal").on('click',function(){

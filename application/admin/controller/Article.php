@@ -8,9 +8,7 @@ class Article extends AdminBase
     {
     	
         $articles =  model('article')->getArticles();
-         
-         // "<pre>";
-         print_r($articles);
+        
         $this->assign("articles",$articles);
 
         return $this->fetch();

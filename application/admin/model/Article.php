@@ -49,7 +49,7 @@ class Article extends Model
 
                 $upload = new Upload();
 
-                if(isset($input['file'])) {
+                if($_FILES['file']['name']) {
                     $article_poster_url = $upload->uploadFile('article');
 
                     $input['article_poster'] = $article_poster_url;

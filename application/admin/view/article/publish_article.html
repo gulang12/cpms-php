@@ -192,8 +192,14 @@
                 data: formData,
                 success: function (data) {
                     
-                   
-                   
+                    if(data.code==1) {
+                        
+                        layer.msg(data.msg, {time:500, icon:6});
+                        
+                    }else{
+                        
+                        layer.msg(data.msg, {time:500, icon:5});
+                    }
                 },
                 dataType:'json'
             });
