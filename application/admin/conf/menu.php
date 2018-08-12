@@ -72,7 +72,7 @@ $menu = array(
 	                "auth"=>array(
 	                	array("name"=>'添加','action'=>"admin/User/addUser"),
 	                	array("name"=>'删除','action'=>"admin/User/delUser"),
-	                	array("name"=>'编辑','action'=>"admin/User/updateUser"),
+	                	array("name"=>'修改','action'=>"admin/User/updateUser"),
 	                )
 			    ),
 	            
@@ -84,7 +84,7 @@ $menu = array(
 	                "auth"=>array(
 	                    array("name"=>'添加','action'=>"admin/Role/addRoleAuth"),
 	                	array("name"=>'删除','action'=>"admin/Role/delRole"),
-	                	array("name"=>'编辑','action'=>"admin/Role/updateRoleAuth"),
+	                	array("name"=>'修改','action'=>"admin/Role/updateRoleAuth"),
 	                )
 			    ),
 			    
@@ -107,7 +107,7 @@ $menu = array(
 	                "auth"=>array(
 	                	array("name"=>'添加','action'=>"admin/Article/addArticle"),
 	                	array("name"=>'删除','action'=>"admin/Article/delArticle"),
-	                	array("name"=>'编辑','action'=>"admin/Article/updateArticle"),
+	                	array("name"=>'修改','action'=>"admin/Article/updateArticle"),
 	                )
 			    ),
 	            

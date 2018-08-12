@@ -96,20 +96,42 @@ class Article extends Model
 
     public function updateArticle($input){
         
-        if(request()->isPost()) { 
-            
+        if(request()->isPost()){
+
             if($input['handle_type'] == 'update') {
 
+                $upload = new Upload();
+
+                if($_FILES['file']['name']) {
+                    $article_poster_url = $upload->uploadFile('article');
+
+                    $input['article_poster'] = $article_poster_url;
+                }else{
+
+                    $input['article_poster'] = $input['hide_article_poster'];
+                }
                 
+                $input['article_author']  = getLoginUserInfo('user_id');
+                $input['article_content'] = htmlspecialchars($input['article_content']);
+
+                $save = $this->allowField(true)->save($input,$input['article_id']);
+                
+                if($save) {
+                    return json(['code'=>1,'msg'=>'保存成功']);
+
+                }else{
+
+                    return json(['code'=>2,'msg'=>'保存失败']);
+                }
                 
             }else{
 
                return json(['code'=>4,'msg'=>'非法数据']); 
             }
-           
-        }else{
 
-            return json(['code'=>5,'msg'=>'非法请求']);
+        }else{
+            
+               return json(['code'=>5,'msg'=>'非法请求']);
         }
 
         

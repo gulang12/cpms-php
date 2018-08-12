@@ -28,8 +28,9 @@ class AdminBase extends Controller
     public function _initialize()
     {
     	
-        // 不需要登入的请求
+        error_reporting(E_ALL ^ E_NOTICE); // 屏蔽模板输出不存在的变量时的错误提示信息
         
+        // 不需要登入的请求
         $noLogin =array( 
             'admin/Index/login',
             'admin/Index/loginOut',

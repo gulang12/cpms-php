@@ -55,7 +55,7 @@
                             </thead>
                             <tbody>
                                 <volist name="articles" id="vo">
-                                    <tr class="gradeX">
+                                    <tr class="gradeX" id="article-{$vo['article_id']}">
                                         <td>{$vo['article_id']}</td>
                                         <td>{$vo['article_title']}</td>
                                         <td>{$vo['article_author']}</td>
@@ -126,6 +126,33 @@
 
                 layer.full(addIndex);
             })
+            
+            $(".ibox-content").on('click','.del-article',function(){
+                var article_id = $(this).data("id");
+                layer.confirm("你确定要删除ID为【"+article_id+"】的文章吗？", {
+
+                    btn: ['确定','取消'] //按钮
+
+                }, function(){
+
+                    $.post("{:url('admin/Article/delArticle')}",{article_id:article_id},function(data){
+                    
+                        if(data.code==1) {
+
+                            layer.msg(data.msg, {time:500, icon:1});
+                             
+                            $("#article-"+article_id).remove();
+
+                        }else{
+                        
+                            layer.msg(data.msg, {time:500, icon:2});
+
+                        }
+
+                    },'json');
+
+                });
+            });
 
             $("#toggle_modal").on('click',function(){
 

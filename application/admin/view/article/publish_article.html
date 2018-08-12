@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label">文章标题</label>
                         <div class="col-sm-8">
-                            <input type="text" name="article_title" value="" class="form-control">
+                            <input type="text" name="article_title" value="{$article['article_title'] | default=''}" class="form-control">
                         </div>
                     </div>
 
@@ -37,11 +37,18 @@
                         <label class="col-sm-1 control-label">文章封面</label>
                         <div class="col-sm-2">
                             <input type="file" id="article_poster" name="file"  value="" class="form-control input-file" onchange="getImgData(this);">
+                            <input type="hidden" id="hide_article_poster" name="hide_article_poster"  value="{$article['article_poster'] | default=''}" class="form-control input-file">
                         </div>
                     </div>
                      <div class="form-group">
                             <label class="col-sm-1 control-label">预览图片</label>
-                            <div class="" id="temp_picture_wrap" style="position:relative;"></div>
+                            <div class="" id="temp_picture_wrap" style="position:relative;">
+                                <if condition="$article['article_poster']">
+                                   <img src="{$article['article_poster']}" id="temp_picture" width="240" height="250" style="margin-top:15px;" /> 
+
+                                    <a class='del_temp_picture' style='position:absolute;bottom:0px;margin-left:10px;'>删除</a>
+                                </if>
+                            </div>
                         </div>
                     <div class="hr-line-dashed" style="border:0.5px dashed #bfbaba;"></div>
                 </div>
@@ -52,11 +59,7 @@
                     <div class="ibox float-e-margins">
                         <div id="summernote_box" class="ibox-content no-padding">
                             <div class ="summernote">
-                                <h2>H+ 后台主题</h2>
-                                <p>H+是一个完全响应式，基于Bootstrap3.3.6最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术，她提供了诸多的强大的可以重新组合的UI组件，并集成了最新的jQuery版本(v2.1.1)，当然，也集成了很多功能强大，用途广泛的就jQuery插件，她可以用于所有的Web应用程序，如<b>网站管理后台</b>，<b>网站会员中心</b>，<b>CMS</b>，<b>CRM</b>，<b>OA</b>等等，当然，您也可以对她进行深度定制，以做出更强系统。</p>
-                                <p>
-                                    <b>当前版本：</b>v4.1.0
-                                </p>
+                                {$article['article_content'] | default = ''}
                             </div>
                         </div>
                     </div>
@@ -64,7 +67,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-1 col-sm-offset-5">
-                    <input type="hidden" id="article_id" name="article_id" value="" />
+                    <input type="hidden" id="article_id" name="article_id" value="{$article['article_id'] | default = ''}" />
                     <input type="hidden" id="handle_type"  name="handle_type"  value="{$type}" />
                     <button class="btn btn-primary" type="submit" onclick="publishArticleSubmit();">保存内容</button>
                 </div>
@@ -82,6 +85,7 @@
 
             $("#temp_picture_wrap").on("click",'.del_temp_picture',function(){
                 $("#article_poster").val('');
+                $("#hide_article_poster").val('');
                 $("#temp_picture_wrap").empty();
             });
 
@@ -183,9 +187,19 @@
             var formData = new FormData(document.getElementById('article_form'));
            
             formData.append('article_content',$(".summernote").summernote('code'));
+            
+            var url = '';
+            if($("#handle_type").val()=='add') {
+
+                url = "{:url('admin/Article/addArticle')}";
+
+            }else if($("#handle_type").val()=='update'){
+
+                url = "{:url('admin/Article/updateArticle')}";
+            }
 
             $.ajax({
-                url: "{:url('admin/Article/addArticle')}",
+                url: url,
                 type: 'post',
                 processData: false,  // 异步传输 formData 时要加上  processData: false  contentType: false 
                 contentType: false,  // 否则会报 Illegal invocation 非法调用错误
@@ -195,7 +209,7 @@
                     if(data.code==1) {
                         
                         layer.msg(data.msg, {time:500, icon:6});
-                        
+
                     }else{
                         
                         layer.msg(data.msg, {time:500, icon:5});
