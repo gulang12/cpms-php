@@ -7,7 +7,7 @@ class Article extends AdminBase
     public function articleList()   
     {
     	
-        $data =  model('article')->getArticles(5);
+        $data =  model('article')->getArticles(20);
         
         $this->assign("articles",$data['data']);
         $this->assign("per_page_nun",$data['per_page_nun']);
