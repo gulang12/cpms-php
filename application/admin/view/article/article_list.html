@@ -19,7 +19,6 @@
 	<css href="/static/css/admin/plugins/dataTables/dataTables.bootstrap.css">
 	<css href="/static/css/admin/animate.min.css" />
 	<css href="/static/css/admin/style.min862f.css"/>
-    <!-- <css href="/static/css/admin/common.css"/> -->
     <link href="/static/css/admin/admincommon.css?v=20180712" rel='stylesheet' type='text/css' /> 
 </head>
 
@@ -42,7 +41,7 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <table id="mytable" class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -58,7 +57,7 @@
                                     <tr class="gradeX" id="article-{$vo['article_id']}">
                                         <td>{$vo['article_id']}</td>
                                         <td>{$vo['article_title']}</td>
-                                        <td>{$vo['article_author']}</td>
+                                        <td>{$vo['user_login']}</td>
                                         <td class="center" align="center">
                                         <if condition="$vo['article_poster']">
                                             <img height="80" width="80" src="{$vo['article_poster']}"/>
@@ -101,16 +100,29 @@
     </div>
     <js href="/static/js/admin/jquery.min.js"/>
 	<js href="/static/js/admin/bootstrap.min.js"/>
-	<js href="/static/js/admin/plugins/dataTables/jquery.dataTables.js"/>
+    <js href="/static/js/admin/plugins/dataTables/jquery.dataTables.min.js"/>
 	<js href="/static/js/admin/plugins/dataTables/dataTables.bootstrap.js"/>
 	<js href="/static/js/admin/content.min.js"/>
     <js href="/static/js/admin/plugins/layui/layer/layer.js"/>
-    <!-- <js href="/static/js/admin/admincommon.js"/> -->
     <script type="text/javascript" src="/static/js/admin/admincommon.js?v=20180712"></script>
 
     <script>
         $(document).ready(function(){
-            $(".dataTables-example").dataTable();
+            $('#mytable').dataTable( {
+                "sDom" : '"top"i',  //禁止搜索框
+                "bLengthChange": false, //去掉每页显示多少条数据方法
+                "bSort": false,
+                "language": {
+                    "sInfo": "每页显示：{$per_page_nun}条，共{$total}条记录",
+                    "oPaginate": {
+                    "sFirst": "第一页",
+                    "sPrevious":" 上一页 ",
+                    "sNext": " 下一页 ",
+                    "sLast": " 最后一页 "
+                    }
+                },
+                "aLengthMenu": [{$per_page_nun}],
+            });
 
             $(".ibox-content").on('click','.edit-article',function(){
                 

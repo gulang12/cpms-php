@@ -12,16 +12,30 @@ class Article extends Model
     // 指定自动写入的时间戳字段名
     protected $createTime = 'article_add_time';
     
-    public  function getArticles(){
+    public  function getArticles($num=20){
         
-        $articles     = $this->select();
+        $total     = $this->where('article_status=0')->count();
+
+        $articles  = $this->alias('a')->field('u.user_login,a.*')
+                    ->join('user u','u.user_id = a.article_author','LEFT')
+                    ->where('a.article_status=0')
+                    ->order('a.article_id','DESC')
+                    ->limit($num)
+                    ->select();
 
         if($articles) {
 
         	$articles = collection($articles)->toArray();
         }
+        if($total > 0) {
+
+            return ['data'=>$articles,'total'=>$total,'msg'=>'数据查询成功!!!','per_page_nun'=>$num];
+
+        }else{
+
+            return ['data'=>'','total'=>0,'msg'=>'暂无数据！！！'];
+        }
         
-        return $articles;
 
     } 
     
