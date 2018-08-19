@@ -5,8 +5,9 @@
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
             <li class="nav-header">
-                <div class="dropdown profile-element">
-                    <span><img alt="image" class="img-circle" src="/static/images/profile_small.jpg" /></span>
+                <div class="dropdown profile-element" style="text-align:center;">
+                    <!-- <span><img alt="image" class="img-circle" src="/static/images/profile_small.jpg" /></span> -->
+                    <span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size:50px;color:#1ab394;text-shadow:1px 2px 2px #1c84c6;"></span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
                             <span class="block m-t-xs"><strong class="font-bold">{$Request.session.user_login}</strong></span>
@@ -15,7 +16,7 @@
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li>
-                            <a class="J_menuItem" href="form_avatar.html">修改密码</a>
+                            <a class="J_menuItem" href="javascript:;">修改密码</a>
                         </li>
                         <li class="divider"></li>
                         <li>
