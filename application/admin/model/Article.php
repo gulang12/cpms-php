@@ -12,6 +12,7 @@ class Article extends Model
     // 指定自动写入的时间戳字段名
     protected $createTime = 'article_add_time';
     
+
     public  function getArticles($num=20){
         
         $total     = $this->where('article_status=0')->count();
@@ -35,9 +36,9 @@ class Article extends Model
 
             return ['data'=>'','total'=>0,'msg'=>'暂无数据！！！'];
         }
-        
 
     } 
+    
     
     public function getArticle($articleId){
 
