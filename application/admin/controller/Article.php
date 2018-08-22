@@ -7,38 +7,30 @@ class Article extends AdminBase
     public function articleList()   
     {
     	
-        $data =  model('article')->getArticles(20);
+        $data =  model('article')->getArticles(10);
         
-        $this->assign("articles",$data['data']);
-        $this->assign("per_page_nun",$data['per_page_nun']);
-        $this->assign("total",$data['total']);
-
+        $this->assign("data",$data['data']);
+        $this->assign("page",$data['page']);
+        $this->assign("keywords",input('param.keywords',''));
         return $this->fetch();
     }
 
-    public function ajax_get_articleList() {
-        // print_r(input());exit;
-        $data =  model('article')->getArticles();
-
-        return json($data);
-
-    }
 
     public function publishArticle() {
        
-       $type  = input("param.type",'');
+        $type  = input("param.type",'');
        
-       if($type=='update') {
+        if($type=='update') {
            
-           $article =  model('article')->getArticle(input("param.article_id",''));
-           $article['article_content'] = htmlspecialchars_decode($article['article_content']);
-           $this->assign("article",$article);
-       }
+            $article =  model('article')->getArticle(input("param.article_id",''));
+            $article['article_content'] = htmlspecialchars_decode($article['article_content']);
+            $this->assign("article",$article);
+        }
        
 
-       $this->assign("type",$type);
+        $this->assign("type",$type);
 
-       return $this->fetch();
+        return $this->fetch();
     }
 
     

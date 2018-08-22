@@ -36,7 +36,7 @@ function ajax_pagination(page,p,rand=6) {
     var  pageHtml = '',disabled ="",prev_page='',next_page = "";
 
     pageHtml+="<ul>";
-    if(page == 1) {
+    if(p == 1) {
    	   disabled = "disabled";
     }else if( p > 1) {
        prev_page = p - 1;
@@ -92,7 +92,7 @@ function ajax_pagination(page,p,rand=6) {
 
     if(p == page) {
    	   disabled = "disabled";
-    }else if( p > 1) {
+    }else if( p < page) {
        next_page = p + 1;
        disabled  = "";
     }

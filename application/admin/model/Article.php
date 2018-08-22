@@ -14,27 +14,32 @@ class Article extends Model
     
 
     public  function getArticles($num=20){
-        
-        $total     = $this->where('article_status=0')->count();
+       
+        $keywords = input('param.keywords','');
+        $where    = " a.article_status=0 ";
 
-        $articles  = $this->alias('a')->field('u.user_login,a.*')
+        if($keywords) {
+            $param['keywords'] = $keywords;
+            $where .= "  AND a.article_title like"."'%".$keywords."%'";
+        }
+    
+        $articles  = Article::alias('a')->field('u.user_login,a.*')
                     ->join('user u','u.user_id = a.article_author','LEFT')
-                    ->where('a.article_status=0')
+                    ->where($where)
                     ->order('a.article_id','DESC')
-                    ->limit($num)
-                    ->select();
+                    ->paginate($num,false,['query' =>$param]);
+
+        
+        $page = $articles->render();// 获取分页显示
+
 
         if($articles) {
 
-        	$articles = collection($articles)->toArray();
-        }
-        if($total > 0) {
-
-            return ['data'=>$articles,'total'=>$total,'msg'=>'数据查询成功!!!','per_page_nun'=>$num];
+            return ['code'=>1,'data'=>$articles,'msg'=>'数据查询成功','page'=>$page];
 
         }else{
 
-            return ['data'=>'','total'=>0,'msg'=>'暂无数据！！！'];
+            return ['code'=>2,'data'=>'','msg'=>'暂无数据','page'=>''];
         }
 
     } 

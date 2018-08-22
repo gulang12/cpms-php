@@ -41,6 +41,12 @@
                         </div>
                     </div>
                     <div class="ibox-content">
+                        <form action="" method="post">
+                            <div class="form-group col-sm-2" style="padding-left:0px;">
+                                <input type="text" id="keywords" name="keywords" value="{$keywords}" placeholder="输入文章标题" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-xm btn-primary">搜索</button>
+                        </form>
                         <table id="mytable" class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                                 <tr>
@@ -53,7 +59,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <volist name="articles" id="vo">
+                                <volist name="data" id="vo">
                                     <tr class="gradeX" id="article-{$vo['article_id']}">
                                         <td>{$vo['article_id']}</td>
                                         <td>{$vo['article_title']}</td>
@@ -93,7 +99,7 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        <div class="pagination-list"></div>
+                        {$page}
                     </div>
                 </div>
             </div>
@@ -107,10 +113,6 @@
 
     <script>
         $(document).ready(function(){
-            
-            var html = ajax_pagination(20,13);
-
-            $(".pagination-list").empty().append(html);
 
             $(".ibox-content").on('click','.edit-article',function(){
                 
