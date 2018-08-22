@@ -17,7 +17,7 @@ class Article extends Model
        
         $keywords = input('param.keywords','');
         $where    = " a.article_status=0 ";
-
+        $param = [];
         if($keywords) {
             $param['keywords'] = $keywords;
             $where .= "  AND a.article_title like"."'%".$keywords."%'";

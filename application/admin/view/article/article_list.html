@@ -43,7 +43,7 @@
                     <div class="ibox-content">
                         <form action="" method="post">
                             <div class="form-group col-sm-2" style="padding-left:0px;">
-                                <input type="text" id="keywords" name="keywords" value="{$keywords}" placeholder="输入文章标题" class="form-control">
+                                <input type="text" id="keywords" name="keywords" value="{$keywords}" placeholder="输入文章标题" class="form-control" onkeyup="searchTitle(this);" />
                             </div>
                             <button type="submit" class="btn btn-xm btn-primary">搜索</button>
                         </form>
@@ -112,67 +112,75 @@
     <script type="text/javascript" src="/static/js/admin/admincommon.js?v=20180820"></script>
 
     <script>
-        $(document).ready(function(){
+    $(document).ready(function(){
 
-            $(".ibox-content").on('click','.edit-article',function(){
-                
-                var addIndex = layer.open({
-                  title:'发布文章',
-                  offset: ['120px', '220px'],
-                  isOutAnim: true ,
-                  type: 2,
-                  content:"{:url('admin/Article/publishArticle')}?type=update&article_id="+$(this).data('id'),
-                  area: ['800px','400px'],
-                  maxmin: true
-                });
-
-                layer.full(addIndex);
-            })
+        $(".ibox-content").on('click','.edit-article',function(){
             
-            $(".ibox-content").on('click','.del-article',function(){
-                var article_id = $(this).data("id");
-                layer.confirm("你确定要删除ID为【"+article_id+"】的文章吗？", {
-
-                    btn: ['确定','取消'] //按钮
-
-                }, function(){
-
-                    $.post("{:url('admin/Article/delArticle')}",{article_id:article_id},function(data){
-                    
-                        if(data.code==1) {
-
-                            layer.msg(data.msg, {time:500, icon:1});
-                             
-                            $("#article-"+article_id).remove();
-
-                        }else{
-                        
-                            layer.msg(data.msg, {time:500, icon:2});
-
-                        }
-
-                    },'json');
-
-                });
+            var addIndex = layer.open({
+              title:'发布文章',
+              offset: ['120px', '220px'],
+              isOutAnim: true ,
+              type: 2,
+              content:"{:url('admin/Article/publishArticle')}?type=update&article_id="+$(this).data('id'),
+              area: ['800px','400px'],
+              maxmin: true
             });
 
-            $("#toggle_modal").on('click',function(){
+            layer.full(addIndex);
+        })
+        
+        $(".ibox-content").on('click','.del-article',function(){
+            var article_id = $(this).data("id");
+            layer.confirm("你确定要删除ID为【"+article_id+"】的文章吗？", {
 
-                var addIndex = layer.open({
-                  title:'发布文章',
-                  offset: ['120px', '220px'],
-                  isOutAnim: true ,
-                  type: 2,
-                  content:"{:url('admin/Article/publishArticle')}?type=add",
-                  area: ['800px','400px'],
-                  maxmin: true
-                });
+                btn: ['确定','取消'] //按钮
 
-                layer.full(addIndex);
+            }, function(){
+
+                $.post("{:url('admin/Article/delArticle')}",{article_id:article_id},function(data){
+                
+                    if(data.code==1) {
+
+                        layer.msg(data.msg, {time:500, icon:1});
+                         
+                        $("#article-"+article_id).remove();
+
+                    }else{
+                    
+                        layer.msg(data.msg, {time:500, icon:2});
+
+                    }
+
+                },'json');
 
             });
         });
-        
+
+        $("#toggle_modal").on('click',function(){
+
+            var addIndex = layer.open({
+              title:'发布文章',
+              offset: ['120px', '220px'],
+              isOutAnim: true ,
+              type: 2,
+              content:"{:url('admin/Article/publishArticle')}?type=add",
+              area: ['800px','400px'],
+              maxmin: true
+            });
+
+            layer.full(addIndex);
+
+        });
+    });
+    
+    function searchTitle(obj) {
+        var keywords = $.trim($(obj).val());
+          
+        if(keywords.length<=0) {
+            window.location.replace(location.href);
+        }
+    } 
+
     </script>
 
 </body>
