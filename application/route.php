@@ -18,6 +18,10 @@ return [
         ':name' => ['index/hello', ['method' => 'post']],
     ],
 
+    '__alias__' =>  [
+        // 'yxht'  =>  'admin/Index', // 隐藏后台URL真实的文件名路径，用别名代替
+    ],
+
 ];
 
 // use think\Route;
