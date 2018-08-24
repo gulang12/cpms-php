@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="./ajaxpagination.css?v=20180823"/>
+	<script type="text/javascript" src="./jquery.min.js"></script>
+	<script type="text/javascript" src="./ajaxpagination.js?v=20180823"></script>
+</head>
+<body>
+    <div class="pagination-list">
+    	<ul>
+    		<li><a href="javascript:;">1</a></li>
+    		<li><a href="javascript:;">2</a></li>
+    		<li><a href="javascript:;">3</a></li>
+    	</ul>
+    </div>
+</body>
+</html>
+  
+<script type="text/javascript">
+
+   $(document).ready(function(){
+
+   	    var t = $(".pagination-list");
+        var setting = 
+        {
+        	totalPage  : 20,
+        	current_p  : 3,
+        	isAjax     : false,
+        	http_url   : "#",
+        	callback   : {
+                ajax_onClick :function(obj,callback){
+                    var p = $(obj).data("page");
+                    
+                    callback(15,p);
+                },
+            }
+        }
+
+   	    $.fn.ajaxPagination.init(t,setting);
+        
+   });
+
+  
+</script>

@@ -1,0 +1,17 @@
+/**分页**/
+   .pagination-list ul {padding:0px !important;text-align: center;}
+   .pagination-list ul li{list-style:none;margin-bottom: 0px !important;display: inline-block;width:40px;height:30px;text-align:center;line-height:30px;
+      margin-right:5px;margin-bottom:5px !important;
+   }
+
+   .pagination-list ul li a.current_page{color:#ffffff;background-color:#3E5062 !important;}
+
+   .pagination-list ul li a{display:inline-block;width:100%;height:100%;border-radius:5px;background-color:#e5dfea;color:#bd9e9e;
+      font-size:14px;cursor:pointer;text-decoration:none;
+   }
+
+   .pagination-list ul li a:hover{background-color:#18c7b7;color:#ffffff;}
+   .pagination-list ul li a.disabled{pointer-events:none;background-color:#f3f3f3;}
+   .pagination-list .prev_page,.next_page{width:45px !important;margin-right:5px;}
+   .pagecount{display:inline-block;height:30px;width:60px;text-align:center;line-height:30px;}
+/**分页**/
