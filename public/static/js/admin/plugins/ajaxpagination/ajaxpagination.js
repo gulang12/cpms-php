@@ -64,7 +64,7 @@
 	            }
 	        }else if(p >= rand && p < (page - Math.ceil((rand / 2)))) {
 
-	        	for(var i = (p - Math.ceil(rand/2)); i <= (p + Math.ceil(rand/2));i++) {
+	        	for(var i = (p - Math.ceil(rand/2))+1; i < (p + Math.ceil(rand/2));i++) {
 
 	                if(i==p) {
 	        			pageHtml+="<li><a href='javascript:;' data-page='"+i+"' class='current_page disabled'>"+i+"</a></li>";
@@ -138,7 +138,7 @@
 	            }
 	        }else if(p >= rand && p < (page - Math.ceil((rand / 2)))) {
 
-	        	for(var i = (p - Math.ceil(rand/2)); i <= (p + Math.ceil(rand/2));i++) {
+	        	for(var i = (p - Math.ceil(rand/2))+1; i < (p + Math.ceil(rand/2));i++) {
 
 	                if(i==p) {
 	        			pageHtml+="<li><a href='"+href+"?p="+i+"' data-page='"+i+"' class='current_page disabled'>"+i+"</a></li>";
