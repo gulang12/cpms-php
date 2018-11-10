@@ -26,6 +26,18 @@ $menu = array(
 			   //  ),
 	            
 	            array(
+					'name'=>'首页导航',
+
+					'action'=>'admin/System/systemSetup',
+
+			      "auth"=>array(
+			            array("name"=>'添加','action'=>"admin/System/add"),
+			            array("name"=>'删除','action'=>"admin/System/delete"),
+			            array("name"=>'编辑','action'=>"admin/System/edit"),
+			       )
+			    ),
+
+	            array(
 					'name'=>'系统日志',
 
 					'action'=>'admin/System/systemLog',
