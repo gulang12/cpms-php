@@ -26,14 +26,14 @@ $menu = array(
 			   //  ),
 	            
 	            array(
-					'name'=>'首页导航',
+					'name'=>'首页菜单',
 
-					'action'=>'admin/System/systemSetup',
+					'action'=>'admin/System/navMenu',
 
 			      "auth"=>array(
-			            array("name"=>'添加','action'=>"admin/System/add"),
-			            array("name"=>'删除','action'=>"admin/System/delete"),
-			            array("name"=>'编辑','action'=>"admin/System/edit"),
+			            array("name"=>'添加','action'=>"admin/System/addMenu"),
+			            array("name"=>'删除','action'=>"admin/System/delMenu"),
+			            array("name"=>'编辑','action'=>"admin/System/editMenu"),
 			       )
 			    ),
 

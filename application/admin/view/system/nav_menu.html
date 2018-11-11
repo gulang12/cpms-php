@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>忆寻-admin</title>
+
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+    <css href="/static/css/admin/bootstrap.min14ed.css" />
+	<css href="/static/css/admin/font-awesome.min93e3.css" />
+	<css href="/static/css/admin/animate.min.css" />
+	<css href="/static/css/admin/style.min862f.css"/>
+    <link href="/static/css/admin/admincommon.css?v=20180712" rel='stylesheet' type='text/css' />
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>首页导航菜单</h5>
+                        <if condition="check_auth('admin/System/addMenu')">
+                            <button id="toggle_modal" class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-left:10px;position:relative;top:-5px;" title="添加菜单">
+                                <i class="fa fa-navicon"></i>+
+                            </button>
+                        </if>
+                        <div class="ibox-tools">
+                            <a href="javascript:location.replace(location.href);" class="btn btn-primary btn-circle" type="button" style="margin-bottom:0px;margin-right:10px;position:relative;top:-5px;" title="刷新">
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                        </div>
+                    </div>
+                     <div class="ibox-content">
+                        <div class="ibox float-e-margins">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>名称</th>
+                                        <th>父级</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <volist name="menus" id="vo">
+                                        <tr id="menu-{$vo['menu_id']}">
+                                            <td>{$vo.menu_id}</td>
+                                             <if condition="$vo.level">
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;{$vo.level}&nbsp;&nbsp;{$vo.menu_name}</td>
+                                                <else/>
+                                                    <td>{$vo.level}{$vo.menu_name}</td>
+                                             </if>
+                                            <td>{$vo.menu_pid}</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <if condition="check_auth('admin/System/editMenu')">
+                                                            <li><a href="javascript:;" class="font-bold edit-menu" data-id="{$vo['menu_id']}">修改</a></li>
+                                                        </if>
+                                                        <if condition="check_auth('admin/System/delMenu')">
+                                                            <li><a href="javascript:;" class="font-bold del-menu" data-id="{$vo['menu_id']}">删除</a></li>
+                                                        </if>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="menu-modal-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="menu_form" action="" method="post" onsubmit="return false;">
+                    <div class="modal-header">
+                        <span class="refresh-btn" onclick="refresh_form('menu_form');"><i class="fa fa-refresh"></i></span>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">添加菜单</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>菜单名：</label>
+                                    <input type="text" placeholder="输入菜单名" id="menu_name" name="menu_name" value="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>所属父级</label>
+                                    <select class="form-control m-b" name="menu_pid" id="menu_pid">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" id="menu_id" name="menu_id" value="" />
+                        <input type="hidden" id="handle_type"  name="handle_type"  value="add" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary" onclick="menuSubmit();">确定</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <js href="/static/js/admin/jquery.min.js"/>
+	<js href="/static/js/admin/bootstrap.min.js"/>
+	<js href="/static/js/admin/content.min.js"/>
+    <js href="/static/js/admin/plugins/layui/layer/layer.js"/>
+    <script type="text/javascript" src="/static/js/admin/admincommon.js?v=20180712"></script>
+    <script>
+        $(document).ready(function(){
+            
+            $(".ibox-content").on('click','.edit-menu',function(){
+                var menuId = $(this).data("id");
+                var option = '';
+
+                $("#myModalLabel").text('编辑菜单');
+                refresh_form('menu_form');
+
+                $.post("{:url('admin/System/getMenu')}",{menu_id:menuId},function(data){
+                    option = '<option value="0">选择父级(默认为顶级)</option>';
+                    if(data) {
+                        
+                        for(var i in data.topMenu) {
+                            if(data.topMenu[i].menu_pid == data.menu.menu_pid) {
+                                option+='<option selected value="'+data.topMenu[i].menu_id+'">'+data.topMenu[i].menu_name+'</option>';
+                            }else{
+                                
+                                option+='<option value="'+data.topMenu[i].menu_id+'">'+data.topMenu[i].menu_name+'</option>';
+                            }
+                            
+                        }
+
+                        $("#menu_name").val(data.menu.menu_name);
+                    }
+                    
+                    $("#menu_pid").empty().append(option);
+                   
+                },'json');
+
+                $("#menu_id").val(menuId);
+                $("#handle_type").val('edit');
+                $("#menu-modal-form").modal('show');
+            });
+
+            
+            $(".ibox-content").on('click','.del-menu',function(){
+                
+                var menuId = $(this).data("id");
+
+                layer.confirm("你确定要删除【"+$("#menu-"+menuId).children("td").eq(1).text()+"】吗？", {
+
+                    btn: ['确定','取消'] //按钮
+
+                }, function(){
+
+                    $.post("{:url('admin/System/delMenu')}",{menuId:menuId},function(data){
+                    
+                        if(data.code==1) {
+
+                            layer.msg(data.msg, {time:500, icon:1});
+                             
+                            $("#menu-"+menuId).remove();
+
+                        }else{
+                        
+                            layer.msg(data.msg, {time:500, icon:2});
+
+                        }
+
+                    },'json');
+                });
+            });
+
+
+           $("#toggle_modal").on('click',function(){
+                var option = '';
+
+                $("#myModalLabel").text('添加菜单');
+                refresh_form('menu_form');
+
+                $.post("{:url('admin/System/getTopMenus')}",function(data){
+                    option = '<option value="0">选择父级(默认为顶级)</option>';
+                    if(data.code==1) {
+
+                        for(var i in data.data) {
+                            option+='<option value="'+data.data[i].menu_id+'">'+data.data[i].menu_name+'</option>';
+                        }
+                    }
+                    
+                    $("#menu_pid").empty().append(option);
+
+                },'json');
+
+                $("#menu_id").val('');
+                $("#handle_type").val('add');
+                $("#menu-modal-form").modal('show');
+            });
+
+        }); 
+        
+        function menuSubmit(){
+
+            var menu_name   = $("#menu_name").val(),
+                menu_pid = $("#menu_pid").val(),
+                handle_type = $("#handle_type").val(),
+                menu_id     = $("#menu_id").val();
+
+            if(handle_type == 'add') {
+                
+                $.post("{:url('admin/System/addMenu')}",{menu_name:menu_name,menu_pid:menu_pid,handle_type:handle_type},function(data){
+                       if(data.code==1) {
+                   
+                        layer.msg(data.msg, {time:500, icon:6}); 
+                       
+                        setTimeout(function(){
+
+                           window.location.reload();//刷新当前iframe页面
+
+                        },500);
+
+                    }else{
+                        
+                       layer.msg(data.msg, {time:500, icon:5});  
+                    }
+
+                },'json');
+            }
+            
+
+        }
+    </script>
+
+</body>
+</html>
