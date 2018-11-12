@@ -137,19 +137,26 @@
 
                 $.post("{:url('admin/System/getMenu')}",{menu_id:menuId},function(data){
                     option = '<option value="0">选择父级(默认为顶级)</option>';
+                    
                     if(data) {
                         
+                        $("#menu_pid").attr("disabled",false);
+
                         for(var i in data.topMenu) {
-                            if(data.topMenu[i].menu_pid == data.menu.menu_pid) {
+                            if(data.topMenu[i].menu_id == data.menu.menu_pid) {
                                 option+='<option selected value="'+data.topMenu[i].menu_id+'">'+data.topMenu[i].menu_name+'</option>';
+
+                            }else if(data.menu.menu_pid==0 && data.topMenu[i].menu_id == data.menu.menu_id) {
+                                option+='<option selected value="'+data.topMenu[i].menu_id+'">'+data.topMenu[i].menu_name+'</option>';
+                                $("#menu_pid").attr("disabled",'disabled');
+
                             }else{
                                 
                                 option+='<option value="'+data.topMenu[i].menu_id+'">'+data.topMenu[i].menu_name+'</option>';
                             }
-                            
                         }
 
-                        $("#menu_name").val(data.menu.menu_name);
+                        $("#menu_name").val(data.menu['menu_name']);
                     }
                     
                     $("#menu_pid").empty().append(option);
@@ -194,6 +201,7 @@
            $("#toggle_modal").on('click',function(){
                 var option = '';
 
+                $("#menu_pid").attr("disabled",false);
                 $("#myModalLabel").text('添加菜单');
                 refresh_form('menu_form');
 
@@ -220,13 +228,23 @@
         function menuSubmit(){
 
             var menu_name   = $("#menu_name").val(),
-                menu_pid = $("#menu_pid").val(),
+                menu_pid    = $("#menu_pid").val(),
                 handle_type = $("#handle_type").val(),
                 menu_id     = $("#menu_id").val();
-
-            if(handle_type == 'add') {
                 
-                $.post("{:url('admin/System/addMenu')}",{menu_name:menu_name,menu_pid:menu_pid,handle_type:handle_type},function(data){
+                if(!menu_name) {
+                    layer.msg('请填写菜单名', {time:500, icon:5});   
+                    return false;
+                }
+                if(handle_type == 'add') {
+
+                    url = "{:url('admin/System/addMenu')}";
+
+                }else{
+                    url = "{:url('admin/System/editMenu')}";
+                }
+                
+                $.post(url,{menu_name:menu_name,menu_pid:menu_pid,handle_type:handle_type,menu_id:menu_id},function(data){
                        if(data.code==1) {
                    
                         layer.msg(data.msg, {time:500, icon:6}); 
@@ -243,9 +261,6 @@
                     }
 
                 },'json');
-            }
-            
-
         }
     </script>
 

@@ -12,7 +12,7 @@ class IndexMenu extends Model
         $topMenus = $this->where("menu_pid=0 AND menu_status=0")->select();
 
         $topMenus = collection($topMenus)->toArray();
-        $menu = $this->where("menu_pid=".$menuId." AND menu_status=0")->find();
+        $menu = $this->where("menu_id=".$menuId." AND menu_status=0")->find();
         
         $menu = $menu->toArray();
 
@@ -23,6 +23,7 @@ class IndexMenu extends Model
     public function getTopMenus() {
 
         if(request()->isPost()){
+
         	$menus  = $this->where("menu_pid=0 AND menu_status=0")->select();
             
 	        if($menus) {
@@ -92,17 +93,27 @@ class IndexMenu extends Model
     public function editMenu($input) {
 
     	if(request()->isPost()) {
-            if($input['handle_type'] == 'update') {
+            if($input['handle_type'] == 'edit') {
                 
+                $save = $this->allowField(true)->save($input,$input['menu_id']);
+                
+                if($save) {
+
+                    return json(['code'=>1,'msg'=>'编辑成功']);
+
+                }else{
+
+                    return json(['code'=>2,'msg'=>'编辑失败']);
+                }
 
             }else{
 
-            	return json(['code'=>4,'msg'=>'非法数据']);
+            	return json(['code'=>3,'msg'=>'非法数据']);
             }
 
     	}else{
 
-    		    return json(['code'=>5,'msg'=>'非法请求']);
+    		    return json(['code'=>4,'msg'=>'非法请求']);
     	}
 
     }

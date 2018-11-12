@@ -68,8 +68,9 @@ class System extends AdminBase
     public function getMenu(){
         
         $menuId = input('param.menu_id');
-        
+
         $info  =  model('IndexMenu')->getMenu($menuId);
+
         return $info;
     }
 
