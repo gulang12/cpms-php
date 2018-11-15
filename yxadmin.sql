@@ -45,11 +45,11 @@ CREATE TABLE `yx_index_menu` (
   `menu_pid` int(11) NOT NULL DEFAULT '0',
   `menu_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1为删除状态 0为使用状态',
   PRIMARY KEY (`menu_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `yx_index_menu` */
 
-insert  into `yx_index_menu`(`menu_id`,`menu_name`,`menu_pid`,`menu_status`) values (1,'后端开发',0,0),(2,'服务器',0,0),(3,'前端开发',0,0),(4,'CSS/CSS3',3,0),(5,'JavaScript',3,0),(6,'PHP',1,0),(7,'Python',1,0),(8,'Apache',2,0),(9,'nginx',2,0),(10,'数据库',0,0),(11,'mysql',10,0);
+insert  into `yx_index_menu`(`menu_id`,`menu_name`,`menu_pid`,`menu_status`) values (1,'后端开发',0,0),(2,'服务器',0,0),(3,'前端开发',0,0),(4,'CSS/CSS3',3,0),(5,'JavaScript',3,0),(6,'PHP',1,0),(7,'Python',1,0),(8,'Apache',2,0),(9,'nginx',2,0),(10,'数据库',0,0),(11,'mysql',10,0),(12,'mongodb',10,0),(14,'其他',0,0),(15,'读书&生活',14,0),(16,'redis',10,0),(17,'linux',2,0);
 
 /*Table structure for table `yx_role` */
 
@@ -67,7 +67,7 @@ CREATE TABLE `yx_role` (
 
 /*Data for the table `yx_role` */
 
-insert  into `yx_role`(`role_id`,`role_name`,`role_describe`,`role_auth`,`role_status`,`role_add_time`) values (1,'超级管理员','整站权限','all',0,'2018-07-21 22:02:45'),(2,'管理员','编辑查看部分权限','admin/User,admin/User/userList,admin/Role/roleList,admin/Order,admin/Article/articleList,admin/Article/addArticle,admin/Article/delArticle,admin/Article/updateArticle',0,'2018-07-18 22:08:13'),(3,'客服','查看','',0,'2018-07-24 20:04:12'),(4,'审核员','审查资料呢','',0,'2018-07-24 20:06:45');
+insert  into `yx_role`(`role_id`,`role_name`,`role_describe`,`role_auth`,`role_status`,`role_add_time`) values (1,'超级管理员','整站权限','all',0,'2018-07-21 22:02:45'),(2,'管理员','编辑查看部分权限','admin/System/navMenu,admin/System/addMenu,admin/System/editMenu,admin/User,admin/User/userList,admin/Role/roleList,admin/Order,admin/Article/articleList,admin/Article/addArticle,admin/Article/delArticle,admin/Article/updateArticle',0,'2018-07-18 22:08:13'),(3,'客服','查看','',0,'2018-07-24 20:04:12'),(4,'审核员','审查资料呢','',0,'2018-07-24 20:06:45');
 
 /*Table structure for table `yx_user` */
 
@@ -84,11 +84,11 @@ CREATE TABLE `yx_user` (
   `user_role` int(11) unsigned NOT NULL COMMENT '用户所属角色ID',
   `user_registered` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '用户注册时间',
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `yx_user` */
 
-insert  into `yx_user`(`user_id`,`user_login`,`user_pass`,`user_nicename`,`user_email`,`user_phone`,`user_status`,`user_role`,`user_registered`) values (1,'admin','$P$BWXu2GZkkk7vthtbbTHURS7UBQT8do1','','admin@sina.com','15889745718',0,1,'2018-07-21 22:01:32');
+insert  into `yx_user`(`user_id`,`user_login`,`user_pass`,`user_nicename`,`user_email`,`user_phone`,`user_status`,`user_role`,`user_registered`) values (1,'admin','$P$BWXu2GZkkk7vthtbbTHURS7UBQT8do1','','admin@sina.com','15889745718',0,1,'2018-07-21 22:01:32'),(5,'lzc','$P$BGJc/cXuJm58EbmrhKvJ8r1PANd3K..','','lzc@sina.com','15889745718',0,2,'2018-11-12 20:29:48');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
