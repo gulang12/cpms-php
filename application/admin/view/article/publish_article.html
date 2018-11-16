@@ -15,10 +15,14 @@
     <css href="/static/css/admin/animate.min.css" />
     <css href="/static/css/admin/plugins/summernote/new_sumnote.css"/>
     <css href="/static/css/admin/plugins/summernote/summernote-bs3.css"/>
+    <css href="/static/css/admin/plugins/chosen/chosen.css"/>
+    <css href="/static/css/admin/plugins/datapicker/datepicker3.css"/>
     <css href="/static/css/admin/style.min862f.css"/>
-    <link href="/static/css/admin/admincommon.css?v=20180802" rel='stylesheet' type='text/css' />
+    <link href="/static/css/admin/admincommon.css?v=20181116" rel='stylesheet' type='text/css' />
 </head>
-
+<style type="text/css">
+    .chosen-container-multi{margin-left:16px;}
+</style>
 <body class="gray-bg">
     <div class="wrapper wrapper-content">
         <form id="article_form" class="form-horizontal" onsubmit="return false;">
@@ -26,15 +30,38 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label class="col-sm-1 control-label">文章标题</label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <input type="text" name="article_title" value="{$article['article_title'] | default=''}" class="form-control">
                         </div>
+                        
+                        <label class="col-sm-1 control-label">发布时间：</span></label>
+                        <div class="input-group date col-sm-2">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            <input type="text" class="form-control" value="{$article['article_add_time']|default= date('Y-m-d')}" id="article_add_time" name="article_add_time">
+                        </div>
+                    
                     </div>
 
                     <div class="hr-line-dashed" style="border:0.5px dashed #bfbaba;"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">文章封面</label>
+                        <label class="col-sm-1 control-label">所属分类：</span></label>
+                        <div class="input-group col-sm-5">
+                            <select data-placeholder="选择所属分类" class="chosen-select" multiple style="width:350px;" tabindex="4">
+                                <volist name='category'  id='parent'>
+                                    <optgroup label="{$parent['parent_name']}">
+                                        <volist name="$parent['children']" id="child">
+                                            <option  value="{$child['menu_id']}" hassubinfo="true">{$child['menu_name']}</option>
+                                        </volist>
+                                    </optgroup>
+                                </volist>
+                            </select>
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">文章封面：</label>
                         <div class="col-sm-2">
                             <input type="file" id="article_poster" name="file"  value="" class="form-control input-file" onchange="getImgData(this);">
                             <input type="hidden" id="hide_article_poster" name="hide_article_poster"  value="{$article['article_poster'] | default=''}" class="form-control input-file">
@@ -77,9 +104,11 @@
     <js href="/static/js/admin/jquery.min.js"/>
     <js href="/static/js/admin/bootstrap.min.js"/>
     <js href="/static/js/admin/content.min.js"/>
+    <js href="/static/js/admin/plugins/chosen/chosen.jquery.js"/>
     <js href="/static/js/admin/plugins/summernote/new_sumnote.js"/>
     <js href="/static/js/admin/plugins/summernote/summernote-zh-CN.js"/>
-    <js href="/static/js/admin/plugins/layui/layer/layer.js"/> 
+    <js href="/static/js/admin/plugins/layui/layer/layer.js"/>
+    <js href="/static/js/admin/plugins/datapicker/bootstrap-datepicker.js"/>
     <script>
         $(document).ready(function(){
 
@@ -117,10 +146,17 @@
                     }
                 }
             });
-
             
-        });
+            $("#article_add_time").datepicker();
 
+            var chosen = $(".chosen-select").chosen({
+                max_selected_options:10,
+                width: "50%"
+            });
+            chosen.bind("chosen:maxselected", function () { 
+                layer.msg('最多选10项', {time:800, icon:2});
+            });
+        });
 
         function getImgData(obj){
 
@@ -177,6 +213,13 @@
                 return false;
             }
 
+            if(!$(".chosen-select").val()){
+
+                layer.msg('请选择所属分类', {time:500, icon:2});
+
+                return false;
+            }
+
             if($.trim($(".summernote").summernote('code')) ==''){
 
                 layer.msg('请填写内容', {time:500, icon:2});
@@ -185,8 +228,8 @@
             }
             
             var formData = new FormData(document.getElementById('article_form'));
-           
             formData.append('article_content',$(".summernote").summernote('code'));
+            formData.append('article_category',$(".chosen-select").val().join(','));
             
             var url = '';
             if($("#handle_type").val()=='add') {
@@ -217,9 +260,6 @@
                 },
                 dataType:'json'
             });
-            
-
         }
-
     </script>
 </html>

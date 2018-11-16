@@ -18,15 +18,17 @@ class Article extends AdminBase
 
     public function publishArticle() {
        
-        $type  = input("param.type",'');
-       
+        $type      = input("param.type",'');
+        $category  =  $this->getArticleCategory();
+        
         if($type=='update') {
            
             $article =  model('article')->getArticle(input("param.article_id",''));
             $article['article_content'] = htmlspecialchars_decode($article['article_content']);
             $this->assign("article",$article);
         }
-       
+        
+        $this->assign("category",$category);
 
         $this->assign("type",$type);
 
@@ -36,7 +38,6 @@ class Article extends AdminBase
     
     public function addArticle() {
         $input = input();
-  
         $info  = model('article')->addArticle($input);
 
         return $info;
@@ -58,5 +59,29 @@ class Article extends AdminBase
         $info  = model('article')->updateArticle($input);
 
         return $info;
+    }
+
+
+    public function getArticleCategory(){
+        $cat  = db('index_menu')->field("menu_id,menu_name,menu_pid")->where('menu_status=0')->select();
+        $cat  = collection($cat)->toArray();
+        
+        $treeCat   = [];
+        foreach ($cat as $k => $v) {
+
+            if($v['menu_pid'] ==0) {
+                $treeCat[$v['menu_id']]['parent_name']  = $v['menu_name'];
+                $menu_id      = $v['menu_id'];
+                unset($cat[$k]);
+                foreach ($cat as $k2 => &$v2) {
+                    if($v2['menu_pid'] == $v['menu_id'] ) {
+
+                        $treeCat[$v['menu_id']]['children'][] = $v2;
+                    }
+                }
+            }
+        }
+
+        return $treeCat;
     }
 }

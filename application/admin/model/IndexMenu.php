@@ -122,35 +122,23 @@ class IndexMenu extends Model
         $menus  = $this->where('menu_status=0')->select();
         $menus  = collection($menus)->toArray();
         
-        $menus  = $this->getMenuTree($menus);
-        return $menus;
-    }
-
-    public function getMenuTree($data){
         $treeMenu   = [];
-        $parentMenu = [];
-        foreach ($data as $k => &$v) {
+        foreach ($menus as $k => &$v) {
 
             if($v['menu_pid'] ==0) {
-                $parentMenu[] = $v;
-               
-                unset($data[$k]);
-            }
-        }
-        
-        foreach ($parentMenu as $k1 => &$v1) {
-            
-            $v1['level'] = '';
+                $v['level']   = '';
+                $treeMenu[]   = $v;
+                $menu_id      = $v['menu_id'];
 
-            array_push($treeMenu, $v1);
-
-            foreach ($data as $k2 => &$v2) {
-                if($v2['menu_pid'] ==$v1['menu_id'] ) {
-                     $v2['level'] = str_repeat('--',2);
-                
-                   array_push($treeMenu, $v2); 
+                unset($menus[$k]);
+                foreach ($menus as $k2 => &$v2) {
+                    if($v2['menu_pid'] == $v['menu_id'] ) {
+                        
+                        $v2['level'] = str_repeat('--',2);
+                        
+                        $treeMenu[]  = $v2;
+                    }
                 }
-                 
             }
         }
 
