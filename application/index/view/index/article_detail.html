@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" >
+	<!-- begin::头部样式 -->
+	<include file='public/header_meta'/>
+	<!-- begin::头部样式 -->
+	<body class="m-page--wide m-header--fixed m-header--fixed-mobile m-footer--push m-aside--offcanvas-default">
+		<div class="m-grid m-grid--hor m-grid--root m-page">
+			<!-- begin::头部 -->
+			<include file='public/header'/>
+			<!-- end::头部 -->
+
+			<!-- begin::主体内容部分 -->
+			<div class="m-grid__item m-grid__item--fluid m-grid m-grid--hor-desktop m-grid--desktop m-body">
+				<div class="m-grid__item m-grid__item--fluid  m-grid m-grid--ver	m-container m-container--responsive m-container--xxl m-page__container">
+					<div class="m-grid__item m-grid__item--fluid m-wrapper">
+
+						<div class="m-content">
+							<div class="row">
+								<div class="col-xl-9">
+									<if condition="$detail neq ''">
+										<div class="text-center article-title">
+				                            <h3>{$detail.article_title}</h3>
+				                        </div>
+				                        <div class="">{$detail.article_content}</div>
+				                    <else/>
+			                            <div class="middle-box text-center animated fadeInDown">
+									        <h1>404</h1>
+									        <h3 class="font-bold">文章未找到！</h3>
+
+									        <div class="error-desc">
+									            抱歉，你要的文章好像去火星了~
+									        </div>
+									    </div>
+				                    </if>
+								</div>
+								<!--右边部分-->
+								<include file='public/right'/>
+								<!--右边部分-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end::主体内容部分END -->
+
+			<!-- begin::底部 -->
+			<include file='public/footer'/>
+			<!-- end::底部 -->
+		</div>
+    	
+	    <!-- begin::回到顶部 -->
+		<div class="m-scroll-top m-scroll-top--skin-top" data-toggle="m-scroll-top" data-scroll-offset="500" data-scroll-speed="300">
+			<i class="la la-arrow-up"></i>
+		</div>
+		<!-- end::回到顶部 -->			
+
+		<!-- begin::侧边导航 -->
+		<include file='public/sidebar_nav'/>
+		<!-- begin::侧边导航 -->	
+	</body>
+</html>

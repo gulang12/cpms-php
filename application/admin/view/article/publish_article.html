@@ -30,12 +30,12 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label class="col-sm-1 control-label">文章标题</label>
-                        <div class="col-sm-7">
+                        <div class="col-sm-6">
                             <input type="text" name="article_title" value="{$article['article_title'] | default=''}" class="form-control">
                         </div>
                         
-                        <label class="col-sm-1 control-label">发布时间：</span></label>
-                        <div class="input-group date col-sm-2">
+                        <label class="col-sm-2 control-label">发布时间：</span></label>
+                        <div class="input-group date col-sm-3">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             <input type="text" class="form-control" value="{$article['article_add_time']|default= date('Y-m-d')}" id="article_add_time" name="article_add_time">
                         </div>

@@ -72,7 +72,7 @@
 		</div>
     	
 	    <!-- begin::回到顶部 -->
-		<div class="m-scroll-top m-scroll-top--skin-top" data-toggle="m-scroll-top" data-scroll-offset="500" data-scroll-speed="300" style="background-color:#206498;">
+		<div class="m-scroll-top m-scroll-top--skin-top" data-toggle="m-scroll-top" data-scroll-offset="500" data-scroll-speed="300">
 			<i class="la la-arrow-up"></i>
 		</div>
 		<!-- end::回到顶部 -->			
@@ -92,7 +92,7 @@
         	totalPage  : "{$page}",
         	current_p  : "{$p}",
         	isAjax     : false,
-        	http_url   : "/",
+        	http_url   : "{:url('index/Index/articleCat')}",
         }
 
    	    $.fn.ajaxPagination.init(t,setting);

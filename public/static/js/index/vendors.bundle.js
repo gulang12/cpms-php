@@ -69908,7 +69908,7 @@ $.notifyDefaults({
 		};
 		// proto.attributeChangedCallback = function (name, previous, value) { };
 		try {
-			document.registerElement("vakata-jstree", { prototype: proto });
+			// document.registerElement("vakata-jstree", { prototype: proto });
 		} catch(ignore) { }
 	}
 

@@ -1,0 +1,145 @@
+<header class="m-grid__item	m-header "  data-minimize="minimize" data-minimize-offset="200" data-minimize-mobile-offset="200" >
+	<div class="m-header__top" >
+		<div class="m-container m-container--responsive m-container--xxl m-container--full-height m-page__container">
+			<div class="m-stack m-stack--ver m-stack--desktop">
+				
+				<div class="m-stack__item m-brand">
+					<div class="m-stack m-stack--ver m-stack--general m-stack--inline">
+						<div class="m-stack__item m-stack__item--middle m-brand__logo">
+							<a href="index.html" class="m-brand__logo-wrapper">
+								<img alt="" src="/static/images/logo.png"/>
+							</a>
+						</div>
+						<div class="m-stack__item m-stack__item--middle m-brand__tools">
+							
+							<a id="m_aside_header_menu_mobile_toggle" href="javascript:;" class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block">
+								<span></span>
+							</a>
+							
+							<a id="m_aside_header_topbar_mobile_toggle" href="javascript:;" class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
+								<i class="flaticon-more"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav">
+					<div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general">
+						<div class="m-stack__item m-topbar__nav-wrapper">
+							<ul class="m-topbar__nav m-nav m-nav--inline">
+
+								<li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" data-dropdown-toggle="click">
+									<a href="#" class="m-nav__link m-dropdown__toggle">
+										<span class="m-topbar__welcome">
+											<!-- Hello,&nbsp; -->
+										</span>
+										<span class="m-topbar__username">
+											<!-- Nick -->
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="m-header__bottom">
+		<div class="m-container m-container--responsive m-container--xxl m-container--full-height m-page__container">
+			<div class="m-stack m-stack--ver m-stack--desktop">
+				<!-- begin::Horizontal Menu -->
+				<div class="m-stack__item m-stack__item--middle m-stack__item--fluid">
+					<button class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-light " id="m_aside_header_menu_mobile_close_btn">
+						<i class="la la-close"></i>
+					</button>
+					<div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-dark m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-light m-aside-header-menu-mobile--submenu-skin-light "  >
+						<ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
+							<li class="m-menu__item  m-menu__item--active"  aria-haspopup="true">
+								<a  href="/" class="m-menu__link ">
+									<span class="m-menu__link-text">
+										首页
+									</span>
+								</a>
+							</li>
+							<volist name="category" id="vo">
+								<li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"  data-menu-submenu-toggle="click" aria-haspopup="true">
+									<a  href="#" class="m-menu__link m-menu__toggle">
+										<span class="m-menu__item-here"></span>
+										<span class="m-menu__link-text">
+											{$vo.parent_name}
+										</span>
+										<i class="m-menu__hor-arrow la la-angle-down"></i>
+										<i class="m-menu__ver-arrow la la-angle-right"></i>
+									</a>
+									<if condition="$vo.children neq ''">
+										<div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left" style="width:110px;">
+											<span class="m-menu__arrow m-menu__arrow--adjust"></span>
+											<ul class="m-menu__subnav" style="padding:5px 0px;">
+												<volist name="vo.children" id="child">
+													<li class="m-menu__item "  aria-haspopup="true">
+														<a  href="{:url('index/Index/articleCat')}?cat_id={$child.menu_id}" class="m-menu__link " style="padding:4px 10px;text-align:center;">
+															<span class="m-menu__link-title">
+																<span class="m-menu__link-wrap">
+																	<span class="m-menu__link-text">
+																		{$child.menu_name}
+																	</span>
+																</span>
+															</span>
+														</a>
+													</li>
+											    </volist>
+											</ul>
+										</div>
+									</if>
+								</li>
+							</volist>
+							
+							<!--隐藏菜单-->
+							<if condition="$other.children neq ''">
+								<li class="m-menu__item  m-menu__item--submenu m-menu__item--rel m-menu__item--more m-menu__item--icon-only"  data-menu-submenu-toggle="click" data-redirect="true" aria-haspopup="true">
+									<a  href="#" class="m-menu__link m-menu__toggle">
+										<span class="m-menu__item-here"></span>
+										<i class="m-menu__link-icon flaticon-more-v3"></i>
+										<span class="m-menu__link-text"></span>
+									</a>
+									<div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left m-menu__submenu--pull" style="width:110px;">
+										<span class="m-menu__arrow m-menu__arrow--adjust"></span>
+										<ul class="m-menu__subnav" style="padding:5px 0px;">
+     										<volist name="other.children" id="child">
+     											<li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
+													<a  href="{:url('index/Index/articleCat')}?cat_id={$child.menu_id}" class="m-menu__link " style="padding:4px 10px;text-align:center;">
+														<span class="m-menu__link-text">
+															{$child.menu_name}
+														</span>
+													</a>
+												</li>
+     										</volist>
+										</ul>
+									</div>
+								</li>
+							</if>
+							<!--隐藏菜单 END-->
+						</ul>
+					</div>
+				</div>
+				<!-- end::Horizontal Menu -->	
+	 			<!--begin::Search-->
+				<div class="m-stack__item m-stack__item--middle m-dropdown m-dropdown--arrow m-dropdown--large m-dropdown--mobile-full-width m-dropdown--align-right m-dropdown--skin-light m-header-search m-header-search--expandable m-header-search--skin-" id="m_quicksearch" data-search-type="default">
+					<!--begin::Search Form -->
+					<form action="" method="get" id="fulltext_search_form">
+						<div class="m-header-search__wrapper">
+							<span class="m-header-search__icon-search" id="fulltext_search">
+								<i class="la la-search"></i>
+							</span>
+							<span class="m-header-search__input-wrapper">
+								<input  type="text" name="q" class="m-header-search__input" value="" placeholder="全站搜索..." id="fulltext_search_input">
+							</span>
+						</div>
+					</form>
+					<!--end::Search Form -->
+				</div>
+				<!--end::Search-->
+			</div>
+		</div>
+	</div>
+</header>

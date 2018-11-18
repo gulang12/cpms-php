@@ -6525,8 +6525,8 @@ jQuery.fn.extend({
                         }, 500);                        
                     }
                 } else {
-                    qs.iconCancel.css('visibility', 'hidden');
-                    qs.iconClose.css('visibility', 'hidden');
+                    // qs.iconCancel.css('visibility', 'hidden');
+                    // qs.iconClose.css('visibility', 'hidden');
                 }
             },
 
@@ -7306,7 +7306,7 @@ var mLayout = function() {
 
         qs.mQuicksearch({
             type: qs.data('search-type'), // quick search type
-            source: 'http://keenthemes.com/metronic/preview/inc/api/quick_search.php',
+            source: '',
             spinner: 'm-loader m-loader--skin-light m-loader--right',
 
             input: '#m_quicksearch_input',
