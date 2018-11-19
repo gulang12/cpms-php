@@ -46,6 +46,7 @@
                                     <tr>
                                         <th>序号</th>
                                         <th>名称</th>
+                                        <th>排序（menu_sort）</th>
                                         <th>父级</th>
                                         <th>操作</th>
                                     </tr>
@@ -59,6 +60,7 @@
                                                 <else/>
                                                     <td>{$vo.level}{$vo.menu_name}</td>
                                              </if>
+                                             <td>{$vo.menu_sort}</td>
                                             <td>{$vo.menu_pid}</td>
                                             <td>
                                                 <div class="btn-group">
@@ -109,6 +111,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>排序：</label>
+                                    <input type="text" placeholder="数值" id="menu_sort" name="menu_sort" value="0" class="form-control">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" id="menu_id" name="menu_id" value="" />
@@ -147,7 +157,7 @@
                                 option+='<option selected value="'+data.topMenu[i].menu_id+'">'+data.topMenu[i].menu_name+'</option>';
 
                             }else if(data.menu.menu_pid==0 && data.topMenu[i].menu_id == data.menu.menu_id) {
-                                option+='<option selected value="'+data.topMenu[i].menu_id+'">'+data.topMenu[i].menu_name+'</option>';
+                                option+='<option selected value="0">'+data.topMenu[i].menu_name+'</option>';
                                 $("#menu_pid").attr("disabled",'disabled');
 
                             }else{
@@ -157,6 +167,7 @@
                         }
 
                         $("#menu_name").val(data.menu['menu_name']);
+                        $("#menu_sort").val(data.menu['menu_sort']);
                     }
                     
                     $("#menu_pid").empty().append(option);
@@ -231,7 +242,7 @@
                 menu_pid    = $("#menu_pid").val(),
                 handle_type = $("#handle_type").val(),
                 menu_id     = $("#menu_id").val();
-                
+                menu_sort   = isNaN(parseInt($("#menu_sort").val())) ? 0 : parseInt($("#menu_sort").val());
                 if(!menu_name) {
                     layer.msg('请填写菜单名', {time:500, icon:5});   
                     return false;
@@ -244,7 +255,7 @@
                     url = "{:url('admin/System/editMenu')}";
                 }
                 
-                $.post(url,{menu_name:menu_name,menu_pid:menu_pid,handle_type:handle_type,menu_id:menu_id},function(data){
+                $.post(url,{menu_name:menu_name,menu_pid:menu_pid,handle_type:handle_type,menu_id:menu_id,menu_sort:menu_sort},function(data){
                        if(data.code==1) {
                    
                         layer.msg(data.msg, {time:500, icon:6}); 

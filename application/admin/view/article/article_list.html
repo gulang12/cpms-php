@@ -55,6 +55,7 @@
                                     <th>作者</th>
                                     <th>封面</th>
                                     <th>发布时间</th>
+                                    <th>状态</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
@@ -70,6 +71,14 @@
                                         </if>
                                         </td>
                                         <td class="center">{$vo['article_add_time']}</td>
+                                        <td class="center" align="center">
+                                            
+                                            <switch name="$vo['article_status']" >
+                                                <case value="0"><a href="javascript:;" style="color:#1ab394;">发布</a></case>
+                                                <case value="1"><a href="javascript:;" style="color:#ed5565;">删除</a></case>
+                                                <case value="2"><a href="javascript:;" style="color:#f8ac59;">草稿</a></case>
+                                            </switch>
+                                        </td>
                                         <td class="center" align="center">
                                             <div class="btn-group">
                                                 <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false">操作 <span class="caret"></span>
@@ -95,6 +104,7 @@
                                     <th>作者</th>
                                     <th>内容</th>
                                     <th>发布时间</th>
+                                    <th>状态</th>
                                     <th>操作</th>
                                 </tr>
                             </tfoot>

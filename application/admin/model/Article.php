@@ -16,7 +16,7 @@ class Article extends Model
     public  function getArticles($num=20){
        
         $keywords = input('param.keywords','');
-        $where    = " a.article_status=0 ";
+        $where    = "";
         $param = [];
         if($keywords) {
             $param['keywords'] = $keywords;
@@ -102,7 +102,7 @@ class Article extends Model
 
     public function delArticle($articleId){
         
-        $del = $this->where('article_id='.$articleId)->delete();
+        $del = $this->where('article_id='.$articleId)->setField('article_status',1); //删除状态改为1
 
         if($del) {
 

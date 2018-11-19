@@ -17,6 +17,7 @@
     <css href="/static/css/admin/plugins/summernote/summernote-bs3.css"/>
     <css href="/static/css/admin/plugins/chosen/chosen.css"/>
     <css href="/static/css/admin/plugins/datapicker/datepicker3.css"/>
+    <css href="/static/css/admin/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"/>
     <css href="/static/css/admin/style.min862f.css"/>
     <link href="/static/css/admin/admincommon.css?v=20181116" rel='stylesheet' type='text/css' />
 </head>
@@ -51,13 +52,16 @@
                                 <volist name='category'  id='parent'>
                                     <optgroup label="{$parent['parent_name']}">
                                         <volist name="$parent['children']" id="child">
-                                            <option  value="{$child['menu_id']}" hassubinfo="true">{$child['menu_name']}</option>
+                                            <if condition="in_array($child['menu_id'],$article['article_category'])">
+                                                <option  value="{$child['menu_id']}" hassubinfo="true" selected>{$child['menu_name']}</option>
+                                            <else/>
+                                                <option  value="{$child['menu_id']}" hassubinfo="true">{$child['menu_name']}</option>
+                                            </if>
                                         </volist>
                                     </optgroup>
                                 </volist>
                             </select>
                         </div>
-                        
                     </div>
 
                     <div class="form-group">
@@ -93,7 +97,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-1 col-sm-offset-5">
+                <div class="col-sm-2 col-sm-offset-5">
+                    <div class="radio radio-success radio-inline">
+                        <input type="radio" id="inlineRadio1" value="0" name="article_status" <if condition="$article['article_status'] eq 0">checked</if>>
+                        <label for="inlineRadio1">发表</label>
+                    </div>
+                    <div class="radio radio-inline radio-danger">
+                        <input type="radio" id="inlineRadio2" value="2" name="article_status" <if condition="$article['article_status'] eq 2">checked</if>>
+                        <label for="inlineRadio2">草稿</label>
+                    </div>
                     <input type="hidden" id="article_id" name="article_id" value="{$article['article_id'] | default = ''}" />
                     <input type="hidden" id="handle_type"  name="handle_type"  value="{$type}" />
                     <button class="btn btn-primary" type="submit" onclick="publishArticleSubmit();">保存内容</button>

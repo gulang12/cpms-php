@@ -24,7 +24,8 @@ class Article extends AdminBase
         if($type=='update') {
            
             $article =  model('article')->getArticle(input("param.article_id",''));
-            $article['article_content'] = htmlspecialchars_decode($article['article_content']);
+            $article['article_content']  = htmlspecialchars_decode($article['article_content']);
+            $article['article_category'] = explode(",", $article['article_category']);
             $this->assign("article",$article);
         }
         
