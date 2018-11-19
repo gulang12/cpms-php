@@ -54,7 +54,7 @@
 					</button>
 					<div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-dark m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-light m-aside-header-menu-mobile--submenu-skin-light "  >
 						<ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
-							<li class="m-menu__item  <if condition='$active_cat eq ""'>m-menu__item--active</if>"  aria-haspopup="true">
+							<li class="m-menu__item">
 								<a  href="/" class="m-menu__link ">
 									<span class="m-menu__item-here"></span>
 									<span class="m-menu__link-text">
@@ -97,7 +97,7 @@
 							
 							<!--隐藏菜单-->
 							<if condition="$other.children neq ''">
-								<li class="m-menu__item  m-menu__item--submenu m-menu__item--rel m-menu__item--more m-menu__item--icon-only <if condition='in_array($active_cat,$other.children_ids)'>m-menu__item--hover</if>"  data-menu-submenu-toggle="click" data-redirect="true" aria-haspopup="true">
+								<li class="m-menu__item  m-menu__item--submenu m-menu__item--rel m-menu__item--more m-menu__item--icon-only <if condition='in_array($active_cat,$other.children_ids)'>m-menu__item--active m-menu__item--hover</if>"  data-menu-submenu-toggle="click" data-redirect="true" aria-haspopup="true">
 									<a  href="#" class="m-menu__link m-menu__toggle">
 										<span class="m-menu__item-here"></span>
 										<i class="m-menu__link-icon flaticon-more-v3"></i>
