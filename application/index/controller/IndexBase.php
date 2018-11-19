@@ -27,9 +27,10 @@ class IndexBase extends Controller
     public function _initialize()
     {
 
-        $category  =  $this->getArticleCategory(); // 调用子类的方法
-        $other     =  array_pop($category);
-        
+        $category   =  $this->getArticleCategory(); // 调用子类的方法
+        $other      =  array_pop($category);
+        $active_cat =  input("param.cat_id")? intval(input("param.cat_id")) :'';
+        $this->assign("active_cat",$active_cat);
         $this->assign("category",$category);
         $this->assign("other",$other);
     	
@@ -50,11 +51,11 @@ class IndexBase extends Controller
                     if($v2['menu_pid'] == $v['menu_id'] ) {
 
                         $treeCat[$v['menu_id']]['children'][] = $v2;
+                        $treeCat[$v['menu_id']]['children_ids'][] = $v2['menu_id'];
                     }
                 }
             }
         }
-
         return $treeCat;
     }
 }
