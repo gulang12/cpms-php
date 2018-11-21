@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.09 (64 bit)
-MySQL - 5.7.23 : Database - yxadmin
+MySQL - 5.5.53 : Database - yxadmin
 *********************************************************************
 */
 
@@ -28,12 +28,11 @@ CREATE TABLE `yx_article` (
   `article_content` text NOT NULL COMMENT '文章内容',
   `article_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '文章状态 0:正常',
   `article_add_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '添加时间',
+  `article_category` varchar(100) NOT NULL,
   PRIMARY KEY (`article_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `yx_article` */
-
-insert  into `yx_article`(`article_id`,`article_author`,`article_title`,`article_poster`,`article_content`,`article_status`,`article_add_time`) values (10,1,'20180818测试文章03','','444',0,'2018-08-18 14:26:10'),(11,1,'20180818测试文章04','','爱我的',0,'2018-08-18 14:26:28'),(12,1,'20180818测试文章05','','为儿女',0,'2018-08-18 14:26:39'),(13,1,'20180818测试文章06','','是否',0,'2018-08-18 14:26:50'),(14,1,'20180818测试文章06','','是否',0,'2018-08-18 14:26:57'),(15,1,'20180818测试文章07','','去儿女',0,'2018-08-18 14:27:08'),(16,1,'20180818测试文章07','','去儿女save',0,'2018-08-18 14:27:33'),(2,1,'第二次测试','','\r\n                                <h2>水电费首付多少地方 水电费水电费是否</h2>\r\n                            ',0,'2018-08-13 21:16:50'),(3,1,'热特让他','','\r\n                                &lt;h2&gt;H+ 后台主题&lt;/h2&gt;\r\n                                &lt;p&gt;H+是一个完全响应式，基于Bootstrap3.3.6最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术，她提供了诸多的强大的可以重新组合的UI组件，并集成了最新的jQuery版本(v2.1.1)，当然，也集成了很多功能强大，用途广泛的就jQuery插件，她可以用于所有的Web应用程序，如&lt;b&gt;网站管理后台&lt;/b&gt;，&lt;b&gt;网站会员中心&lt;/b&gt;，&lt;b&gt;C&lt;/b&gt;&lt;/p&gt;\r\n                            ',0,'2018-08-11 21:51:48'),(4,1,'热特让他777777777777','\\upload\\article\\20180812\\157289b89721c5738168e05177241655.jpg','\r\n                                \r\n                                \r\n                                &lt;h1&gt;双方都色粉 水电费盛世嫡妃s&lt;/h1&gt;&lt;p&gt;水电费水电费水电费&lt;/p&gt;&lt;p&gt;&amp;lt;tr&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;th&amp;gt;ID&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;th&amp;gt;标题&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;th&amp;gt;作者&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;th&amp;gt;封面&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;th&amp;gt;发布时间&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;th&amp;gt;操作&amp;lt;/th&amp;gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;lt;/tr&amp;gt;&lt;/p&gt;                                                                                    ',0,'2018-08-11 21:53:29'),(8,1,'20180818测试文章01','','问问v',0,'2018-08-18 14:24:56'),(9,1,'20180818测试文章02','','胜多负少的 水电费',0,'2018-08-18 14:25:46'),(6,1,'代码测试','','\n                                \n                                \n                                &lt;h2&gt;H+ 后台主题&lt;/h2&gt;\n                                &lt;p&gt;H+是一个完全响应式，基于Bootstrap3.3.6最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术，她提供了诸多的强大的可以重新组合的UI组件，并集成了最新的jQuery版本(v2.1.1)，当然，也集成了很多功能强大，用途广泛的就jQuery插件，她可以用于所有的Web应用程序，如&lt;b&gt;网站管理后台&lt;/b&gt;，&lt;b&gt;网站会员中心&lt;/b&gt;，&lt;b&gt;CMS&lt;/b&gt;，&lt;b&gt;CRM&lt;/b&gt;，&lt;b&gt;OA&lt;/b&gt;等等，当然，您也可以对她进行深度定制，以做出更强系统。&lt;/p&gt;\n                                &lt;p&gt;\n                                    &lt;b&gt;当前版本：&lt;/b&gt;v4.1.0\n                                &lt;/p&gt;\n&lt;pre&gt;var bsSuggest = $(&quot;input#test&quot;).bsSuggest({\n      url: &quot;/rest/sys/getuserlist?keyword=&quot;\n    })\n&lt;/pre&gt;\n的\n',0,'2018-08-11 21:57:14'),(7,1,'舒服舒服','\\upload\\article\\20180811\\7a1099104eed8831f379946330badefe.jpg','\r\n                                \r\n                                &amp;lt;h2&amp;gt;H+ 后台主题&amp;lt;/h2&amp;gt;\r\n                                &amp;lt;p&amp;gt;H+是一个完全响应式，基于Bootstrap3.3.6最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术，她提供了诸多的强大的可以重新组合的UI组件，并集成了最新的jQuery版本(v2.1.1)，当然，也集成了很多功能强大，用途广泛的就jQuery插件，她可以用于所有的Web应用程序，如&amp;lt;b&amp;gt;网站管理后台&amp;lt;/b&amp;gt;，&amp;lt;b&amp;gt;网站会员中心&amp;lt;/b&amp;gt;，&amp;lt;b&amp;gt;CMS&amp;lt;/b&amp;gt;，&amp;lt;b&amp;gt;CRM&amp;lt;/b&amp;gt;，&amp;lt;b&amp;gt;OA&amp;lt;/b&amp;gt;等等，当然，您也可以对她进行深度定制，以做出更强系统。&amp;lt;/p&amp;gt;\r\n                                &amp;lt;p&amp;gt;\r\n                                    &amp;lt;b&amp;gt;当前版本：&amp;lt;/b&amp;gt;v4.1.0\r\n                                &amp;lt;/p&amp;gt;\r\n                                                        ',0,'2018-08-11 21:57:33');
 
 /*Table structure for table `yx_index_menu` */
 
@@ -44,12 +43,13 @@ CREATE TABLE `yx_index_menu` (
   `menu_name` varchar(50) NOT NULL DEFAULT '',
   `menu_pid` int(11) NOT NULL DEFAULT '0',
   `menu_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1为删除状态 0为使用状态',
+  `menu_sort` tinyint(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`menu_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `yx_index_menu` */
 
-insert  into `yx_index_menu`(`menu_id`,`menu_name`,`menu_pid`,`menu_status`) values (1,'后端开发',0,0),(2,'服务器',0,0),(3,'前端开发',0,0),(4,'CSS/CSS3',3,0),(5,'JavaScript',3,0),(6,'PHP',1,0),(7,'Python',1,0),(8,'Apache',2,0),(9,'nginx',2,0),(10,'数据库',0,0),(11,'mysql',10,0),(12,'mongodb',10,0),(14,'其他',0,0),(15,'读书&生活',14,0),(16,'redis',10,0),(17,'linux',2,0);
+insert  into `yx_index_menu`(`menu_id`,`menu_name`,`menu_pid`,`menu_status`,`menu_sort`) values (18,'后端开发',0,0,2),(19,'服务器',0,0,3),(20,'前端开发',0,0,1),(21,'CSS/CSS3',20,0,0),(22,'JavaScript',20,0,0),(23,'PHP',18,0,0),(24,'Python',18,0,0),(25,'Apache',19,0,0),(26,'nginx',19,0,0),(10,'数据库',0,0,4),(11,'mysql',10,0,0),(12,'mongodb',10,0,0),(14,'其他',0,0,100),(15,'读书&生活',14,0,0),(16,'redis',10,0,0),(17,'linux',19,0,0);
 
 /*Table structure for table `yx_role` */
 
@@ -67,7 +67,7 @@ CREATE TABLE `yx_role` (
 
 /*Data for the table `yx_role` */
 
-insert  into `yx_role`(`role_id`,`role_name`,`role_describe`,`role_auth`,`role_status`,`role_add_time`) values (1,'超级管理员','整站权限','all',0,'2018-07-21 22:02:45'),(2,'管理员','编辑查看部分权限','admin/System/navMenu,admin/System/addMenu,admin/System/editMenu,admin/User,admin/User/userList,admin/Role/roleList,admin/Order,admin/Article/articleList,admin/Article/addArticle,admin/Article/delArticle,admin/Article/updateArticle',0,'2018-07-18 22:08:13'),(3,'客服','查看','',0,'2018-07-24 20:04:12'),(4,'审核员','审查资料呢','',0,'2018-07-24 20:06:45');
+insert  into `yx_role`(`role_id`,`role_name`,`role_describe`,`role_auth`,`role_status`,`role_add_time`) values (1,'超级管理员','整站权限','all',0,'2018-07-21 22:02:45'),(2,'管理员','编辑查看部分权限','admin/System/navMenu,admin/System/addMenu,admin/System/editMenu,admin/User,admin/User/userList,admin/Role/roleList,admin/Order,admin/Article/articleList,admin/Article/addArticle,admin/Article/delArticle,admin/Article/updateArticle',0,'2018-07-18 22:08:13');
 
 /*Table structure for table `yx_user` */
 
