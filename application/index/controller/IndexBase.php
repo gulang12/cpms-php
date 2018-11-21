@@ -26,10 +26,16 @@ class IndexBase extends Controller
      */
     public function _initialize()
     {
-
+        
+        error_reporting(E_ALL ^ E_NOTICE); // 屏蔽模板输出不存在的变量时的错误提示信息
+        
         $category   =  $this->getArticleCategory(); // 调用子类的方法
         $other      =  array_pop($category);
-        $active_cat =  input("param.cat_id")? intval(input("param.cat_id")) :'';
+        $active_cat =  intval(input("param.cat_id"))?:'';
+
+        if(!$_SERVER['QUERY_STRING']) { // 判断是否显示首页
+            $active_cat = 'index';
+        }
         $this->assign("active_cat",$active_cat);
         $this->assign("category",$category);
         $this->assign("other",$other);

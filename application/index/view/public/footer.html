@@ -4,13 +4,15 @@
 			<div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
 				<div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
 					<span class="m-footer__copyright">
-						2017 &copy; Metronic theme by
+						2014 &copy; Metronic theme by
 						<a href="javascript:;" class="m-link">
 							Keenthemes
 						</a>
 					</span>
 				</div>
-				<div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first"></div>
+				<div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
+					<span class="m-footer__copyright">技术成就梦想！！！</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -18,3 +20,17 @@
 <load file="/static/js/index/vendors.bundle.js"/>
 <load file="/static/js/index/scripts.bundle.js"/>
 <load file="/static/js/admin/plugins/ajaxpagination/ajaxpagination.js"/>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".m-menu__nav > li").hover(function(){
+            
+            $(this).addClass("m-menu__item--hover  m-menu__item--open-dropdown").siblings().removeClass("m-menu__item--hover  m-menu__item--open-dropdown");
+			$(this).children('div').css("display",'block').parent().siblings().children("div").css("display",'none');
+			
+		},function(){
+			$(this).removeClass("m-menu__item--hover  m-menu__item--open-dropdown").children('div').css("display",'none');
+		});
+
+		$(".m-menu__nav > li").click(function(){$(this).children('div').css("display",'none');})
+	})
+</script>

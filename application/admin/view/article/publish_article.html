@@ -9,7 +9,7 @@
 
     <meta name="keywords" content="">
     <meta name="description" content="">
-
+    <link rel="shortcut icon" href="/favicon.ico" />
     <css href="/static/css/admin/bootstrap.min14ed.css" />
     <css href="/static/css/admin/font-awesome.min93e3.css" />
     <css href="/static/css/admin/animate.min.css" />
@@ -52,7 +52,7 @@
                                 <volist name='category'  id='parent'>
                                     <optgroup label="{$parent['parent_name']}">
                                         <volist name="$parent['children']" id="child">
-                                            <if condition="in_array($child['menu_id'],$article['article_category'])">
+                                            <if condition="in_array($child['menu_id'],$article_category)">
                                                 <option  value="{$child['menu_id']}" hassubinfo="true" selected>{$child['menu_name']}</option>
                                             <else/>
                                                 <option  value="{$child['menu_id']}" hassubinfo="true">{$child['menu_name']}</option>

@@ -17,21 +17,45 @@
 						<div class="m-content">
 							<div class="row">
 								<div class="col-xl-9">
-									<if condition="$detail neq ''">
-										<div class="text-center article-title">
-				                            <h3>{$detail.article_title}</h3>
-				                        </div>
-				                        <div class="">{$detail.article_content}</div>
-				                    <else/>
-			                            <div class="middle-box text-center animated fadeInDown">
-									        <h1>404</h1>
-									        <h3 class="font-bold">文章未找到！</h3>
+									<div class="m-portlet m-portlet--mobile ">
+										<p class="m-portlet__head-text m-portlet__head" style="padding:10px;">
+											<a href="/" class="bread-nav">首页</a> /
+											<volist name="allCats" id="vo">
+												<a href="{:url('index/Index/articleList')}?cat_id={$vo.menu_id}" class="bread-nav">      					{$vo.menu_name}</a>&nbsp;&nbsp;
+											</volist>
+										</p>
+										<div class="m-portlet__body">
+											<if condition="$detail neq ''">
+												<div class="text-center article-title">
+						                            <h3>{$detail.article_title}</h3>
+						                        </div>
+						                        <div class="">{$detail.article_content}</div>
+						                        <div class="row">
+						                            <div class="col-md-6 small">
+						                            	
+						                            </div>
+						                            <div class="col-md-6">
+						                                <div class="small text-right">
+						                               		<span class="text-muted">
+							                            		<i class="fa fa-clock-o"></i> 
+							                            		{$detail.article_add_time}
+							                            	</span>
+						                                </div>
+						                            </div>
+						                        </div>
+						                    <else/>
+					                            <div class="middle-box text-center animated fadeInDown" style="height:120px;">
+											        <h1>404</h1>
+											        <h3 class="font-bold">文章未找到！</h3>
 
-									        <div class="error-desc">
-									            抱歉，你要的文章好像去火星了~
-									        </div>
-									    </div>
-				                    </if>
+											        <div class="error-desc">
+											            抱歉，你要的文章好像去火星了~
+											        </div>
+											    </div>
+						                    </if>
+						                    
+						                </div>
+						            </div>
 								</div>
 								<!--右边部分-->
 								<include file='public/right'/>

@@ -20,13 +20,16 @@ class Article extends AdminBase
        
         $type      = input("param.type",'');
         $category  =  $this->getArticleCategory();
-        
         if($type=='update') {
            
             $article =  model('article')->getArticle(input("param.article_id",''));
             $article['article_content']  = htmlspecialchars_decode($article['article_content']);
             $article['article_category'] = explode(",", $article['article_category']);
             $this->assign("article",$article);
+            $this->assign("article_category",$article['article_category']);
+        }else{
+
+            $this->assign("article_category",[]);
         }
         
         $this->assign("category",$category);

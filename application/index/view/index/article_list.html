@@ -18,17 +18,21 @@
 							<div class="row">
 								<div class="col-xl-9">
 									<div class="m-portlet m-portlet--mobile ">
-										
+										<p class="m-portlet__head-text m-portlet__head" style="padding:10px;">
+											<a href="/" class="bread-nav">首页</a> /
+											<a href="javascript:;" class="bread-nav">{$parentName.menu_name}</a> /
+											<a href="javascript:;" class="bread-nav-last">{$catName.menu_name}</a>
+										</p>
 										<div class="m-portlet__body">
 											<div class="ibox">
 												<if condition="$articles neq ''">
 													<volist name="articles" id="vo">
 														<div class="ibox-content">
-									                        <a href="{:url('index/Index/articleDetail')}?article_id={$vo.article_id}" style="color:#454080;">
-									                            <h4 style="margin-bottom:1rem;">
-									                               {$vo.article_title}
-									                            </h4>
-									                        </a>
+									                        
+								                            <h4 style="margin-bottom:1rem;">
+								                               <a href="{:url('index/Index/articleDetail')}?article_id={$vo.article_id}" style="color:#454080;">{$vo.article_title}</a>
+								                            </h4>
+									                        <div class=""><p style="text-indent:30px;">{$vo.article_content}</p></div>
 									                        <div class="row">
 									                            <div class="col-md-6 small">
 									                            	<span class="text-muted">
@@ -44,15 +48,17 @@
 									                            </div>
 									                        </div>
 									                    </div>
-									                    <div class="hr-line-dashed" style="height:1px;margin:20px 0px;border-top:1px dashed #8684a9"></div>
+									                    <div class="hr-line-dashed"></div>
 													</volist>
 												<else/>
 												    <p style="text-align: center;">暂无相关内容...</p>
 												</if>
 							                </div>
-							                <!--分页代码-->
-     										<div class="pagination-list"></div>
-     										<!--分页代码-->
+							                <if condition="$page gt 0">
+							                	<!--分页代码-->
+	     										<div class="pagination-list"></div>
+	     										<!--分页代码-->
+							                </if>
 										</div>
 									</div>
 								</div>
@@ -92,7 +98,8 @@
         	totalPage  : "{$page}",
         	current_p  : "{$p}",
         	isAjax     : false,
-        	http_url   : "{:url('index/Index/articleCat')}",
+        	http_url   : "{:url('index/Index/articleList')}",
+        	url_param  : "&cat_id={$cat_id}",
         }
 
    	    $.fn.ajaxPagination.init(t,setting);

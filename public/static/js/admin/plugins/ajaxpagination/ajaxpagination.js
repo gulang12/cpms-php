@@ -14,6 +14,7 @@
         random_num : 6,     // 默认显示页码数量
         isAjax     : true,  // 是否开启ajax分页
         http_url   : '',    // 跳转链接
+        url_param  : '',    // 跳转链接的参数 不包括url?p部分
         callback   : {
             ajax_onClick : null,
         }
@@ -94,8 +95,8 @@
 
     },
     _creatUrlPageDom = function(page,p){
-        var  pageHtml = '',disabled ="",prev_page='',next_page = "",rand = defaults.random_num,href = defaults.http_url;
-        
+        var  pageHtml = '',disabled ="",prev_page='',next_page = "",rand = defaults.random_num,href = defaults.http_url,param = defaults.url_param;
+        p = parseInt(p);
 	    pageHtml+="<ul>";
 	    if(p == 1) {
 	   	   disabled = "disabled";
@@ -103,47 +104,46 @@
 	       prev_page = p - 1;
 	    }
 
-	    pageHtml+="<li><a href='"+href+"?p=1' data-page='1' class='"+disabled+"'>首页</a></li>";
-	    pageHtml+="<li class='prev_page'><a href='"+href+"?p="+prev_page+"' data-page='"+prev_page+"' class='"+disabled+"'>上一页</a></li>";
+	    pageHtml+="<li><a href='"+href+"?p=1"+param+"' data-page='1' class='"+disabled+"'>首页</a></li>";
+	    pageHtml+="<li class='prev_page'><a href='"+href+"?p="+prev_page+param+"' data-page='"+prev_page+"' class='"+disabled+"'>上一页</a></li>";
 
 	    if(page <= rand) {
 	    	for(var i=1;i<=page;i++){
 
 	    		if(i==p) {
-	    			pageHtml+="<li><a href='"+href+"?p="+i+"' data-page='"+i+"' class='current_page disabled'>"+i+"</a></li>";
+	    			pageHtml+="<li><a href='"+href+"?p="+i+param+"' data-page='"+i+"' class='current_page disabled'>"+i+"</a></li>";
 	    		}else{
-	                pageHtml+="<li><a href='"+href+"?p="+i+"' data-page='"+i+"'>"+i+"</a></li>";
+	                pageHtml+="<li><a href='"+href+"?p="+i+param+"' data-page='"+i+"'>"+i+"</a></li>";
 	    		}
 	    	}
 
 	    }else if(page > rand){
-	          
+	         
 	        if(p < rand) {
 	        	for (var i = 1; i <= rand; i++) {
 	        		if(i==p) {
-	        			pageHtml+="<li><a href='"+href+"?p="+i+"' data-page='"+i+"' class='current_page disabled'>"+i+"</a></li>";
+	        			pageHtml+="<li><a href='"+href+"?p="+i+param+"' data-page='"+i+"' class='current_page disabled'>"+i+"</a></li>";
 	        		}else{
-	        			pageHtml+="<li><a href='"+href+"?p="+i+"' data-page='"+i+"'>"+i+"</a></li>";
+	        			pageHtml+="<li><a href='"+href+"?p="+i+param+"' data-page='"+i+"'>"+i+"</a></li>";
 	        		}
 	        	}
 	        }else if(p >=(page - Math.ceil((rand / 2)))) {
-
 	            for(var i = page - rand;i<=page;i++) {
 
 	                if(i==p) {
-	        			pageHtml+="<li><a href='"+href+"?p="+i+"' data-page='"+i+"' class='current_page disabled'>"+i+"</a></li>";
+	        			pageHtml+="<li><a href='"+href+"?p="+i+param+"' data-page='"+i+"' class='current_page disabled'>"+i+"</a></li>";
 	        		}else{
-	        			pageHtml+="<li><a href='"+href+"?p="+i+"' data-page='"+i+"'>"+i+"</a></li>";
+	        			pageHtml+="<li><a href='"+href+"?p="+i+param+"' data-page='"+i+"'>"+i+"</a></li>";
 	        		}  
 	            }
 	        }else if(p >= rand && p < (page - Math.ceil((rand / 2)))) {
-
-	        	for(var i = (p - Math.ceil(rand/2))+1; i < (p + Math.ceil(rand/2));i++) {
+	        	
+	        	for(var i = parseInt(p - Math.ceil(rand/2)); i <= parseInt((p + Math.ceil(rand/2)));i++) {
 
 	                if(i==p) {
-	        			pageHtml+="<li><a href='"+href+"?p="+i+"' data-page='"+i+"' class='current_page disabled'>"+i+"</a></li>";
+	        			pageHtml+="<li><a href='"+href+"?p="+i+param+"' data-page='"+i+"' class='current_page disabled'>"+i+"</a></li>";
 	        		}else{
-	        			pageHtml+="<li><a href='"+href+"?p="+i+"' data-page='"+i+"'>"+i+"</a></li>";
+	        			pageHtml+="<li><a href='"+href+"?p="+i+param+"' data-page='"+i+"'>"+i+"</a></li>";
 	        		}  
 	            }
 
@@ -158,8 +158,8 @@
 	       disabled  = "";
 	    }
 
-	    pageHtml+="<li class='next_page'><a href='"+href+"?p="+next_page+"' data-page='"+next_page+"' class='"+disabled+"'>下一页</a></li>";
-	    pageHtml+="<li class='prev_page'><a href='"+href+"?p="+page+"' data-page='"+page+"' class='"+disabled+"'>尾页</a></li>";
+	    pageHtml+="<li class='next_page'><a href='"+href+"?p="+next_page+param+"' data-page='"+next_page+"' class='"+disabled+"'>下一页</a></li>";
+	    pageHtml+="<li class='prev_page'><a href='"+href+"?p="+page+param+"' data-page='"+page+"' class='"+disabled+"'>尾页</a></li>";
 
 	    pageHtml+="<span class='pageCount' data-pagecount='"+page+"'>共"+page+"页<span>";
 	    

@@ -7130,7 +7130,7 @@ var mLayout = function() {
 
         if (header.data('minimize') == 'minimize') {
             options.minimize.desktop = {};
-            options.minimize.desktop.on = 'm-header--minimize-on';
+            options.minimize.desktop.on = 'm-header--minimize-off';
             options.minimize.desktop.off = 'm-header--minimize-off';
         } else  if (header.data('minimize') == 'hide') {
             options.minimize.desktop = {};
