@@ -97,7 +97,7 @@
 							
 							<!--隐藏菜单-->
 							<if condition="$other.children neq ''">
-								<li class="m-menu__item  m-menu__item--submenu m-menu__item--rel m-menu__item--more m-menu__item--icon-only <if condition='in_array($active_cat,$other.children_ids)'>m-menu__item--active other__item--hover</if> m-menu__item--open-dropdown m-menu__item--hover"  data-menu-submenu-toggle="click" data-redirect="true" aria-haspopup="true">
+								<li class="m-menu__item  m-menu__item--submenu m-menu__item--rel  <if condition='in_array($active_cat,$other.children_ids)'>m-menu__item--active other__item--hover</if> m-menu__item--open-dropdown m-menu__item--hover"  data-menu-submenu-toggle="click" data-redirect="true" aria-haspopup="true">
 									<a  href="#" class="m-menu__link m-menu__toggle">
 										<span class="m-menu__item-here"></span>
 										<i class="m-menu__link-icon flaticon-more-v3" style="color:#e6e08b;"></i>
