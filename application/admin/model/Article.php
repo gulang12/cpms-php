@@ -20,7 +20,7 @@ class Article extends Model
         $param = [];
         if($keywords) {
             $param['keywords'] = $keywords;
-            $where .= "  AND a.article_title like"."'%".$keywords."%'";
+            $where .= "a.article_title like"."'%".$keywords."%'";
         }
     
         $articles  = Article::alias('a')->field('u.user_login,a.*')

@@ -48,7 +48,7 @@ class System extends AdminBase
     }
  
     public function delMenu(){
-        $menuId = input('param.menu_id');
+        $menuId = input('param.menuId');
 
         $info  =  model('IndexMenu')->delMenu($menuId);
        
