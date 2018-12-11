@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue</title>
+</head>
+<style type="text/css">
+	.fade-enter-active, .fade-leave-active {
+	  transition: opacity .5s;
+	}
+
+	.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+	  opacity: 0;
+    }
+</style>
+<body>
+    
+    <div id="app">
+    	{{ message }}
+	</div>
+
+	<div id="app-2">
+	  <span v-bind:title="message">
+	    鼠标悬停几秒钟查看此处动态绑定的提示信息！
+	  </span>
+	</div>
+    
+    <div id="app-3">
+	  <p v-if="seen">现在你看到我了</p>
+	</div>
+    
+    <div id="demo">
+		  <button v-on:click="show = !show"><!--可以定义函数，或者直接写js代码-->
+		    显示隐藏
+		  </button>
+		  <transition name="fade">
+		    <p v-if="show">hello</p>
+		  </transition>
+	</div>
+
+	<div id="app-4">
+		<p>动态添加数据源，显示列表渲染<button v-on:click="addData">添加数据</button></p>
+	  <ol>
+	    <li v-for="todo in todos">
+	      {{ todo.text }}
+	    </li>
+	  </ol>
+	</div>
+
+	<div id="app-5">
+	  <p v-on:click="test">{{ message }}</p>
+	  <button v-on:click="reverseMessage">监听事件</button>
+	</div>
+    
+    <div id="app-6">
+    	<div>
+    		<input type="text" name="val" id="val"  v-model="b">
+    		<button v-on:click="changeValue">改变值</button>
+    	</div>
+    </div>
+   
+
+   
+	<div id="app-7">
+		<p>切换input</p>
+		<template v-if="loginType === 'username'">
+		   <label>Username</label>
+		   <input placeholder="Enter your username" key="username-input">
+		</template>
+		<template v-else>
+		   <label>Email</label>
+		   <input placeholder="Enter your email address" key="email-input">
+		</template>
+
+		<button v-on:click="switchBtn">切换</button>
+		<!--v-show只是改变display控制显示隐藏 而v-if 是重新渲染DOM开销大-->
+		<h1 v-show="ok">Hello!</h1>
+	</div>
+    <div id="app-8">
+    	<!--v-on:submit.prevent 阻止提交表单页面跳转-->
+	    <form v-on:submit.prevent="addNewTodo">
+		    <label for="new-todo">Add a todo</label>
+		    <input v-model="newTodoText" id="new-todo" placeholder="E.g. Feed the cat">
+		    <button>Add</button>
+	    </form>
+	    <ul>
+
+		    <li v-for="(todo, index) in todos" v-bind:key="todo.id" v-bind:title="todo.title" >	
+		    	{{todo.title}}
+		    	<button v-on:click="removeDom(index)">移除节点</button>
+		    </li>
+		  </ul>
+	</div>
+	<div id="app-9">
+		<input type="checkbox" id="checkbox" v-model="checked">
+		<label for="checkbox">{{ checked }}</label>
+		<select v-model="selected">
+		    <!-- 内联对象字面量 -->
+		     <option >选择</option>
+		  <option v-bind:value="123">123</option>
+		</select>
+		<alert-box class="test-cla">Something bad happened.</alert-box>
+	</div>
+</body>
+</html>
+<load file="/static/js/index/vue.js"/>
+<script type="text/javascript">
+
+	var app = new Vue({
+	  el: '#app',
+	  data: {
+	    message: '{$msg}'
+	  }
+	})
+	 
+	var app2 = new Vue({
+	  el: '#app-2',
+	  data: {
+	    message: '页面加载于 ' + new Date().toLocaleString()
+	  }
+	})
+    
+    var app3 = new Vue({
+	  el: '#app-3',
+	  data: {
+	    seen: false
+	  }
+	})
+
+	new Vue({
+	  el: '#demo',
+	  data: {
+	    show: true
+	  }
+	})
+
+	var app4 = new Vue({
+	  el: '#app-4',
+	  data: {
+	    todos: [
+	      { text: '学习 JavaScript' },
+	      { text: '学习 Vue' },
+	      { text: '整个牛项目' }
+	    ]
+	  },
+	  methods:{
+	  	addData:function(){
+	  		this.todos.push({ text:'新增数据' });
+	  	}
+	  }
+	})
+
+	var app5 = new Vue({
+	  el: '#app-5',
+	  data: {
+	    message: '监听事件'
+	  },
+	  methods: {
+	    reverseMessage: function () {
+	      // this.message = this.message.split('').reverse().join('')
+
+	      // alert(333)
+	    },
+
+	    test:function() {
+	    	console.log('testclick')
+	    }
+	  }
+	})
+ 
+	// 该对象被加入到一个 Vue 实例中
+	var vm = new Vue({
+	    el: '#app-6',
+		data: { a: 1,b:66 },
+
+		watch: { // 监听data里对应key的value值的变化，并触发相应的方法. 可以在input标签里使用v-model='a',监听a的值的变化
+
+		    // 如果 `a` 发生改变，这个函数就会运行
+		    a: function (newA, oldA) {
+		       console.log('a的值改变了：'+this.a)
+		    },
+
+			// 如果 `b` 发生改变，这个函数就会运行
+		    b:function(newA, oldA) {
+		    	console.log('b的值改变了：'+this.b)
+		    }
+		  },
+
+		methods:{  //可以绑定方法，如点击事件方法
+	        changeValue:function() {
+	              this.a = 66;
+	        }
+		}
+
+	});
+
+	var app7 = new Vue({
+	  el: '#app-7',
+	  data: {
+	    loginType: 'username',
+	    ok :true
+	  },
+	  methods: {
+	    switchBtn: function () {
+	    	this.loginType = this.loginType=='username' ? 'email' : 'username';
+	    	this.ok = this.ok ? false : true;
+	    },
+	  }
+	})
+
+
+	var app8 = new Vue({
+	  el: '#app-8',
+	  data: {
+	    newTodoText: '',
+	    todos: [
+	      {
+	        id: 1,
+	        title: 'Do the dishes',
+	      },
+	      {
+	        id: 2,
+	        title: 'Take out the trash',
+	      },
+	      {
+	        id: 3,
+	        title: 'Mow the lawn'
+	      }
+	    ],
+	    nextTodoId: 4
+	  },
+	  methods: {
+	    addNewTodo: function () {
+	    	this.todos.push({
+		        id: this.nextTodoId++,
+		        title: this.newTodoText
+	        })
+	        this.newTodoText = ''
+		}, 
+		removeDom:function(index) {
+			this.todos.splice(index,1); // 删除数组指定元素
+		}  
+	  }
+	})
+ 
+
+    Vue.component('alert-box', {
+	  template: `
+	    <div class="demo-alert-box">
+	      <strong>Error!</strong>
+	      <slot></slot>
+	    </div>
+	  `
+	})
+
+	var app9 = new Vue({
+	  el: '#app-9',
+	  data: {
+	    checked: false,
+	    selected :true
+	  },
+	  watch: { 
+        
+         checked:function(){
+         	console.log(this.checked)
+         }
+
+	  }
+	})
+
+	
+
+</script>
