@@ -15,7 +15,7 @@ return [
     // +----------------------------------------------------------------------
 
     // 应用调试模式
-    'app_debug'              => false,   // 部署正式环境 关闭调试模式 false;
+    'app_debug'              => true,   // 部署正式环境 关闭调试模式 false;
     // 应用Trace
     'app_trace'              => false,   // 看出页面响应时间  部署正式环境 关闭模式 false;
     // 应用模式状态
@@ -150,8 +150,8 @@ return [
     // +----------------------------------------------------------------------
 
     // 异常页面的模板文件
-    // 'exception_tmpl'         => THINK_PATH . 'tpl' . DS . 'think_exception.tpl',
-    'exception_tmpl'         => APP_PATH.'404.html',
+    'exception_tmpl'         => THINK_PATH . 'tpl' . DS . 'think_exception.tpl',
+    // 'exception_tmpl'         => APP_PATH.'404.html',
     // 错误显示信息,非调试模式有效
     'error_message'          => '发生未知错误！请联系管理员~~~',
     // 显示错误信息

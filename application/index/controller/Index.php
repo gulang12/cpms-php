@@ -16,8 +16,11 @@ class Index extends IndexBase
         $articles = db('article')->where("article_status=0")->limit(($p-1)*$pageNum,$pageNum)->order("article_add_time DESC")->select();
         
         foreach ($articles as $k => &$v) {
-            $v['article_content'] = cut_trim_words($v['article_content'], 80);
+            $content = strip_tags(htmlspecialchars_decode($v['article_content']));
+            $v['article_content']  = mb_substr($content,0,150,'utf-8')."...";
+            $v['article_add_time'] = date("Y-m-d",strtotime($v['article_add_time']));
         }
+
         $articles = $articles ?:'';
         $this->assign("articles",$articles);
         $this->assign("page",$page);
@@ -39,7 +42,9 @@ class Index extends IndexBase
             $articles = db('article')->where($where)->limit(($p-1)*$pageNum,$pageNum)->order("article_add_time DESC")->select();
 
             foreach ($articles as $k => &$v) {
-                $v['article_content'] = cut_trim_words($v['article_content'], 80);
+                $content = strip_tags(htmlspecialchars_decode($v['article_content']));
+                $v['article_content']  = mb_substr($content,0,150,'utf-8')."...";
+                $v['article_add_time'] = date("Y-m-d",strtotime($v['article_add_time']));
             }
             
             $catName    = db('index_menu')->field('menu_name,menu_pid')->where("menu_id=".$cat_id)->find();
@@ -66,7 +71,7 @@ class Index extends IndexBase
 
         if($article){
             $article['article_content'] = htmlspecialchars_decode($article['article_content']);
-            
+            $article['article_add_time'] = date("Y-m-d",strtotime($article['article_add_time']));
             if($article['article_category']) {
                $allCats = db('index_menu')->field('menu_name,menu_id')->where("menu_id IN(".$article['article_category'].")")->select();
                $this->assign("allCats",$allCats); 
@@ -92,7 +97,9 @@ class Index extends IndexBase
             $articles =  db('article')->where($where)->limit(($p-1)*$pageNum,$pageNum)->order("article_add_time DESC")->select();
 
             foreach ($articles as $k => &$v) {
-                $v['article_content'] = cut_trim_words($v['article_content'], 80);
+                $content = strip_tags(htmlspecialchars_decode($v['article_content']));
+                $v['article_content']  = mb_substr($content,0,150,'utf-8')."...";
+                $v['article_add_time'] = date("Y-m-d",strtotime($v['article_add_time']));
             }
 
             $articles = $articles ?:'';
@@ -107,6 +114,13 @@ class Index extends IndexBase
         }
         
         return $this->fetch();
+    }
+
+    public function vueTest() {
+        
+        $this->assign("msg",'vue study best');
+        return $this->fetch();
+
     }
 
 }
