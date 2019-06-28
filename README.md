@@ -14,6 +14,7 @@ cpms-php是采用TP5.0开发的一个简单的后台脚手架管理系统（包�
 - UI模板使用h+admin V4.1.0  
 - 密码验证采用第三方加密框架 PasswordHash
 - 权限采用RBAC设计用户-角色-权限（资源）之间的关系
+- 使用Workerman（socketIO）框架，实现聊天
 - AJAX异步图片上传
 ......
 
