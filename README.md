@@ -16,8 +16,9 @@ cpms-php是采用TP5.0开发的一个简单的后台脚手架管理系统（包�
 - 权限采用RBAC设计用户-角色-权限（资源）之间的关系
 - AJAX异步图片上传
 ......
-
+后台帐号：admin 密码：123456
 *使用本脚手架可以快速搭建一个个人博客系统*
+
 ![image](https://github.com/gulang12/cpms-php/blob/master/public/static/images/bbbb.png)
 ![image](https://github.com/gulang12/cpms-php/blob/master/public/static/images/ccc.png)
 ![image](https://github.com/gulang12/cpms-php/blob/master/public/static/images/dddd.png)
