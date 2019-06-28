@@ -20,4 +20,19 @@ cpms-php是采用TP5.0开发的一个简单的后台脚手架管理系统（包�
 ......
 
 *使用本脚手架可以快速搭建一个个人博客系统*
-
+<p align="center">
+  <img width="900" src="https://github.com/gulang12/cpms-php/blob/master/public/static/images/bbbb.png
+">
+</p>
+<p align="center">
+  <img width="900" src="https://github.com/gulang12/cpms-php/blob/master/public/static/images/ccc.png
+">
+</p>
+<p align="center">
+  <img width="900" src="https://github.com/gulang12/cpms-php/blob/master/public/static/images/dddd.png
+">
+</p>
+<p align="center">
+  <img width="900" src="https://github.com/gulang12/cpms-php/blob/master/public/static/images/aaa.png
+">
+</p>
