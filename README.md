@@ -25,5 +25,5 @@ cpms-php是采用TP5.0开发的一个简单的后台脚手架管理系统（包�
 ![image](https://github.com/gulang12/cpms-php/blob/master/public/static/images/bbbb.png)
 ![image](https://github.com/gulang12/cpms-php/blob/master/public/static/images/ccc.png)
 ![image](https://github.com/gulang12/cpms-php/blob/master/public/static/images/dddd.png)
-![image](https://github.com/gulang12/cpms-php/blob/master/public/static/images/aaa.png)
+![image](https://github.com/gulang12/cpms-php/blob/master/public/static/images/hhhhhhhhhh.png)
 
