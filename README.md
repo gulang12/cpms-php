@@ -16,7 +16,9 @@ cpms-php是采用TP5.0开发的一个简单的后台脚手架管理系统（包�
 - 权限采用RBAC设计用户-角色-权限（资源）之间的关系
 - 使用Workerman（socketIO）框架，实现聊天
 - AJAX异步图片上传
-......
+- ......
+
+后台访问地址：http://localhost/admin/index/index
 
 后台帐号：admin 密码：123456
 
