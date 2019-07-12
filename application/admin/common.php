@@ -123,4 +123,30 @@ function httpRequest($url, $data='', $method='GET'){
 	return $tmpInfo; // 返回数据
 }
 
+/**
+   *模拟表单提交信息到socket服务，socket服务在推送到指定客户端，
+   *@param  $postData 数组  推送的信息 
+   // array(
+   //     "type" => $type,   // 推送信息类型
+   //     "content"=>$content, // 推送信息内容
+   //     "to"=>$to          // 推送给指定的组/人
+   // ) 
+*/
+function sendToSocketServer($postData) {
+
+    //利用API推送信息给socket服务器  推送的url地址，使用自己的服务器地址
+    $push_api_url = "http://127.0.0.1:3121";  // 这个要与服务端的 new Worker('http://0.0.0.0:2121')做区分
+   
+    $ch = curl_init ();
+    curl_setopt ( $ch, CURLOPT_URL, $push_api_url );
+    curl_setopt ( $ch, CURLOPT_POST, 1 );
+    curl_setopt ( $ch, CURLOPT_HEADER, 0 );
+    curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+    curl_setopt ( $ch, CURLOPT_POSTFIELDS, $postData );
+    curl_setopt ($ch, CURLOPT_HTTPHEADER, array("Expect:"));
+    $return = curl_exec ( $ch );
+    curl_close ( $ch );
+    var_dump($return);
+}
+
 ?>
