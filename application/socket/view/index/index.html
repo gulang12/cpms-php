@@ -20,7 +20,18 @@
 	<css href="/static/css/admin/style.min862f.css"/>
 
 </head>
+<style type="text/css">
+	.chat-from-message{padding: 10px 20px;}
+	.chat-from-message .message-avatar {float: left;margin-right: 10px;}
+	.chat-from-message .message {text-align: left;margin-left: 55px;}
+	.chat-from-message .message-date {float: right;}
 
+	.chat-to-message{padding: 10px 20px;}
+	.chat-to-message .message-avatar {float: right;margin-left: 10px;}
+	.chat-to-message .message {text-align: right;margin-right: 55px;}
+	.chat-to-message .message-date {float: left;}
+
+</style>
 <body class="gray-bg">
     <div class="wrapper wrapper-content  animated fadeInRight">
 
@@ -40,8 +51,7 @@
 
                             <div class="col-md-9 ">
                                 <div class="chat-discussion">
-
-                                    <div class="chat-message">
+                                    <div class=" chat-from-message">
                                         <img class="message-avatar" src="/static/images/a1.jpg" alt="">
                                         <div class="message">
                                             <a class="message-author" href="#"> 颜文字君</a>
@@ -51,7 +61,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="chat-message">
+                                    <div class="chat-to-message">
                                         <img class="message-avatar" src="/static/images/a4.jpg" alt="">
                                         <div class="message">
                                             <a class="message-author" href="#"> 林依晨Ariel </a>
@@ -61,116 +71,29 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="chat-message">
-                                        <img class="message-avatar" src="/static/images/a2.jpg" alt="">
-                                        <div class="message">
-                                            <a class="message-author" href="#"> 谨斯里 </a>
-                                            <span class="message-date">  2015-02-02 11:12:36 </span>
-                                            <span class="message-content">
-											验证日期格式(类似30/30/2008的格式,不验证日期准确性只验证格式
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="chat-message">
-                                        <img class="message-avatar" src="/static/images/a5.jpg" alt="">
-                                        <div class="message">
-                                            <a class="message-author" href="#"> 林依晨Ariel </a>
-                                            <span class="message-date">  2015-02-02 - 11:12:36 </span>
-                                            <span class="message-content">
-											还有约79842492229个Bug需要修复
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="chat-message">
-                                        <img class="message-avatar" src="/static/images/a6.jpg" alt="">
-                                        <div class="message">
-                                            <a class="message-author" href="#"> 林依晨Ariel </a>
-                                            <span class="message-date">  2015-02-02 11:12:36 </span>
-                                            <span class="message-content">
-											九部令人拍案叫绝的惊悚悬疑剧情佳作】如果你喜欢《迷雾》《致命ID》《电锯惊魂》《孤儿》《恐怖游轮》这些好片，那么接下来推荐的9部同类题材并同样出色的的电影，绝对不可错过哦~
-
-                                            </span>
-                                        </div>
-                                    </div>
-
                                 </div>
-
                             </div>
                             <div class="col-md-3">
-                                <div class="chat-users">
-
-
-                                    <div class="users-list">
-                                        <div class="chat-user">
-                                            <img class="chat-avatar" src="/static/images/a4.jpg" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">伤城Simple</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <img class="chat-avatar" src="/static/images/a1.jpg" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">从未出现过的风景__</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <span class="pull-right label label-primary">在线</span>
-                                            <img class="chat-avatar" src="/static/images/a2.jpg" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">冬伴花暖</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <span class="pull-right label label-primary">在线</span>
-                                            <img class="chat-avatar" src="/static/images/a3.jpg" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">ZM敏姑娘	</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <img class="chat-avatar" src="/static/images/a5.jpg" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">才越越</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <img class="chat-avatar" src="/static/images/a6.jpg" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">时光十年TENSHI</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <img class="chat-avatar" src="/static/images/a2.jpg" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">刘顰颖</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <span class="pull-right label label-primary">在线</span>
-                                            <img class="chat-avatar" src="/static/images/a3.jpg" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">陈泳儿SccBaby</a>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-
+                                <div class="chat-users ">
+                                    <div class="users-list" id="chat-users-list"></div>
                                 </div>
                             </div>
-
                         </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="chat-message-form">
-
-                                    <div class="form-group">
-
-                                        <textarea class="form-control message-input" name="message" placeholder="输入消息内容，按回车键发送"></textarea>
-                                    </div>
-
-                                </div>
-                            </div>
+                        <div class="col-sm-9" style="margin-top:20px;">
+                        	<input type="hidden" name="u_id" value="{$userInfo.user_id}">
+                        	<input type="hidden" name="u_name" value="{$userInfo.user_login}">
+                        	<input type="hidden" name="u_portrait" value="{$userInfo.user_head_portrait}">
+                        	<div class="row">
+                        		<div class="chat-message-form col-sm-10">
+	                                <div class="form-group">
+	                                    <input type="text"  class="form-control " name="send-msg" placeholder="输入消息内容，按回车键发送">
+	                                </div>
+	                            </div>
+	                            <div class="col-sm-2">
+	                            	<button type="submit" id="send-msg" class="btn btn-xm btn-primary">发送</button>
+	                            </div>
+                        	</div>
+                            
                         </div>
                     </div>
                 </div>
@@ -178,34 +101,144 @@
         </div>
     </div>
     <js href="/static/js/admin/jquery.min.js"/>
-	<js href="/static/js/admin/bootstrap.min.js"/>
+    <js href="/static/js/admin/bootstrap.min.js"/>
     <js href="/static/js/admin/content.min.js"/>
     <js href="/static/js/admin/socket/socket.io.js">
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8">
-    	// 如果服务端不在本机，请把127.0.0.1改成服务端ip
-		var socket = io('http://127.0.0.1:3120');
-		
-		var uid = 222;
-		// 当连接服务端成功时触发connect默认事件
-		socket.on('connect', function(){
-		    // console.log('connect success admin model index page');
-		    socket.emit('login',uid);
-		});
+    <script type="text/javascript">
+    	$(document).ready(function(){
 
-		// 触发服务端的chat message事件
-		
-		// 服务端通过emit('chat message from server', $msg)触发客户端的chat message from server事件
-		socket.on('all login user', function(users){
-		    console.log("用户ID:"+users);
-		});
+    		// 连接服务端 如果服务端不在本机，请把127.0.0.1改成服务端ip
+			var socket = io('http://127.0.0.1:3120'); //进入本页面就开始连接服务端 默认直接触发服务端的connection事件
+			
+			// 当连接服务端成功时触发connect默认事件
+			socket.on("connect",function(data){
+				//用户上线触发服务端事件 user_online 把用户的uid和用户名传到服务端作数据绑定，前端传json对象，服务端后自动转为数组
+				var userInfo = {
+					uId: $("input[name='u_id']").val(),
+					uName: $("input[name='u_name']").val(),
+					uPortrait: $("input[name='u_portrait']").val()
+				};
 
-		socket.on('send to me',function(msg){
-			console.log(msg);
-		})
-	   
-	    socket.on('new_msg',function(msg){
-			console.log(msg);
-		})
+				socket.emit("user_online",userInfo);
+			});
+			
+			socket.on('notice_all_user', function(users){
+
+				$("#content").append("<p style='font-size:12px;color:#72a9d2;text-align:center;'>"+users+"</p>")
+			});
+
+			//发送信息到服务端
+			$("#send-msg").on("click",function(){
+				var sendMsg = $("input[name='send-msg']").val();
+				var msgHtml = '<div class="chat-to-message"><img class="message-avatar" src="/static/images/'+$("input[name='u_portrait']").val()+'" alt=""><div class="message">';
+                    msgHtml += '<a class="message-author" href="javascript:;"> '+$("input[name='u_name']").val()+' </a>';
+                    msgHtml += '<span class="message-date">'+CurentTime()+'</span>';
+                    msgHtml += '<span class="message-content">';
+					msgHtml += 	sendMsg;
+                    msgHtml += '</span></div></div>';
+
+                $(".chat-discussion").append(msgHtml);
+
+				socket.emit("send_msg_to_server",sendMsg);
+			});
+
+			//接收来自服务端的信息
+			socket.on("get_msg_from_server",function(data){
+
+				var msgHtml = '<div class="chat-from-message"><img class="message-avatar" src="/static/images/'+data.from_uportrait+'" alt=""><div class="message">';
+                    msgHtml += '<a class="message-author" href="javascript:;"> '+data.from_uname+' </a>';
+                    msgHtml += '<span class="message-date">'+CurentTime()+'</span>';
+                    msgHtml += '<span class="message-content">';
+					msgHtml += 	data.from_msg;
+                    msgHtml += '</span></div></div>';
+
+                $(".chat-discussion").append(msgHtml);
+			});
+			
+
+			//通知在线的用户谁上线了
+			socket.on("online_notice",function(data){
+
+				if(data) {
+					var userHtml = '<div class="chat-user" data-uid="'+data.uId+'"><img class="chat-avatar" src="/static/images/'+data.uPortrait+'" alt="头像"><div class="chat-user-name"><a href="javascript:;">'+data.uName+'</a></div></div>';
+
+					$(".none-online-users").remove();
+					$("#chat-users-list").append(userHtml);
+				}
+			});
+
+			//通知在线的用户谁离线了
+			socket.on("off_line_notice",function(data){
+
+				$("div[data-uid='"+data+"']").remove();
+				
+			});
+
+			//通知当前上线的用户，目前在线的人员列表
+			socket.on("current_online_notice",function(data){
+				var currentUserId = $("input[name='u_id']").val(),userHtml = '';
+				
+				if(data instanceof Array && data.length <=0) {
+
+					$("#chat-users-list").append("<p class='none-online-users' style='text-align:center;height:200px;line-height:200px;'>暂无用户在线</p>");
+					return;
+				}
+
+				if(data != null) {
+
+					for(var i in data) {
+						if(data[i].uId != currentUserId) {
+
+							userHtml+= '<div class="chat-user" data-uid="'+data[i].uId+'"><img class="chat-avatar" src="/static/images/'+data[i].uPortrait+'" alt="头像"><div class="chat-user-name"><a href="javascript:;">'+data[i].uName+'</a></div></div>';
+						}
+					}
+
+					$("#chat-users-list").append(userHtml);
+					
+
+				}else{
+
+					$("#chat-users-list").append("<p class='none-online-users' style='text-align:center;height:200px;line-height:200px;'>暂无用户在线</p>");
+				}
+				
+			});
+
+    	})
+    	
+    	function CurentTime(){ 
+	        var now   = new Date();
+	        var year  = now.getFullYear();       //年
+	        var month = now.getMonth() + 1;     //月
+	        var day   = now.getDate();            //日
+	        
+	        var hh = now.getHours();            //时
+	        var mm = now.getMinutes();          //分
+	        var ss = now.getSeconds();          //秒
+	        
+	        var clock = year + "-";
+	        
+	        if(month < 10)
+	            clock += "0";
+	        
+	        clock += month + "-";
+	        
+	        if(day < 10)
+	            clock += "0";
+	            
+	        clock += day + " ";
+	        
+	        if(hh < 10)
+	            clock += "0";
+	            
+	        clock += hh + ":";
+	        if (mm < 10) clock += '0'; 
+	        clock += mm+":"; 
+
+	         if (ss < 10) clock += '0'; 
+	        clock += ss
+	        return(clock); 
+        }
+
     </script>
 </body>
 </html>
