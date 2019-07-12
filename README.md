@@ -19,6 +19,7 @@ cpms-php是采用TP5.0开发的一个简单的后台脚手架管理系统（包�
 - 使用Workerman（socketIO）框架，实现聊天
 - AJAX异步图片上传
 - ......
+
 socket服务启动： 到public目录下然后通过cmd命令 php server.php 【windows】即可启动socket服务
 后台访问地址：http://localhost/admin/index/index
 
