@@ -37,6 +37,7 @@ class Index  extends AdminBase
         include APP_PATH."admin/conf/menu.php";
 
         $this->assign("menu",$menu['admin']);
+        $this->assign("user_id",session("user_id"));
         return $this->fetch();
     }
 
