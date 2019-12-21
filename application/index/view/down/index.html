@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>下载测试</title>
+</head>
+<body>
+	<a href="/index/down/testDown?file=a.jpg" >下载图片</a>
+	<a href="/index/down/testDown?file=b.docx" >下载文档</a>
+	<a href="javascript:;" onclick="ajaxDown()">下载txt</a>
+
+	<img src="{$dataImg}"  title="base64格式" />
+
+<js href="/static/js/admin/jquery.min.js"/>
+<script type="text/javascript">
+	function ajaxDown(){
+	 	var url = "/index/down/testDown?file=c.txt";
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);    // 也可以使用POST方式，根据接口
+        xhr.responseType = "blob";
+        xhr.onload = function () {
+            if (this.status === 200) {
+                var content = this.response;
+                console.log(content)
+                var aTag = document.createElement('a');
+                var blob = new Blob([content]);
+                var headerName = xhr.getResponseHeader("Content-disposition");
+                var fileName = decodeURIComponent(headerName).substring(21);
+                aTag.download = fileName;
+                aTag.href = URL.createObjectURL(blob); // 创建二进制URL对象
+                aTag.click();
+                URL.revokeObjectURL(blob); // 释放对象URL资源
+            }
+        };
+        xhr.send()
+	}
+	
+
+</script>
+</body>
+</html>
