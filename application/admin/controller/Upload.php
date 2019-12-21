@@ -3,7 +3,7 @@ namespace app\admin\controller;
 class Upload  extends AdminBase
 {
     
-    protected $fileSize = 125678;
+    protected $fileSize = 2225678;
     protected $fileExt  = 'jpg,png,gif';
     protected $saveFolder = ''; // 图片保存目录
 

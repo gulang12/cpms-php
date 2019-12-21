@@ -126,24 +126,6 @@ $menu = array(
 		    )
 		    
 		),
-
-		array(
-			'name'=>'即时通讯',
-	        'controller'=>'socket/wechat',
-	        'icon'=>'fa-wechat',
-			'child'=>array(
-
-				array(
-					'name'=>'WeChat',
-
-					'action'=>'socket/Index/index',
-
-	                "auth"=>array()
-			    ),
-	            
-		    )
-		    
-		),
         
 	),
 	

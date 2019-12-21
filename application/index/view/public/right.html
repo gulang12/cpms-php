@@ -1,6 +1,6 @@
 <div class="col-xl-3">
 <!--begin:: Widgets/Sales States-->
-<div class="m-portlet">
+<div class="m-portlet" style="background:#fff8e6;box-shadow:0px -2px 10px #595454;">
 	<div class="m-portlet__head">
 		<div class="m-portlet__head-caption">
 			<div class="m-portlet__head-title">
@@ -10,9 +10,40 @@
 			</div>
 		</div>
 	</div>
-	<div class="m-portlet__body">
-		<p style="text-align:center;">暂无相关内容...</p>
+	<div class="m-portlet__body" id="latest-news-list">
+		<ol>
+			<volist name="latestNews" id="vo">
+				<li><a href="{:url('index/Index/articleDetail')}?article_id={$vo.article_id}">{$vo.article_title}</a></li>
+			</volist>
+		</ol>
 	</div>
 </div>
-<!--end:: Widgets/Sales States-->
+
+<div class="m-portlet" style="background:#fff8e6;box-shadow:0px -2px 10px #595454;">
+	<div class="m-portlet__head">
+		<div class="m-portlet__head-caption">
+			<div class="m-portlet__head-title">
+				<h4 class="m-portlet__head-text">
+					标签
+				</h4>
+			</div>
+		</div>
+	</div>
+	<div class="m-portlet__body" id="latest-news-list">
+			<volist name="tagsList" id="vo">
+					<span class="tag-item"><a href="{:url('index/Index/tagArticleList')}?tag_id={$vo.menu_id}">{$vo.menu_name}</a></span>
+			</volist>
+		
+	</div>
 </div>
+
+</div>
+<style>
+	.tag-item{background: cornsilk;display:inline-block;padding:2px 5px;
+	   border:1px solid rosybrown;border-radius:4px;cursor: pointer;margin:5px;
+	}
+	.tag-item:hover{box-shadow:0px 4px 5px #a1a090;}
+	.tag-item a{color:#8d8f9d;}
+	.tag-item a:hover{text-decoration:none;}
+
+</style>

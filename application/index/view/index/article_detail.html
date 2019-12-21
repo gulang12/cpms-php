@@ -16,12 +16,12 @@
 
 						<div class="m-content">
 							<div class="row">
-								<div class="col-xl-9">
+								<div class="col-xl-9" id="article-detail-box" style="overflow:auto;">
 									<div class="m-portlet m-portlet--mobile ">
 										<p class="m-portlet__head-text m-portlet__head" style="padding:10px;">
 											<a href="/" class="bread-nav">首页</a> /
 											<volist name="allCats" id="vo">
-												<a href="{:url('index/Index/articleList')}?cat_id={$vo.menu_id}" class="bread-nav">      					{$vo.menu_name}</a>&nbsp;&nbsp;
+												<a href="{:url('index/Index/tagArticleList')}?tag_id={$vo.menu_id}" class="bread-nav">      					{$vo.menu_name}</a>&nbsp;&nbsp;
 											</volist>
 										</p>
 										<div class="m-portlet__body">

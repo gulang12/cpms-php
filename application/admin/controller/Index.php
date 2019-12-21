@@ -7,37 +7,13 @@ use think\captcha\Captcha;
 use app\common\util\PasswordHash;
 class Index  extends AdminBase
 {
-    public function test()   //访问方式  http://域名/模块/控制器/方法/参数/参数值
-    {
-        
-    /********************** 读取配置文件数据 ********************************/  
-       
-        // print_r(Config::get('admin_test')); // 读取admin模块或其它模块下的config文件参数
-
-        // print_r(Config::get('queue'));   //  读取extra扩展目录下的某个扩展配置文件的全部数据  queue 文件名
-
-
-
-
-    /********************** 渲染页面 ********************************/        
-        // $this->assign('domain',$this->request->url(true));  // 获取包含域名的完整URL地址
-
-        // return $this->fetch('index');  // 渲染页面
-        // Session('name_liu','liuzaichun');
-       
-       return $this->fetch();  // 渲染页面
-
-       // return 'name:'.$name;   // 可以直接获取方法的参数 无需用get获取 
-
-    }
-    
+   
     public function index()   
     {
     	
         include APP_PATH."admin/conf/menu.php";
 
         $this->assign("menu",$menu['admin']);
-        $this->assign("user_id",session("user_id"));
         return $this->fetch();
     }
 
@@ -66,7 +42,6 @@ class Index  extends AdminBase
         curl_setopt ($ch, CURLOPT_HTTPHEADER, array("Expect:"));
         $return = curl_exec ( $ch );
         curl_close ( $ch );
-        var_dump($return);
     }
 
     public function login() {

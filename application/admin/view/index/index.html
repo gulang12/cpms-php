@@ -38,39 +38,6 @@
                         <!-- <h2 class="navbar-form-custom" style="line-height:50px;margin-left:20px;margin-top:0px;text-align: center;">欢迎 {$Request.session.user_login} </h2> -->
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
-                                <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-alerts">
-                                <li>
-                                    <a href="mailbox.html">
-                                        <div>
-                                            <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
-                                            <span class="pull-right text-muted small">4分钟前</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="profile.html">
-                                        <div>
-                                            <i class="fa fa-qq fa-fw"></i> 3条新回复
-                                            <span class="pull-right text-muted small">12分钟钱</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="text-center link-block">
-                                        <a class="J_menuItem" href="javascript:;" data-index="89">
-                                            <strong>查看所有 </strong>
-                                            <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
                         <li class="dropdown hidden-xs">
                             <a class="right-sidebar-toggle" aria-expanded="false">
                                 <i class="fa fa-tasks"></i> 主题
@@ -202,7 +169,6 @@
             </div>
         </div>
         <!--右侧边栏结束-->
-        <input type="hidden" name="login-uid" value="{$user_id}">
     </div>
     <js href="/static/js/admin/jquery.min.js"/>
     <js href="/static/js/admin/bootstrap.min.js" />
@@ -212,25 +178,5 @@
     <js href="/static/js/admin/hplus.min.js" />
     <js href="/static/js/admin/contabs.min.js" />
     <js href="/static/js/admin/plugins/pace/pace.min.js"/>
-    <js href="/static/js/admin/socket/socket.io.js">
-    <script type="text/javascript">
-        $(document).ready(function(){
-            /******这里可以做推送信息的功能。比如用户发表了评论其它客户都可以收到推送信息**********/
-            
-            // 连接服务端 如果服务端不在本机，请把127.0.0.1改成服务端ip
-            var socket = io('http://127.0.0.1:3120'); //进入本页面就开始连接服务端 默认直接触发服务端的connection事件
-            console.log("uid: "+$("input[name='login-uid']").val())
-            // 当连接服务端成功时触发connect默认事件
-            socket.on("connect",function(){
-                var uid = $("input[name='login-uid']").val();
-                socket.emit("user_login",uid);
-            });
-
-            socket.on("push_msg_client",function(data){
-                console.log(data);
-            });
-
-        })
-    </script>
 </body>
 </html>

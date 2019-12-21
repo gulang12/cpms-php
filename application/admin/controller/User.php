@@ -35,15 +35,7 @@ class User  extends AdminBase
         $input = input();
 
         $info  =  model('User')->addUser($input);
-        if($info) {
-            $postData =  array(
-               "type"     => "public", // 推送公共信息到所有客户端
-               "content"  => "推送给uid:6的信息",
-               "to"       => '',   // 给指定用户推送信息  to为组名即uid
-            );
-
-            sendToSocketServer($postData);
-        }
+       
         return $info;
     }
     

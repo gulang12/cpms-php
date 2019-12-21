@@ -77,6 +77,7 @@ class Article extends Model
                 
                 $input['article_author']  = getLoginUserInfo('user_id');
                 $input['article_content'] = htmlspecialchars($input['article_content']);
+                $input['article_read_count']  =  mt_rand(1,50);
 
                 $save = $this->allowField(true)->save($input);
                 

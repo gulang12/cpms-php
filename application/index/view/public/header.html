@@ -63,63 +63,16 @@
 								</a>
 							</li>
 							<volist name="category" id="vo">
-								<li class="m-menu__item  m-menu__item--submenu m-menu__item--rel <if condition='in_array($active_cat,$vo.children_ids)'>m-menu__item--active</if>"  data-menu-submenu-toggle="click" aria-haspopup="true">
-									<a  href="#" class="m-menu__link m-menu__toggle">
+								<li class="m-menu__item  <if condition='$active_cat eq $vo.menu_id'>m-menu__item--active</if>">
+									<a  href="{:url('index/Index/articleList')}?cat_id={$vo.menu_id}" class="m-menu__link ">
 										<span class="m-menu__item-here"></span>
 										<span class="m-menu__link-text">
-											{$vo.parent_name}
+											{$vo.menu_name}
 										</span>
-										<i class="m-menu__hor-arrow la la-angle-down"></i>
-										<i class="m-menu__ver-arrow la la-angle-right"></i>
 									</a>
-									<if condition="$vo.children neq ''">
-										<div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left" style="width:130px;">
-											<span class="m-menu__arrow m-menu__arrow--adjust"></span>
-											<ul class="m-menu__subnav" style="padding:5px 0px;">
-												<volist name="vo.children" id="child">
-													<li class="m-menu__item "  aria-haspopup="true">
-														<a  href="{:url('index/Index/articleList')}?cat_id={$child.menu_id}" class="m-menu__link " style="padding:4px 10px;text-align:center;">
-															<span class="m-menu__link-title">
-																<span class="m-menu__link-wrap">
-																	<span class="m-menu__link-text">
-																		{$child.menu_name}
-																	</span>
-																</span>
-															</span>
-														</a>
-													</li>
-											    </volist>
-											</ul>
-										</div>
-									</if>
 								</li>
 							</volist>
-							
-							<!--隐藏菜单-->
-							<if condition="$other.children neq ''">
-								<li class="m-menu__item  m-menu__item--submenu m-menu__item--rel  <if condition='in_array($active_cat,$other.children_ids)'>m-menu__item--active other__item--hover</if> m-menu__item--open-dropdown m-menu__item--hover"  data-menu-submenu-toggle="click" data-redirect="true" aria-haspopup="true">
-									<a  href="#" class="m-menu__link m-menu__toggle">
-										<span class="m-menu__item-here"></span>
-										<i class="m-menu__link-icon flaticon-more-v3" style="color:#e6e08b;"></i>
-										<span class="m-menu__link-text"></span>
-									</a>
-									<div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left m-menu__submenu--pull" style="width:130px;">
-										<span class="m-menu__arrow m-menu__arrow--adjust"></span>
-										<ul class="m-menu__subnav" style="padding:5px 0px;">
-     										<volist name="other.children" id="child">
-     											<li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
-													<a  href="{:url('index/Index/articleList')}?cat_id={$child.menu_id}" class="m-menu__link " style="padding:4px 10px;text-align:center;">
-														<span class="m-menu__link-text">
-															{$child.menu_name}
-														</span>
-													</a>
-												</li>
-     										</volist>
-										</ul>
-									</div>
-								</li>
-							</if>
-							<!--隐藏菜单 END-->
+						
 						</ul>
 					</div>
 				</div>
@@ -132,7 +85,7 @@
 							<span class="m-header-search__icon-search" id="fulltext_search">
 								<i class="la la-search"></i>
 							</span>
-							<span class="">
+							<span>
 								<input  type="text" name="key_word" class="m-header-search__input" value="{$key_word| default=''}" placeholder="全站搜索..." id="fulltext_search_input">
 							</span>
 						</div>

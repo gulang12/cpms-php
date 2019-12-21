@@ -16,7 +16,7 @@
 
 						<div class="m-content">
 							<div class="row">
-								<div class="col-xl-9">
+								<div class="col-xl-9 index-col-xl-9">
 									<div class="m-portlet m-portlet--mobile ">
 										
 										<div class="m-portlet__body">
@@ -38,13 +38,16 @@
 									                            </div>
 									                            <div class="col-md-6">
 									                                <div class="small text-right">
-									                               		<!-- <i class="fa fa-comments-o"> </i> 56 评论 -->
-									                                   <!--  &nbsp;<i class="fa fa-eye"> </i> 144 浏览 -->
+									                               		<span>标签：</span>
+									                               		<volist name="vo.article_tags" id="tags">
+									                               			<a href="{:url('index/Index/tagArticleList')}?tag_id={$tags.menu_id}">{$tags.menu_name}</a>&nbsp;
+									                               		</volist>
+									                                    &nbsp;<i class="fa fa-eye"> </i> {$vo.article_read_count}
 									                                </div>
 									                            </div>
 									                        </div>
 									                    </div>
-									                    <div class="hr-line-dashed" style="height:1px;margin:20px 0px;border-top:1px dashed #8684a9"></div>
+									                    <div class="hr-line-dashed"></div>
 													</volist>
 												<else/>
 												    <p style="text-align: center;">暂无相关内容...</p>
