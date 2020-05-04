@@ -26,7 +26,7 @@ socket服务启动： 到public目录下然后通过cmd命令 php server.php 【
 
 后台帐号：admin 密码：123456
 
-交流群：178056243 
+本人QQ：1226740471
 
 个人网站： http://www.liuzaichun.cn/
 
