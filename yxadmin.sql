@@ -2,7 +2,8 @@
 SQLyog Ultimate v12.09 (64 bit)
 MySQL - 5.7.26 : Database - yxadmin
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -92,7 +93,7 @@ CREATE TABLE `yx_user` (
 
 /*Data for the table `yx_user` */
 
-insert  into `yx_user`(`user_id`,`user_login`,`user_pass`,`user_nicename`,`user_email`,`user_phone`,`user_status`,`user_role`,`user_registered`) values (1,'admin','$P$BxQ7fBK/nlKyw2niuTJilLUUkeRwAk0','','admin@sina.com','15889745718',0,1,'2018-07-21 22:01:32');
+insert  into `yx_user`(`user_id`,`user_login`,`user_pass`,`user_nicename`,`user_email`,`user_phone`,`user_status`,`user_role`,`user_registered`) values (1,'admin','$P$BnsmcRm/HWAH2bcuDYrnuen9cd8DVj.','','admin@sina.com','15889745718',0,1,'2018-07-21 22:01:32');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

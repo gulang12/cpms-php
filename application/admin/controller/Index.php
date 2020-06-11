@@ -65,6 +65,10 @@ class Index  extends AdminBase
 
                 $hasher = new PasswordHash(8,true);
                 
+                // 由于后台没有做修改密码的功能，这里可以自定义密码的加密密文，然后修改数据库对应的账号密码
+                // print_r($hasher->HashPassword(123456));
+                // exit;
+
                 $chekcPass = $hasher->CheckPassword($user_pass, $checkLogin['user_pass']);
                
                 if(!$chekcPass){
