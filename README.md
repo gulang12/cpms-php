@@ -28,8 +28,6 @@ socket服务启动： 到public目录下然后通过cmd命令 php server.php 【
 
 本人QQ：1226740471
 
-个人网站： http://www.liuzaichun.cn/
-
 *使用本脚手架可以快速搭建一个个人博客系统*
 
 ![image](https://github.com/gulang12/cpms-php/blob/master/public/static/images/bbbb.png)
